@@ -272,6 +272,140 @@
               "    )",
               ")"
             ]
+          },
+          {
+            "name": "Annen bebyggelse og anlegg",
+            "expression": [
+              "",
+              "",
+              "/* ",
+              "    Omdisponering, etter dyrka eller dyrkbar jord, formål, region, lovanvendelse, statistikkvariabel ",
+              "    og år",
+              "*/",
+              "",
+              "CALCULATE(SUM('Alle Data'[Verdi]),",
+              "    FILTER(ALL(Tabeller[Tabellnummer]), [Tabellnummer] = \"11776\"),",
+              "    FILTER(ALL(Variabel[Variabelnavn]), [Variabelnavn] = \"Areal  (dekar)\"),",
+              "    FILTER(ALL('Formål'[Dimensjonsnavn]), [Dimensjonsnavn] = \"Annen bebyggelse og anlegg\")",
+              ")"
+            ]
+          },
+          {
+            "name": "Andre formål",
+            "expression": [
+              "",
+              "",
+              "/* ",
+              "    Omdisponering, etter dyrka eller dyrkbar jord, formål, region, lovanvendelse, statistikkvariabel ",
+              "    og år",
+              "*/",
+              "",
+              "CALCULATE(SUM('Alle Data'[Verdi]),",
+              "    FILTER(ALL(Tabeller[Tabellnummer]), [Tabellnummer] = \"11776\"),",
+              "    FILTER(ALL(Variabel[Variabelnavn]), [Variabelnavn] = \"Areal  (dekar)\"),",
+              "    FILTER(ALL('Formål'[Dimensjonsnavn]), [Dimensjonsnavn] IN {",
+              "        \"Annet landbruksformål, feks. tilleggsnæringer\",",
+              "        \"Bruk og vern av sjø og vassdrag, med tilhørende strandsone\",",
+              "        \"Forsvaret\",",
+              "        \"Golfbane\",",
+              "        \"Kombinasjoner av hovedformål\",",
+              "        \"Landbruks-, natur- og friluftsområder, spredt utbygging\",",
+              "        \"Landbruks-, natur- og friluftsområder der landbruk er utelukket\"",
+              "    })",
+              ")"
+            ]
+          },
+          {
+            "name": "Boligformål",
+            "expression": [
+              "",
+              "",
+              "/* ",
+              "    Omdisponering, etter dyrka eller dyrkbar jord, formål, region, lovanvendelse, statistikkvariabel ",
+              "    og år",
+              "*/",
+              "",
+              "CALCULATE(SUM('Alle Data'[Verdi]),",
+              "    FILTER(ALL(Tabeller[Tabellnummer]), [Tabellnummer] = \"11776\"),",
+              "    FILTER(ALL(Variabel[Variabelnavn]), [Variabelnavn] = \"Areal  (dekar)\"),",
+              "    FILTER(ALL('Formål'[Dimensjonsnavn]), [Dimensjonsnavn] = ",
+              "        \"Boligbebyggelse, inkludert uteoppholdsareal\"",
+              "    )",
+              ")"
+            ]
+          },
+          {
+            "name": "Forretninger, kontorer, industri m.m.",
+            "expression": [
+              "",
+              "",
+              "/* ",
+              "    Omdisponering, etter dyrka eller dyrkbar jord, formål, region, lovanvendelse, statistikkvariabel ",
+              "    og år",
+              "*/",
+              "",
+              "CALCULATE(SUM('Alle Data'[Verdi]),",
+              "    FILTER(ALL(Tabeller[Tabellnummer]), [Tabellnummer] = \"11776\"),",
+              "    FILTER(ALL(Variabel[Variabelnavn]), [Variabelnavn] = \"Areal  (dekar)\"),",
+              "    FILTER(ALL('Formål'[Dimensjonsnavn]), [Dimensjonsnavn] IN {",
+              "        \"Næringsbebyggelse / virksomhet\",",
+              "        \"Offentlig eller privat tjenesteyting\"",
+              "    })",
+              ")"
+            ]
+          },
+          {
+            "name": "Fritidsbebyggelse",
+            "expression": [
+              "",
+              "",
+              "/* ",
+              "    Omdisponering, etter dyrka eller dyrkbar jord, formål, region, lovanvendelse, statistikkvariabel ",
+              "    og år",
+              "*/",
+              "",
+              "CALCULATE(SUM('Alle Data'[Verdi]),",
+              "    FILTER(ALL(Tabeller[Tabellnummer]), [Tabellnummer] = \"11776\"),",
+              "    FILTER(ALL(Variabel[Variabelnavn]), [Variabelnavn] = \"Areal  (dekar)\"),",
+              "    FILTER(ALL('Formål'[Dimensjonsnavn]), [Dimensjonsnavn] = \"Fritidsbebyggelse\")",
+              ")"
+            ]
+          },
+          {
+            "name": "Grønnstruktur",
+            "expression": [
+              "",
+              "",
+              "/* ",
+              "    Omdisponering, etter dyrka eller dyrkbar jord, formål, region, lovanvendelse, statistikkvariabel ",
+              "    og år",
+              "*/",
+              "",
+              "CALCULATE(SUM('Alle Data'[Verdi]),",
+              "    FILTER(ALL(Tabeller[Tabellnummer]), [Tabellnummer] = \"11776\"),",
+              "    FILTER(ALL(Variabel[Variabelnavn]), [Variabelnavn] = \"Areal  (dekar)\"),",
+              "    FILTER(ALL('Formål'[Dimensjonsnavn]), [Dimensjonsnavn] = \"Grønnstruktur\")",
+              ")"
+            ]
+          },
+          {
+            "name": "Trafikkområde",
+            "expression": [
+              "",
+              "",
+              "/* ",
+              "    Omdisponering, etter dyrka eller dyrkbar jord, formål, region, lovanvendelse, statistikkvariabel ",
+              "    og år",
+              "*/",
+              "",
+              "CALCULATE(SUM('Alle Data'[Verdi]),",
+              "    FILTER(ALL(Tabeller[Tabellnummer]), [Tabellnummer] = \"11776\"),",
+              "    FILTER(ALL(Variabel[Variabelnavn]), [Variabelnavn] = \"Areal  (dekar)\"),",
+              "    FILTER(ALL('Formål'[Dimensjonsnavn]), [Dimensjonsnavn] = ",
+              "        \"Samferdselsanlegg og teknisk infrastruktur\"",
+              "    )",
+              ")"
+            ]
           }
         ]
       },
@@ -306,6 +440,12 @@
             "name": "Verdi",
             "dataType": "double",
             "sourceColumn": "Verdi"
+          },
+          {
+            "name": "Formålkode",
+            "dataType": "string",
+            "isHidden": true,
+            "sourceColumn": "Formålkode"
           }
         ],
         "partitions": [
@@ -488,6 +628,13 @@
         "fromColumn": "År",
         "toTable": "År",
         "toColumn": "År"
+      },
+      {
+        "name": "c209b3d6-9b68-4a5f-968a-abff763f84ee",
+        "fromTable": "Alle Data",
+        "fromColumn": "Formålkode",
+        "toTable": "Formål",
+        "toColumn": "Dimensjonskode"
       }
     ],
     "annotations": [
