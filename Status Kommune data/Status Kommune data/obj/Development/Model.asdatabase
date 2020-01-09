@@ -1,5 +1,5 @@
 {
-  "name": "SemanticModel",
+  "name": "Status Kommune data",
   "compatibilityLevel": 1400,
   "model": {
     "culture": "nb-NO",
@@ -16,7 +16,6 @@
           "authentication": null,
           "query": null
         },
-        "options": {},
         "credential": {
           "AuthenticationKind": "Windows",
           "kind": "SQL",
@@ -163,12 +162,10 @@
             "name": "Båtruter",
             "expression": [
               "",
-              "",
               "/* Millioner passasjerkilometer buss, båt, t-bane, trikk/bybane - fylkeskommunale ruter*/",
               "",
               "var ant_btrut =",
               "CALCULATE(SUM('Alle Data'[Verdi]),",
-              "    FILTER(ALL(Tabeller[Tabellnummer]), [Tabellnummer] = \"11844\"),",
               "    FILTER(ALL(Variabel[Variabelnavn]), [Variabelnavn] = \"Passasjer, båtruter (antall)\")",
               ")",
               "",
@@ -187,12 +184,10 @@
             "name": "Buss",
             "expression": [
               "",
-              "",
               "/* Millioner passasjerkilometer buss, båt, t-bane, trikk/bybane - fylkeskommunale ruter*/",
               "",
               "var ant_buss =",
               "CALCULATE(SUM('Alle Data'[Verdi]),",
-              "    FILTER(ALL(Tabeller[Tabellnummer]), [Tabellnummer] = \"11844\"),",
               "    FILTER(ALL(Variabel[Variabelnavn]), [Variabelnavn] = \"Passasjerer, buss (antall)\")",
               ")",
               "",
@@ -211,12 +206,10 @@
             "name": "T-bane og trikk/bybane",
             "expression": [
               "",
-              "",
               "/* Millioner passasjerkilometer buss, båt, t-bane, trikk/bybane - fylkeskommunale ruter*/",
               "",
               "var ant_baner =",
               "CALCULATE(SUM('Alle Data'[Verdi]),",
-              "    FILTER(ALL(Tabeller[Tabellnummer]), [Tabellnummer] = \"11844\"),",
               "    FILTER(ALL(Variabel[Variabelnavn]), [Variabelnavn] = \"Passasjerer, t-bane og trikk/bybane (antall)\")",
               ")",
               "",
@@ -227,48 +220,6 @@
               "    ROUND(",
               "        baner_1mill,",
               "        1",
-              "    )",
-              ")"
-            ]
-          },
-          {
-            "name": "Omdisponering til andre formål enn landbruk i alt",
-            "expression": [
-              "",
-              "",
-              "/* Dekar dyrka og dyrkbar jord som er omdisponert til andre formål enn landbruk */",
-              "CALCULATE(SUM('Alle Data'[Verdi]),",
-              "    FILTER(ALL(Tabeller[Tabellnummer]), [Tabellnummer] = \"07903\"),",
-              "    FILTER(ALL(Variabel[Variabelnavn]), [Variabelnavn] = ",
-              "        \"Omdisponering til andre formål enn landbruk i alt\"",
-              "    )",
-              ")"
-            ]
-          },
-          {
-            "name": "Dyrka jord",
-            "expression": [
-              "",
-              "",
-              "/* Dekar dyrka og dyrkbar jord som er omdisponert til andre formål enn landbruk */",
-              "CALCULATE(SUM('Alle Data'[Verdi]),",
-              "    FILTER(ALL(Tabeller[Tabellnummer]), [Tabellnummer] = \"07903\"),",
-              "    FILTER(ALL(Variabel[Variabelnavn]), [Variabelnavn] = ",
-              "        \"Dyrka jord\"",
-              "    )",
-              ")"
-            ]
-          },
-          {
-            "name": "Dyrkbar jord",
-            "expression": [
-              "",
-              "",
-              "/* Dekar dyrka og dyrkbar jord som er omdisponert til andre formål enn landbruk */",
-              "CALCULATE(SUM('Alle Data'[Verdi]),",
-              "    FILTER(ALL(Tabeller[Tabellnummer]), [Tabellnummer] = \"07903\"),",
-              "    FILTER(ALL(Variabel[Variabelnavn]), [Variabelnavn] = ",
-              "        \"Dyrkbar jord\"",
               "    )",
               ")"
             ]
@@ -460,6 +411,5 @@
         "value": "500"
       }
     ]
-  },
-  "id": "SemanticModel"
+  }
 }
