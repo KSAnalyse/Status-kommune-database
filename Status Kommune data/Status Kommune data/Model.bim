@@ -160,7 +160,7 @@
         ],
         "measures": [
           {
-            "name": "Buss",
+            "name": "Båtruter",
             "expression": [
               "",
               "",
@@ -175,6 +175,48 @@
               "return (",
               "    ROUND(",
               "        btrut_1mill,",
+              "        1",
+              "    )",
+              ")"
+            ]
+          },
+          {
+            "name": "Buss",
+            "expression": [
+              "",
+              "",
+              "var ant_buss =",
+              "CALCULATE(SUM('Alle Data'[Verdi]),",
+              "    FILTER(ALL(Variabel[Variabelnavn]), [Variabelnavn] = \"Passasjerer, buss (antall)\")",
+              ")",
+              "",
+              "var buss_1mill =",
+              "DIVIDE(ant_buss, 1000000)",
+              "",
+              "return (",
+              "    ROUND(",
+              "        buss_1mill,",
+              "        1",
+              "    )",
+              ")"
+            ]
+          },
+          {
+            "name": "T-bane og trikk/bybane",
+            "expression": [
+              "",
+              "",
+              "var ant_baner =",
+              "CALCULATE(SUM('Alle Data'[Verdi]),",
+              "    FILTER(ALL(Variabel[Variabelnavn]), [Variabelnavn] = \"Passasjerer, t-bane og trikk/bybane (antall)\")",
+              ")",
+              "",
+              "var baner_1mill =",
+              "DIVIDE(ant_baner, 1000000)",
+              "",
+              "return (",
+              "    ROUND(",
+              "        baner_1mill,",
               "        1",
               "    )",
               ")"
