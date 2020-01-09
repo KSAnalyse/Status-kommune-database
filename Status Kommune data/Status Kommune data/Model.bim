@@ -157,6 +157,29 @@
               ]
             }
           }
+        ],
+        "measures": [
+          {
+            "name": "Buss",
+            "expression": [
+              "",
+              "",
+              "var ant_btrut =",
+              "CALCULATE(SUM('Alle Data'[Verdi]),",
+              "    FILTER(ALL(Variabel[Variabelnavn]), [Variabelnavn] = \"Passasjer, båtruter (antall)\")",
+              ")",
+              "",
+              "var btrut_1mill =",
+              "DIVIDE(ant_btrut, 1000000)",
+              "",
+              "return (",
+              "    ROUND(",
+              "        btrut_1mill,",
+              "        1",
+              "    )",
+              ")"
+            ]
+          }
         ]
       },
       {
@@ -165,21 +188,25 @@
           {
             "name": "Tabell",
             "dataType": "string",
+            "isHidden": true,
             "sourceColumn": "Tabell"
           },
           {
             "name": "Kode",
             "dataType": "string",
+            "isHidden": true,
             "sourceColumn": "Kode"
           },
           {
             "name": "Variabel",
             "dataType": "string",
+            "isHidden": true,
             "sourceColumn": "Variabel"
           },
           {
             "name": "År",
             "dataType": "int64",
+            "isHidden": true,
             "sourceColumn": "År"
           },
           {
@@ -302,6 +329,36 @@
             }
           }
         ]
+      }
+    ],
+    "relationships": [
+      {
+        "name": "fd45f95f-1458-41de-94d2-adbfedaf54d1",
+        "fromTable": "Alle Data",
+        "fromColumn": "Tabell",
+        "toTable": "Tabeller",
+        "toColumn": "Tabellnummer"
+      },
+      {
+        "name": "eed6dfec-a469-473b-83d0-e397180a58be",
+        "fromTable": "Alle Data",
+        "fromColumn": "Kode",
+        "toTable": "Region",
+        "toColumn": "Kode"
+      },
+      {
+        "name": "9989dbda-0a8f-4ca3-abc2-d8a4cf13a03f",
+        "fromTable": "Alle Data",
+        "fromColumn": "Variabel",
+        "toTable": "Variabel",
+        "toColumn": "Variabel"
+      },
+      {
+        "name": "f775df9d-0345-47e7-a6ec-9152a6c368f3",
+        "fromTable": "Alle Data",
+        "fromColumn": "År",
+        "toTable": "År",
+        "toColumn": "År"
       }
     ],
     "annotations": [
