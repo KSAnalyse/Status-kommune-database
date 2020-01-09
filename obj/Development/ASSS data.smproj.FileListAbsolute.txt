@@ -1,0 +1,6 @@
+C:\Users\8093aha\Documents\GitHub\ASSS-database\bin\ASSS database.asdatabase
+C:\Users\8093aha\Documents\GitHub\ASSS-database\bin\ASSS database.deploymenttargets
+C:\Users\8093aha\Documents\GitHub\ASSS-database\bin\ASSS database.deploymentoptions
+C:\Users\8093aha\Documents\GitHub\ASSS-database\obj\Development\ASSS database.asdatabase
+C:\Users\8093aha\Documents\GitHub\ASSS-database\obj\Development\ASSS database.deploymentoptions
+C:\Users\8093aha\Documents\GitHub\ASSS-database\obj\Development\ASSS database.deploymenttargets
