@@ -5,8 +5,8 @@
     "culture": "nb-NO",
     "dataSources": [
       {
-        "name": "KS-SQL2018;Reporting_ASSS",
-        "connectionString": "Provider=SQLNCLI11;Data Source=KS-SQL2018;Integrated Security=SSPI;Persist Security Info=false;Initial Catalog=Reporting_ASSS",
+        "name": "KS-SQL2018;Reporting_Status",
+        "connectionString": "Provider=SQLNCLI11;Data Source=KS-SQL2018;Integrated Security=SSPI;Persist Security Info=false;Initial Catalog=Reporting_Status",
         "impersonationMode": "impersonateAccount",
         "account": "KSINT\\8093AHA",
         "annotations": [
@@ -46,7 +46,7 @@
             "dataView": "full",
             "source": {
               "query": " SELECT [dbo].[Variabel].* FROM [dbo].[Variabel] ",
-              "dataSource": "KS-SQL2018;Reporting_ASSS"
+              "dataSource": "KS-SQL2018;Reporting_Status"
             }
           }
         ],
@@ -93,7 +93,7 @@
             "dataView": "full",
             "source": {
               "query": " SELECT [dbo].[Art].* FROM [dbo].[Art] ",
-              "dataSource": "KS-SQL2018;Reporting_ASSS"
+              "dataSource": "KS-SQL2018;Reporting_Status"
             }
           }
         ],
@@ -181,7 +181,7 @@
             "dataView": "full",
             "source": {
               "query": " SELECT [dbo].[ASSS Indikatorer].* FROM [dbo].[ASSS Indikatorer] ",
-              "dataSource": "KS-SQL2018;Reporting_ASSS"
+              "dataSource": "KS-SQL2018;Reporting_Status"
             },
             "annotations": [
               {
@@ -8254,7 +8254,7 @@
             "dataView": "full",
             "source": {
               "query": " SELECT [dbo].[Energitype].* FROM [dbo].[Energitype] ",
-              "dataSource": "KS-SQL2018;Reporting_ASSS"
+              "dataSource": "KS-SQL2018;Reporting_Status"
             }
           }
         ],
@@ -8301,7 +8301,7 @@
             "dataView": "full",
             "source": {
               "query": " SELECT [dbo].[Funksjon].* FROM [dbo].[Funksjon] ",
-              "dataSource": "KS-SQL2018;Reporting_ASSS"
+              "dataSource": "KS-SQL2018;Reporting_Status"
             }
           }
         ],
@@ -8379,7 +8379,7 @@
             "dataView": "full",
             "source": {
               "query": " SELECT [dbo].[Region].* FROM [dbo].[Region] ",
-              "dataSource": "KS-SQL2018;Reporting_ASSS"
+              "dataSource": "KS-SQL2018;Reporting_Status"
             },
             "annotations": [
               {
@@ -8750,7 +8750,7 @@
             "dataView": "full",
             "source": {
               "query": " SELECT [dbo].[Tabeller].* FROM [dbo].[Tabeller] ",
-              "dataSource": "KS-SQL2018;Reporting_ASSS"
+              "dataSource": "KS-SQL2018;Reporting_Status"
             }
           }
         ],
@@ -8785,7 +8785,7 @@
             "dataView": "full",
             "source": {
               "query": " SELECT [dbo].[År].* FROM [dbo].[År] ",
-              "dataSource": "KS-SQL2018;Reporting_ASSS"
+              "dataSource": "KS-SQL2018;Reporting_Status"
             }
           }
         ],
@@ -8964,7 +8964,7 @@
             "dataView": "full",
             "source": {
               "query": " SELECT [dbo].[Alle Data].* FROM [dbo].[Alle Data] ",
-              "dataSource": "KS-SQL2018;Reporting_ASSS"
+              "dataSource": "KS-SQL2018;Reporting_Status"
             },
             "annotations": [
               {
@@ -10702,7 +10702,7 @@
             "dataView": "full",
             "source": {
               "query": " SELECT [dbo].[Alder].* FROM [dbo].[Alder] ",
-              "dataSource": "KS-SQL2018;Reporting_ASSS"
+              "dataSource": "KS-SQL2018;Reporting_Status"
             }
           }
         ],
@@ -10749,7 +10749,7 @@
             "dataView": "full",
             "source": {
               "query": " SELECT [dbo].[Handsamingstid].* FROM [dbo].[Handsamingstid] ",
-              "dataSource": "KS-SQL2018;Reporting_ASSS"
+              "dataSource": "KS-SQL2018;Reporting_Status"
             }
           }
         ],
@@ -10796,7 +10796,7 @@
             "dataView": "full",
             "source": {
               "query": " SELECT [dbo].[Kilde].* FROM [dbo].[Kilde] ",
-              "dataSource": "KS-SQL2018;Reporting_ASSS"
+              "dataSource": "KS-SQL2018;Reporting_Status"
             }
           }
         ],
@@ -10843,7 +10843,7 @@
             "dataView": "full",
             "source": {
               "query": " SELECT [dbo].[Konklusjon].* FROM [dbo].[Konklusjon] ",
-              "dataSource": "KS-SQL2018;Reporting_ASSS"
+              "dataSource": "KS-SQL2018;Reporting_Status"
             }
           }
         ],
@@ -10890,7 +10890,7 @@
             "dataView": "full",
             "source": {
               "query": " SELECT [dbo].[Omsorgs-/hjelpetiltak].* FROM [dbo].[Omsorgs-/hjelpetiltak] ",
-              "dataSource": "KS-SQL2018;Reporting_ASSS"
+              "dataSource": "KS-SQL2018;Reporting_Status"
             }
           }
         ],
@@ -10964,7 +10964,7 @@
             "dataView": "full",
             "source": {
               "query": " SELECT [dbo].[Sammenslåtte Regioner].* FROM [dbo].[Sammenslåtte Regioner] ",
-              "dataSource": "KS-SQL2018;Reporting_ASSS"
+              "dataSource": "KS-SQL2018;Reporting_Status"
             }
           }
         ],
@@ -11011,7 +11011,7 @@
             "dataView": "full",
             "source": {
               "query": " SELECT [dbo].[Tiltakskategori].* FROM [dbo].[Tiltakskategori] ",
-              "dataSource": "KS-SQL2018;Reporting_ASSS"
+              "dataSource": "KS-SQL2018;Reporting_Status"
             }
           }
         ],
@@ -11058,7 +11058,7 @@
             "dataView": "full",
             "source": {
               "query": " SELECT [dbo].[Tjenestegrupper].* FROM [dbo].[Tjenestegrupper] ",
-              "dataSource": "KS-SQL2018;Reporting_ASSS"
+              "dataSource": "KS-SQL2018;Reporting_Status"
             }
           }
         ],
@@ -11105,7 +11105,7 @@
             "dataView": "full",
             "source": {
               "query": " SELECT [dbo].[Utdanning].* FROM [dbo].[Utdanning] ",
-              "dataSource": "KS-SQL2018;Reporting_ASSS"
+              "dataSource": "KS-SQL2018;Reporting_Status"
             }
           }
         ],
@@ -11152,7 +11152,7 @@
             "dataView": "full",
             "source": {
               "query": " SELECT [dbo].[Kommunal sektor].* FROM [dbo].[Kommunal sektor] ",
-              "dataSource": "KS-SQL2018;Reporting_ASSS"
+              "dataSource": "KS-SQL2018;Reporting_Status"
             }
           }
         ],
@@ -11199,7 +11199,7 @@
             "dataView": "full",
             "source": {
               "query": " SELECT [dbo].[Post].* FROM [dbo].[Post] ",
-              "dataSource": "KS-SQL2018;Reporting_ASSS"
+              "dataSource": "KS-SQL2018;Reporting_Status"
             }
           }
         ],
@@ -11246,7 +11246,7 @@
             "dataView": "full",
             "source": {
               "query": " SELECT [dbo].[Regnskapsbegrep].* FROM [dbo].[Regnskapsbegrep] ",
-              "dataSource": "KS-SQL2018;Reporting_ASSS"
+              "dataSource": "KS-SQL2018;Reporting_Status"
             }
           }
         ],
@@ -11293,7 +11293,7 @@
             "dataView": "full",
             "source": {
               "query": " SELECT [dbo].[Avtaleform].* FROM [dbo].[Avtaleform] ",
-              "dataSource": "KS-SQL2018;Reporting_ASSS"
+              "dataSource": "KS-SQL2018;Reporting_Status"
             }
           }
         ],
@@ -11340,7 +11340,7 @@
             "dataView": "full",
             "source": {
               "query": " SELECT [dbo].[Helsekontroller].* FROM [dbo].[Helsekontroller] ",
-              "dataSource": "KS-SQL2018;Reporting_ASSS"
+              "dataSource": "KS-SQL2018;Reporting_Status"
             }
           }
         ],
@@ -11387,7 +11387,7 @@
             "dataView": "full",
             "source": {
               "query": " SELECT [dbo].[Eieform].* FROM [dbo].[Eieform] ",
-              "dataSource": "KS-SQL2018;Reporting_ASSS"
+              "dataSource": "KS-SQL2018;Reporting_Status"
             }
           }
         ],
@@ -11434,7 +11434,7 @@
             "dataView": "full",
             "source": {
               "query": " SELECT [dbo].[Årstrinn].* FROM [dbo].[Årstrinn] ",
-              "dataSource": "KS-SQL2018;Reporting_ASSS"
+              "dataSource": "KS-SQL2018;Reporting_Status"
             }
           }
         ],
@@ -11481,7 +11481,7 @@
             "dataView": "full",
             "source": {
               "query": " SELECT [dbo].[Eierforhold].* FROM [dbo].[Eierforhold] ",
-              "dataSource": "KS-SQL2018;Reporting_ASSS"
+              "dataSource": "KS-SQL2018;Reporting_Status"
             }
           }
         ],
@@ -11528,7 +11528,7 @@
             "dataView": "full",
             "source": {
               "query": " SELECT [dbo].[Oppholdstid].* FROM [dbo].[Oppholdstid] ",
-              "dataSource": "KS-SQL2018;Reporting_ASSS"
+              "dataSource": "KS-SQL2018;Reporting_Status"
             }
           }
         ],
@@ -11575,7 +11575,7 @@
             "dataView": "full",
             "source": {
               "query": " SELECT [dbo].[Kjønn].* FROM [dbo].[Kjønn] ",
-              "dataSource": "KS-SQL2018;Reporting_ASSS"
+              "dataSource": "KS-SQL2018;Reporting_Status"
             }
           }
         ],
@@ -11622,7 +11622,7 @@
             "dataView": "full",
             "source": {
               "query": " SELECT [dbo].[Stillingstype].* FROM [dbo].[Stillingstype] ",
-              "dataSource": "KS-SQL2018;Reporting_ASSS"
+              "dataSource": "KS-SQL2018;Reporting_Status"
             }
           }
         ],
@@ -11669,7 +11669,7 @@
             "dataView": "full",
             "source": {
               "query": " SELECT [dbo].[Kompetanse].* FROM [dbo].[Kompetanse] ",
-              "dataSource": "KS-SQL2018;Reporting_ASSS"
+              "dataSource": "KS-SQL2018;Reporting_Status"
             }
           }
         ],
@@ -11716,7 +11716,7 @@
             "dataView": "full",
             "source": {
               "query": " SELECT [dbo].[Tjenesteområde].* FROM [dbo].[Tjenesteområde] ",
-              "dataSource": "KS-SQL2018;Reporting_ASSS"
+              "dataSource": "KS-SQL2018;Reporting_Status"
             }
           }
         ],
