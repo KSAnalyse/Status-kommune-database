@@ -3,16 +3,16 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
 VisualStudioVersion = 14.0.23107.0
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{6870E480-7721-4708-BFB8-9AE898AA21B3}") = "ASSS data", "ASSS data.smproj", "{D4E6B4D8-E590-4E68-BF57-C257D4FAB806}"
+Project("{6870E480-7721-4708-BFB8-9AE898AA21B3}") = "Status Kommune data", "Status Kommune data\Status Kommune data.smproj", "{8CE414BB-95B2-4C99-9E03-51BA72086E22}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Development|x86 = Development|x86
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{D4E6B4D8-E590-4E68-BF57-C257D4FAB806}.Development|x86.ActiveCfg = Development|x86
-		{D4E6B4D8-E590-4E68-BF57-C257D4FAB806}.Development|x86.Build.0 = Development|x86
-		{D4E6B4D8-E590-4E68-BF57-C257D4FAB806}.Development|x86.Deploy.0 = Development|x86
+		{8CE414BB-95B2-4C99-9E03-51BA72086E22}.Development|x86.ActiveCfg = Development|x86
+		{8CE414BB-95B2-4C99-9E03-51BA72086E22}.Development|x86.Build.0 = Development|x86
+		{8CE414BB-95B2-4C99-9E03-51BA72086E22}.Development|x86.Deploy.0 = Development|x86
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
