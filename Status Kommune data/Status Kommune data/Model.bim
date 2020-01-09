@@ -422,6 +422,42 @@
             }
           }
         ]
+      },
+      {
+        "name": "Formål",
+        "columns": [
+          {
+            "name": "Dimensjonskode",
+            "dataType": "string",
+            "sourceColumn": "Dimensjonskode"
+          },
+          {
+            "name": "Dimensjonsnavn",
+            "dataType": "string",
+            "sourceColumn": "Dimensjonsnavn"
+          },
+          {
+            "name": "DimensjonskodeNavn",
+            "dataType": "string",
+            "sourceColumn": "DimensjonskodeNavn"
+          }
+        ],
+        "partitions": [
+          {
+            "name": "Partition",
+            "dataView": "full",
+            "source": {
+              "type": "m",
+              "expression": [
+                "let",
+                "    Source = #\"SQL/KS-SQL2018;Reporting_Status\",",
+                "    dbo_Formål = Source{[Schema=\"dbo\",Item=\"Formål\"]}[Data]",
+                "in",
+                "    dbo_Formål"
+              ]
+            }
+          }
+        ]
       }
     ],
     "relationships": [
