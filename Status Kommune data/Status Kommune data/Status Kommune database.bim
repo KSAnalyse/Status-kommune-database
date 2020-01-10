@@ -516,7 +516,8 @@
               "    FILTER(ALL(Behandling[Dimensjonsnavn]), [Dimensjonsnavn] = \"i alt\"),",
               "    FILTER(ALL(Materiale[Dimensjonsnavn]), [Dimensjonsnavn] = \"Metaller\")",
               ")"
-            ]
+            ],
+            "displayFolder": "Klima og miljøvennlig utvikling;Mengder husholdningsavfall, etter materiale og år"
           },
           {
             "name": "Papp",

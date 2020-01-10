@@ -453,6 +453,283 @@
               ")"
             ],
             "displayFolder": "Klima og miljøvennlig utvikling;Jord og skogbruksareal (km2)"
+          },
+          {
+            "name": "EE- avfall",
+            "expression": [
+              "",
+              "",
+              "/* Mengder husholdningsavfall, etter materiale og år */",
+              "",
+              "CALCULATE([Mengder husholdningsavfall],",
+              "    FILTER(ALL(Behandling[Dimensjonsnavn]), [Dimensjonsnavn] = \"i alt\"),",
+              "    FILTER(ALL(Materiale[Dimensjonsnavn]), [Dimensjonsnavn] = \"EE- avfall\")",
+              ")"
+            ],
+            "displayFolder": "Klima og miljøvennlig utvikling;Mengder husholdningsavfall, etter materiale og år"
+          },
+          {
+            "name": "Glass",
+            "expression": [
+              "",
+              "",
+              "/* Mengder husholdningsavfall, etter materiale og år */",
+              "",
+              "CALCULATE([Mengder husholdningsavfall],",
+              "    FILTER(ALL(Behandling[Dimensjonsnavn]), [Dimensjonsnavn] = \"i alt\"),",
+              "    FILTER(ALL(Materiale[Dimensjonsnavn]), [Dimensjonsnavn] = \"Glass\")",
+              ")"
+            ],
+            "displayFolder": "Klima og miljøvennlig utvikling;Mengder husholdningsavfall, etter materiale og år"
+          },
+          {
+            "name": "Matavfall",
+            "expression": [
+              "",
+              "",
+              "/* Mengder husholdningsavfall, etter materiale og år */",
+              "",
+              "/*",
+              "CALCULATE(SUM('Alle Data'[Verdi]);",
+              "    FILTER(ALL(Tabeller[Tabellnummer]); [Tabellnummer] = \"12313\");",
+              "    FILTER(ALL(Variabel[Variabelnavn]); [Variabelnavn] = \"Mengde  (tonn)\");",
+              "    FILTER(ALL(Behandling[Dimensjonsnavn]); [Dimensjonsnavn] = \"i alt\");",
+              "    FILTER(ALL(Materiale[Dimensjonsnavn]); [Dimensjonsnavn] = \"Matavfall\")",
+              ")",
+              "*/",
+              "",
+              "CALCULATE([Mengder husholdningsavfall],",
+              "    FILTER(ALL(Behandling[Dimensjonsnavn]), [Dimensjonsnavn] = \"i alt\"),",
+              "    FILTER(ALL(Materiale[Dimensjonsnavn]), [Dimensjonsnavn] = \"Matavfall\")",
+              ")"
+            ],
+            "displayFolder": "Klima og miljøvennlig utvikling;Mengder husholdningsavfall, etter materiale og år"
+          },
+          {
+            "name": "Metaller",
+            "expression": [
+              "",
+              "",
+              "/* Mengder husholdningsavfall, etter materiale og år */",
+              "",
+              "CALCULATE([Mengder husholdningsavfall],",
+              "    FILTER(ALL(Behandling[Dimensjonsnavn]), [Dimensjonsnavn] = \"i alt\"),",
+              "    FILTER(ALL(Materiale[Dimensjonsnavn]), [Dimensjonsnavn] = \"Metaller\")",
+              ")"
+            ]
+          },
+          {
+            "name": "Papp",
+            "expression": [
+              "",
+              "",
+              "/* Mengder husholdningsavfall, etter materiale og år */",
+              "",
+              "CALCULATE([Mengder husholdningsavfall],",
+              "    FILTER(ALL(Behandling[Dimensjonsnavn]), [Dimensjonsnavn] = \"i alt\"),",
+              "    FILTER(ALL(Materiale[Dimensjonsnavn]), [Dimensjonsnavn] = \"Papp\")",
+              ")"
+            ],
+            "displayFolder": "Klima og miljøvennlig utvikling;Mengder husholdningsavfall, etter materiale og år"
+          },
+          {
+            "name": "Plast",
+            "expression": [
+              "",
+              "",
+              "/* Mengder husholdningsavfall, etter materiale og år */",
+              "",
+              "CALCULATE([Mengder husholdningsavfall],",
+              "    FILTER(ALL(Behandling[Dimensjonsnavn]), [Dimensjonsnavn] = \"i alt\"),",
+              "    FILTER(ALL(Materiale[Dimensjonsnavn]), [Dimensjonsnavn] = \"Plast\")",
+              ")"
+            ],
+            "displayFolder": "Klima og miljøvennlig utvikling;Mengder husholdningsavfall, etter materiale og år"
+          },
+          {
+            "name": "Materialgjenvinning",
+            "expression": [
+              "",
+              "",
+              "/* Mengder husholdningsavfall, etter materiale og år */",
+              "",
+              "var matgjen =",
+              "CALCULATE(SUM('Alle Data'[Verdi]),",
+              "    FILTER(ALL(Tabeller[Tabellnummer]), [Tabellnummer] = \"12313\"),",
+              "    FILTER(ALL(Variabel[Variabelnavn]), [Variabelnavn] = \"Mengde  (tonn)\"),",
+              "    FILTER(ALL(Behandling[Dimensjonsnavn]), [Dimensjonsnavn] = \"Materialgjenvinning\"),",
+              "    FILTER(ALL(Materiale[Dimensjonsnavn]), [Dimensjonsnavn] = \"I alt\")",
+              ")",
+              "",
+              "var total =",
+              "CALCULATE(SUM('Alle Data'[Verdi]),",
+              "    FILTER(ALL(Tabeller[Tabellnummer]), [Tabellnummer] = \"12313\"),",
+              "    FILTER(ALL(Variabel[Variabelnavn]), [Variabelnavn] = \"Mengde  (tonn)\"),",
+              "    FILTER(ALL(Behandling[Dimensjonsnavn]), [Dimensjonsnavn] = \"i alt\"),",
+              "    FILTER(ALL(Materiale[Dimensjonsnavn]), [Dimensjonsnavn] = \"I alt\")",
+              ")",
+              "",
+              "var mat_div_tot =",
+              "DIVIDE(matgjen * 100, total)",
+              "",
+              "return (",
+              "    ROUND(mat_div_tot, 1)",
+              ")"
+            ],
+            "displayFolder": "Klima og miljøvennlig utvikling;Mengder husholdningsavfall, etter materiale og år"
+          },
+          {
+            "name": "Annet",
+            "expression": [
+              "",
+              "",
+              "/* Mengder husholdningsavfall, etter materiale og år */",
+              "",
+              "var annet =",
+              "CALCULATE([Mengder husholdningsavfall],",
+              "    FILTER(ALL(Behandling[Dimensjonsnavn]), [Dimensjonsnavn] = \"Annet\"),",
+              "    FILTER(ALL(Materiale[Dimensjonsnavn]), [Dimensjonsnavn] = \"I alt\")",
+              ")",
+              "",
+              "var total =",
+              "CALCULATE([Mengder husholdningsavfall],",
+              "    FILTER(ALL(Behandling[Dimensjonsnavn]), [Dimensjonsnavn] = \"i alt\"),",
+              "    FILTER(ALL(Materiale[Dimensjonsnavn]), [Dimensjonsnavn] = \"I alt\")",
+              ")",
+              "",
+              "var annet_div_tot =",
+              "DIVIDE(annet * 100, total)",
+              "",
+              "return (",
+              "    ROUND(annet_div_tot, 1)",
+              ")"
+            ],
+            "displayFolder": "Klima og miljøvennlig utvikling;Mengder husholdningsavfall, etter materiale og år"
+          },
+          {
+            "name": "Biogassproduksjon",
+            "expression": [
+              "",
+              "",
+              "/* Mengder husholdningsavfall, etter materiale og år */",
+              "",
+              "var bio =",
+              "CALCULATE([Mengder husholdningsavfall],",
+              "    FILTER(ALL(Behandling[Dimensjonsnavn]), [Dimensjonsnavn] = \"Biogassproduksjon\"),",
+              "    FILTER(ALL(Materiale[Dimensjonsnavn]), [Dimensjonsnavn] = \"I alt\")",
+              ")",
+              "",
+              "var total =",
+              "CALCULATE([Mengder husholdningsavfall],",
+              "    FILTER(ALL(Behandling[Dimensjonsnavn]), [Dimensjonsnavn] = \"i alt\"),",
+              "    FILTER(ALL(Materiale[Dimensjonsnavn]), [Dimensjonsnavn] = \"I alt\")",
+              ")",
+              "",
+              "var bio_div_tot =",
+              "DIVIDE(bio * 100, total)",
+              "",
+              "return (",
+              "    ROUND(bio_div_tot, 1)",
+              ")"
+            ],
+            "displayFolder": "Klima og miljøvennlig utvikling;Mengder husholdningsavfall, etter materiale og år"
+          },
+          {
+            "name": "Deponi",
+            "expression": [
+              "",
+              "",
+              "/* Mengder husholdningsavfall, etter materiale og år */",
+              "",
+              "var dep =",
+              "CALCULATE([Mengder husholdningsavfall],",
+              "    FILTER(ALL(Behandling[Dimensjonsnavn]), [Dimensjonsnavn] = \"Deponi\"),",
+              "    FILTER(ALL(Materiale[Dimensjonsnavn]), [Dimensjonsnavn] = \"I alt\")",
+              ")",
+              "",
+              "var total =",
+              "CALCULATE([Mengder husholdningsavfall],",
+              "    FILTER(ALL(Behandling[Dimensjonsnavn]), [Dimensjonsnavn] = \"i alt\"),",
+              "    FILTER(ALL(Materiale[Dimensjonsnavn]), [Dimensjonsnavn] = \"I alt\")",
+              ")",
+              "",
+              "var dep_div_tot =",
+              "DIVIDE(dep * 100, total)",
+              "",
+              "return (",
+              "    ROUND(dep_div_tot, 1)",
+              ")"
+            ],
+            "displayFolder": "Klima og miljøvennlig utvikling;Mengder husholdningsavfall, etter materiale og år"
+          },
+          {
+            "name": "Forbrenning",
+            "expression": [
+              "",
+              "",
+              "/* Mengder husholdningsavfall, etter materiale og år */",
+              "",
+              "var forb =",
+              "CALCULATE([Mengder husholdningsavfall],",
+              "    FILTER(ALL(Behandling[Dimensjonsnavn]), [Dimensjonsnavn] = \"Forbrenning\"),",
+              "    FILTER(ALL(Materiale[Dimensjonsnavn]), [Dimensjonsnavn] = \"I alt\")",
+              ")",
+              "",
+              "var total =",
+              "CALCULATE([Mengder husholdningsavfall],",
+              "    FILTER(ALL(Behandling[Dimensjonsnavn]), [Dimensjonsnavn] = \"i alt\"),",
+              "    FILTER(ALL(Materiale[Dimensjonsnavn]), [Dimensjonsnavn] = \"I alt\")",
+              ")",
+              "",
+              "var forb_div_tot =",
+              "DIVIDE(forb * 100, total)",
+              "",
+              "return (",
+              "    ROUND(forb_div_tot, 1)",
+              ")"
+            ],
+            "displayFolder": "Klima og miljøvennlig utvikling;Mengder husholdningsavfall, etter materiale og år"
+          },
+          {
+            "name": "Kompostering",
+            "expression": [
+              "",
+              "",
+              "/* Mengder husholdningsavfall, etter materiale og år */",
+              "",
+              "var komp =",
+              "CALCULATE([Mengder husholdningsavfall],",
+              "    FILTER(ALL(Behandling[Dimensjonsnavn]), [Dimensjonsnavn] = \"Kompostering\"),",
+              "    FILTER(ALL(Materiale[Dimensjonsnavn]), [Dimensjonsnavn] = \"I alt\")",
+              ")",
+              "",
+              "var total =",
+              "CALCULATE([Mengder husholdningsavfall],",
+              "    FILTER(ALL(Behandling[Dimensjonsnavn]), [Dimensjonsnavn] = \"i alt\"),",
+              "    FILTER(ALL(Materiale[Dimensjonsnavn]), [Dimensjonsnavn] = \"I alt\")",
+              ")",
+              "",
+              "var komp_div_tot =",
+              "DIVIDE(komp * 100, total)",
+              "",
+              "return (",
+              "    ROUND(komp_div_tot, 1)",
+              ")"
+            ],
+            "displayFolder": "Klima og miljøvennlig utvikling;Mengder husholdningsavfall, etter materiale og år"
+          },
+          {
+            "name": "Mengder husholdningsavfall",
+            "expression": [
+              "",
+              "",
+              "/* Mengder husholdningsavfall, etter materiale og år */",
+              "",
+              "CALCULATE(SUM('Alle Data'[Verdi]),",
+              "    FILTER(ALL(Tabeller[Tabellnummer]), [Tabellnummer] = \"12313\"),",
+              "    FILTER(ALL(Variabel[Variabelnavn]), [Variabelnavn] = \"Mengde  (tonn)\")",
+              ")"
+            ]
           }
         ]
       },
@@ -499,6 +776,17 @@
             "dataType": "string",
             "isHidden": true,
             "sourceColumn": "Arealklassekode"
+          },
+          {
+            "name": "Materialekode",
+            "dataType": "string",
+            "isHidden": true,
+            "sourceColumn": "Materialekode"
+          },
+          {
+            "name": "Behandlingkode",
+            "dataType": "string",
+            "sourceColumn": "Behandlingkode"
           }
         ],
         "partitions": [
@@ -687,6 +975,78 @@
             }
           }
         ]
+      },
+      {
+        "name": "Materiale",
+        "columns": [
+          {
+            "name": "Dimensjonskode",
+            "dataType": "string",
+            "sourceColumn": "Dimensjonskode"
+          },
+          {
+            "name": "Dimensjonsnavn",
+            "dataType": "string",
+            "sourceColumn": "Dimensjonsnavn"
+          },
+          {
+            "name": "DimensjonskodeNavn",
+            "dataType": "string",
+            "sourceColumn": "DimensjonskodeNavn"
+          }
+        ],
+        "partitions": [
+          {
+            "name": "Partition",
+            "dataView": "full",
+            "source": {
+              "type": "m",
+              "expression": [
+                "let",
+                "    Source = #\"SQL/KS-SQL2018;Reporting_Status\",",
+                "    dbo_Materiale = Source{[Schema=\"dbo\",Item=\"Materiale\"]}[Data]",
+                "in",
+                "    dbo_Materiale"
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "name": "Behandling",
+        "columns": [
+          {
+            "name": "Dimensjonskode",
+            "dataType": "string",
+            "sourceColumn": "Dimensjonskode"
+          },
+          {
+            "name": "Dimensjonsnavn",
+            "dataType": "string",
+            "sourceColumn": "Dimensjonsnavn"
+          },
+          {
+            "name": "DimensjonskodeNavn",
+            "dataType": "string",
+            "sourceColumn": "DimensjonskodeNavn"
+          }
+        ],
+        "partitions": [
+          {
+            "name": "Partition",
+            "dataView": "full",
+            "source": {
+              "type": "m",
+              "expression": [
+                "let",
+                "    Source = #\"SQL/KS-SQL2018;Reporting_Status\",",
+                "    dbo_Behandling = Source{[Schema=\"dbo\",Item=\"Behandling\"]}[Data]",
+                "in",
+                "    dbo_Behandling"
+              ]
+            }
+          }
+        ]
       }
     ],
     "relationships": [
@@ -730,6 +1090,20 @@
         "fromTable": "Alle Data",
         "fromColumn": "Arealklassekode",
         "toTable": "Arealklasse",
+        "toColumn": "Dimensjonskode"
+      },
+      {
+        "name": "eb156d52-29db-4293-84d2-e246e7c3cf29",
+        "fromTable": "Alle Data",
+        "fromColumn": "Materialekode",
+        "toTable": "Materiale",
+        "toColumn": "Dimensjonskode"
+      },
+      {
+        "name": "9702bd0d-d6f5-44c7-95e1-dcd135686722",
+        "fromTable": "Alle Data",
+        "fromColumn": "Behandlingkode",
+        "toTable": "Behandling",
         "toColumn": "Dimensjonskode"
       }
     ],
