@@ -453,6 +453,90 @@
               ")"
             ],
             "displayFolder": "Klima og miljøvennlig utvikling;Jord og skogbruksareal (km2)"
+          },
+          {
+            "name": "EE- avfall",
+            "expression": [
+              "",
+              "",
+              "/* Mengder husholdningsavfall, etter materiale og år */",
+              "",
+              "CALCULATE(SUM('Alle Data'[Verdi]),",
+              "    FILTER(ALL(Tabeller[Tabellnummer]), [Tabellnummer] = \"12313\"),",
+              "    FILTER(ALL(Variabel[Variabelnavn]), [Variabelnavn] = \"Mengde  (tonn)\"),",
+              "    FILTER(ALL(Materiale[Dimensjonsnavn]), [Dimensjonsnavn] = \"EE- avfall\")",
+              ")"
+            ]
+          },
+          {
+            "name": "Glass",
+            "expression": [
+              "",
+              "",
+              "/* Mengder husholdningsavfall, etter materiale og år */",
+              "",
+              "CALCULATE(SUM('Alle Data'[Verdi]),",
+              "    FILTER(ALL(Tabeller[Tabellnummer]), [Tabellnummer] = \"12313\"),",
+              "    FILTER(ALL(Variabel[Variabelnavn]), [Variabelnavn] = \"Mengde  (tonn)\"),",
+              "    FILTER(ALL(Materiale[Dimensjonsnavn]), [Dimensjonsnavn] = \"Glass\")",
+              ")"
+            ]
+          },
+          {
+            "name": "Matavfall",
+            "expression": [
+              "",
+              "",
+              "/* Mengder husholdningsavfall, etter materiale og år */",
+              "",
+              "CALCULATE(SUM('Alle Data'[Verdi]),",
+              "    FILTER(ALL(Tabeller[Tabellnummer]), [Tabellnummer] = \"12313\"),",
+              "    FILTER(ALL(Variabel[Variabelnavn]), [Variabelnavn] = \"Mengde  (tonn)\"),",
+              "    FILTER(ALL(Materiale[Dimensjonsnavn]), [Dimensjonsnavn] = \"Matavfall\")",
+              ")"
+            ]
+          },
+          {
+            "name": "Metaller",
+            "expression": [
+              "",
+              "",
+              "/* Mengder husholdningsavfall, etter materiale og år */",
+              "",
+              "CALCULATE(SUM('Alle Data'[Verdi]),",
+              "    FILTER(ALL(Tabeller[Tabellnummer]), [Tabellnummer] = \"12313\"),",
+              "    FILTER(ALL(Variabel[Variabelnavn]), [Variabelnavn] = \"Mengde  (tonn)\"),",
+              "    FILTER(ALL(Materiale[Dimensjonsnavn]), [Dimensjonsnavn] = \"Metaller\")",
+              ")"
+            ]
+          },
+          {
+            "name": "Papp",
+            "expression": [
+              "",
+              "",
+              "/* Mengder husholdningsavfall, etter materiale og år */",
+              "",
+              "CALCULATE(SUM('Alle Data'[Verdi]),",
+              "    FILTER(ALL(Tabeller[Tabellnummer]), [Tabellnummer] = \"12313\"),",
+              "    FILTER(ALL(Variabel[Variabelnavn]), [Variabelnavn] = \"Mengde  (tonn)\"),",
+              "    FILTER(ALL(Materiale[Dimensjonsnavn]), [Dimensjonsnavn] = \"Papp\")",
+              ")"
+            ]
+          },
+          {
+            "name": "Plast",
+            "expression": [
+              "",
+              "",
+              "/* Mengder husholdningsavfall, etter materiale og år */",
+              "",
+              "CALCULATE(SUM('Alle Data'[Verdi]),",
+              "    FILTER(ALL(Tabeller[Tabellnummer]), [Tabellnummer] = \"12313\"),",
+              "    FILTER(ALL(Variabel[Variabelnavn]), [Variabelnavn] = \"Mengde  (tonn)\"),",
+              "    FILTER(ALL(Materiale[Dimensjonsnavn]), [Dimensjonsnavn] = \"Plast\")",
+              ")"
+            ]
           }
         ]
       },
@@ -499,6 +583,12 @@
             "dataType": "string",
             "isHidden": true,
             "sourceColumn": "Arealklassekode"
+          },
+          {
+            "name": "Materialekode",
+            "dataType": "string",
+            "isHidden": true,
+            "sourceColumn": "Materialekode"
           }
         ],
         "partitions": [
@@ -687,6 +777,42 @@
             }
           }
         ]
+      },
+      {
+        "name": "Materiale",
+        "columns": [
+          {
+            "name": "Dimensjonskode",
+            "dataType": "string",
+            "sourceColumn": "Dimensjonskode"
+          },
+          {
+            "name": "Dimensjonsnavn",
+            "dataType": "string",
+            "sourceColumn": "Dimensjonsnavn"
+          },
+          {
+            "name": "DimensjonskodeNavn",
+            "dataType": "string",
+            "sourceColumn": "DimensjonskodeNavn"
+          }
+        ],
+        "partitions": [
+          {
+            "name": "Partition",
+            "dataView": "full",
+            "source": {
+              "type": "m",
+              "expression": [
+                "let",
+                "    Source = #\"SQL/KS-SQL2018;Reporting_Status\",",
+                "    dbo_Materiale = Source{[Schema=\"dbo\",Item=\"Materiale\"]}[Data]",
+                "in",
+                "    dbo_Materiale"
+              ]
+            }
+          }
+        ]
       }
     ],
     "relationships": [
@@ -730,6 +856,13 @@
         "fromTable": "Alle Data",
         "fromColumn": "Arealklassekode",
         "toTable": "Arealklasse",
+        "toColumn": "Dimensjonskode"
+      },
+      {
+        "name": "eb156d52-29db-4293-84d2-e246e7c3cf29",
+        "fromTable": "Alle Data",
+        "fromColumn": "Materialekode",
+        "toTable": "Materiale",
         "toColumn": "Dimensjonskode"
       }
     ],
