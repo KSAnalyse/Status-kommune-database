@@ -730,7 +730,8 @@
               "    FILTER(ALL(Tabeller[Tabellnummer]), [Tabellnummer] = \"12313\"),",
               "    FILTER(ALL(Variabel[Variabelnavn]), [Variabelnavn] = \"Mengde  (tonn)\")",
               ")"
-            ]
+            ],
+            "displayFolder": "Klima og miljøvennlig utvikling;Mengder husholdningsavfall, etter materiale og år"
           }
         ]
       },
