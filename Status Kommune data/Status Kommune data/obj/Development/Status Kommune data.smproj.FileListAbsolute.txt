@@ -1,6 +1,6 @@
-C:\Users\8093aha\Documents\GitHub\Status-kommune-database\Status Kommune data\Status Kommune data\bin\Model.asdatabase
-C:\Users\8093aha\Documents\GitHub\Status-kommune-database\Status Kommune data\Status Kommune data\bin\Model.deploymenttargets
-C:\Users\8093aha\Documents\GitHub\Status-kommune-database\Status Kommune data\Status Kommune data\bin\Model.deploymentoptions
-C:\Users\8093aha\Documents\GitHub\Status-kommune-database\Status Kommune data\Status Kommune data\obj\Development\Model.asdatabase
-C:\Users\8093aha\Documents\GitHub\Status-kommune-database\Status Kommune data\Status Kommune data\obj\Development\Model.deploymentoptions
-C:\Users\8093aha\Documents\GitHub\Status-kommune-database\Status Kommune data\Status Kommune data\obj\Development\Model.deploymenttargets
+C:\Users\8093aha\Documents\GitHub\Status-kommune-database\Status Kommune data\Status Kommune data\bin\Status Kommune database.asdatabase
+C:\Users\8093aha\Documents\GitHub\Status-kommune-database\Status Kommune data\Status Kommune data\bin\Status Kommune database.deploymenttargets
+C:\Users\8093aha\Documents\GitHub\Status-kommune-database\Status Kommune data\Status Kommune data\bin\Status Kommune database.deploymentoptions
+C:\Users\8093aha\Documents\GitHub\Status-kommune-database\Status Kommune data\Status Kommune data\obj\Development\Status Kommune database.asdatabase
+C:\Users\8093aha\Documents\GitHub\Status-kommune-database\Status Kommune data\Status Kommune data\obj\Development\Status Kommune database.deploymentoptions
+C:\Users\8093aha\Documents\GitHub\Status-kommune-database\Status Kommune data\Status Kommune data\obj\Development\Status Kommune database.deploymenttargets
