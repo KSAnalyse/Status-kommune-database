@@ -1,0 +1,1458 @@
+{
+  "name": "SemanticModel",
+  "compatibilityLevel": 1400,
+  "model": {
+    "culture": "nb-NO",
+    "dataSources": [
+      {
+        "type": "structured",
+        "name": "SQL/KS-SQL2018;Reporting_Status",
+        "connectionDetails": {
+          "protocol": "tds",
+          "address": {
+            "server": "KS-SQL2018",
+            "database": "Reporting_Status"
+          },
+          "authentication": null,
+          "query": null
+        },
+        "options": {},
+        "credential": {
+          "AuthenticationKind": "Windows",
+          "kind": "SQL",
+          "path": "ks-sql2018;Reporting_Status",
+          "Username": "Axel.Hjelmervik.Hansen@ks.no",
+          "EncryptConnection": false
+        }
+      }
+    ],
+    "tables": [
+      {
+        "name": "Region",
+        "columns": [
+          {
+            "name": "Kode",
+            "dataType": "string",
+            "sourceColumn": "Kode"
+          },
+          {
+            "name": "Navn",
+            "dataType": "string",
+            "sourceColumn": "Navn"
+          },
+          {
+            "name": "KodeNummernavn",
+            "dataType": "string",
+            "sourceColumn": "KodeNummernavn"
+          },
+          {
+            "name": "Regionnummer",
+            "dataType": "string",
+            "sourceColumn": "Regionnummer"
+          },
+          {
+            "name": "Kategori",
+            "dataType": "string",
+            "sourceColumn": "Kategori"
+          },
+          {
+            "name": "ASSS kommune",
+            "dataType": "string",
+            "sourceColumn": "ASSS kommune"
+          },
+          {
+            "name": "GyldigFraDato",
+            "dataType": "dateTime",
+            "sourceColumn": "GyldigFraDato"
+          },
+          {
+            "name": "GyldigTilDato",
+            "dataType": "dateTime",
+            "sourceColumn": "GyldigTilDato"
+          }
+        ],
+        "partitions": [
+          {
+            "name": "Partition",
+            "dataView": "full",
+            "source": {
+              "type": "m",
+              "expression": [
+                "let",
+                "    Source = #\"SQL/KS-SQL2018;Reporting_Status\",",
+                "    dbo_Region = Source{[Schema=\"dbo\",Item=\"Region\"]}[Data]",
+                "in",
+                "    dbo_Region"
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "name": "Status Kommune Indikatorer",
+        "columns": [
+          {
+            "name": "Andre",
+            "dataType": "int64",
+            "sourceColumn": "Andre"
+          },
+          {
+            "name": "Attraktive arbeidsgivere",
+            "dataType": "int64",
+            "sourceColumn": "Attraktive arbeidsgivere"
+          },
+          {
+            "name": "Attraktive byer og steder",
+            "dataType": "int64",
+            "sourceColumn": "Attraktive byer og steder"
+          },
+          {
+            "name": "Deltagende innbyggere",
+            "dataType": "int64",
+            "sourceColumn": "Deltagende innbyggere"
+          },
+          {
+            "name": "Effektive og innovative",
+            "dataType": "int64",
+            "sourceColumn": "Effektive og innovative"
+          },
+          {
+            "name": "Klima og miljøvennlig utvikling",
+            "dataType": "int64",
+            "sourceColumn": "Klima og miljøvennlig utvikling"
+          },
+          {
+            "name": "Konkurranse næringsliv",
+            "dataType": "int64",
+            "sourceColumn": "Konkurranse næringsliv"
+          },
+          {
+            "name": "God oppvekst og godt liv",
+            "dataType": "int64",
+            "sourceColumn": "God oppvekst og godt liv"
+          },
+          {
+            "name": "Mangfold og inkludering",
+            "dataType": "int64",
+            "sourceColumn": "Mangfold og inkludering"
+          },
+          {
+            "name": "Selvstendige",
+            "dataType": "int64",
+            "sourceColumn": "Selvstendige"
+          }
+        ],
+        "partitions": [
+          {
+            "name": "Partition",
+            "dataView": "full",
+            "source": {
+              "type": "m",
+              "expression": [
+                "let",
+                "    Source = #\"SQL/KS-SQL2018;Reporting_Status\",",
+                "    #\"dbo_Status Kommune Indikatorer\" = Source{[Schema=\"dbo\",Item=\"Status Kommune Indikatorer\"]}[Data]",
+                "in",
+                "    #\"dbo_Status Kommune Indikatorer\""
+              ]
+            }
+          }
+        ],
+        "measures": [
+          {
+            "name": "Båtruter",
+            "expression": [
+              "",
+              "",
+              "/* Millioner passasjerkilometer buss, båt, t-bane, trikk/bybane - fylkeskommunale ruter*/",
+              "",
+              "var ant_btrut =",
+              "CALCULATE(SUM('Alle Data'[Verdi]),",
+              "    FILTER(ALL(Tabeller[Tabellnummer]), [Tabellnummer] = \"11844\"),",
+              "    FILTER(ALL(Variabel[Variabelnavn]), [Variabelnavn] = \"Passasjer, båtruter (antall)\")",
+              ")",
+              "",
+              "var btrut_1mill =",
+              "DIVIDE(ant_btrut, 1000000)",
+              "",
+              "return (",
+              "    ROUND(",
+              "        btrut_1mill,",
+              "        1",
+              "    )",
+              ")"
+            ],
+            "displayFolder": "Klima og miljøvennlig utvikling;Millioner passasjerkilometer buss, båt, t-bane, trikk/bybane - fylkeskommunale ruter"
+          },
+          {
+            "name": "Buss",
+            "expression": [
+              "",
+              "",
+              "/* Millioner passasjerkilometer buss, båt, t-bane, trikk/bybane - fylkeskommunale ruter*/",
+              "",
+              "var ant_buss =",
+              "CALCULATE(SUM('Alle Data'[Verdi]),",
+              "    FILTER(ALL(Tabeller[Tabellnummer]), [Tabellnummer] = \"11844\"),",
+              "    FILTER(ALL(Variabel[Variabelnavn]), [Variabelnavn] = \"Passasjerer, buss (antall)\")",
+              ")",
+              "",
+              "var buss_1mill =",
+              "DIVIDE(ant_buss, 1000000)",
+              "",
+              "return (",
+              "    ROUND(",
+              "        buss_1mill,",
+              "        1",
+              "    )",
+              ")"
+            ],
+            "displayFolder": "Klima og miljøvennlig utvikling;Millioner passasjerkilometer buss, båt, t-bane, trikk/bybane - fylkeskommunale ruter"
+          },
+          {
+            "name": "T-bane og trikk/bybane",
+            "expression": [
+              "",
+              "",
+              "/* Millioner passasjerkilometer buss, båt, t-bane, trikk/bybane - fylkeskommunale ruter*/",
+              "",
+              "var ant_baner =",
+              "CALCULATE(SUM('Alle Data'[Verdi]),",
+              "    FILTER(ALL(Tabeller[Tabellnummer]), [Tabellnummer] = \"11844\"),",
+              "    FILTER(ALL(Variabel[Variabelnavn]), [Variabelnavn] = \"Passasjerer, t-bane og trikk/bybane (antall)\")",
+              ")",
+              "",
+              "var baner_1mill =",
+              "DIVIDE(ant_baner, 1000000)",
+              "",
+              "return (",
+              "    ROUND(",
+              "        baner_1mill,",
+              "        1",
+              "    )",
+              ")"
+            ],
+            "displayFolder": "Klima og miljøvennlig utvikling;Millioner passasjerkilometer buss, båt, t-bane, trikk/bybane - fylkeskommunale ruter"
+          },
+          {
+            "name": "Omdisponering til andre formål enn landbruk i alt",
+            "expression": [
+              "",
+              "",
+              "/* Dekar dyrka og dyrkbar jord som er omdisponert til andre formål enn landbruk */",
+              "CALCULATE(SUM('Alle Data'[Verdi]),",
+              "    FILTER(ALL(Tabeller[Tabellnummer]), [Tabellnummer] = \"07903\"),",
+              "    FILTER(ALL(Variabel[Variabelnavn]), [Variabelnavn] = ",
+              "        \"Omdisponering til andre formål enn landbruk i alt\"",
+              "    )",
+              ")"
+            ],
+            "displayFolder": "Klima og miljøvennlig utvikling;Dekar dyrka og dyrkbar jord som er omdisponert til andre formål enn landbruk"
+          },
+          {
+            "name": "Dyrka jord",
+            "expression": [
+              "",
+              "",
+              "/* Dekar dyrka og dyrkbar jord som er omdisponert til andre formål enn landbruk */",
+              "CALCULATE(SUM('Alle Data'[Verdi]),",
+              "    FILTER(ALL(Tabeller[Tabellnummer]), [Tabellnummer] = \"07903\"),",
+              "    FILTER(ALL(Variabel[Variabelnavn]), [Variabelnavn] = ",
+              "        \"Dyrka jord\"",
+              "    )",
+              ")"
+            ],
+            "displayFolder": "Klima og miljøvennlig utvikling;Dekar dyrka og dyrkbar jord som er omdisponert til andre formål enn landbruk"
+          },
+          {
+            "name": "Dyrkbar jord",
+            "expression": [
+              "",
+              "",
+              "/* Dekar dyrka og dyrkbar jord som er omdisponert til andre formål enn landbruk */",
+              "CALCULATE(SUM('Alle Data'[Verdi]),",
+              "    FILTER(ALL(Tabeller[Tabellnummer]), [Tabellnummer] = \"07903\"),",
+              "    FILTER(ALL(Variabel[Variabelnavn]), [Variabelnavn] = ",
+              "        \"Dyrkbar jord\"",
+              "    )",
+              ")"
+            ],
+            "displayFolder": "Klima og miljøvennlig utvikling;Dekar dyrka og dyrkbar jord som er omdisponert til andre formål enn landbruk"
+          },
+          {
+            "name": "Annen bebyggelse og anlegg",
+            "expression": [
+              "",
+              "",
+              "/* ",
+              "    Omdisponering, etter dyrka eller dyrkbar jord, formål, region, lovanvendelse, statistikkvariabel ",
+              "    og år",
+              "*/",
+              "",
+              "CALCULATE(SUM('Alle Data'[Verdi]),",
+              "    FILTER(ALL(Tabeller[Tabellnummer]), [Tabellnummer] = \"11776\"),",
+              "    FILTER(ALL(Variabel[Variabelnavn]), [Variabelnavn] = \"Areal  (dekar)\"),",
+              "    FILTER(ALL('Formål'[Dimensjonsnavn]), [Dimensjonsnavn] = \"Annen bebyggelse og anlegg\")",
+              ")"
+            ],
+            "displayFolder": "Klima og miljøvennlig utvikling;Omdisponering, etter dyrka eller dyrkbar jord, formål, region, lovanvendelse, statistikkvariabel"
+          },
+          {
+            "name": "Andre formål",
+            "expression": [
+              "",
+              "",
+              "/* ",
+              "    Omdisponering, etter dyrka eller dyrkbar jord, formål, region, lovanvendelse, statistikkvariabel ",
+              "    og år",
+              "*/",
+              "",
+              "CALCULATE(SUM('Alle Data'[Verdi]),",
+              "    FILTER(ALL(Tabeller[Tabellnummer]), [Tabellnummer] = \"11776\"),",
+              "    FILTER(ALL(Variabel[Variabelnavn]), [Variabelnavn] = \"Areal  (dekar)\"),",
+              "    FILTER(ALL('Formål'[Dimensjonsnavn]), [Dimensjonsnavn] IN {",
+              "        \"Annet landbruksformål, feks. tilleggsnæringer\",",
+              "        \"Bruk og vern av sjø og vassdrag, med tilhørende strandsone\",",
+              "        \"Forsvaret\",",
+              "        \"Golfbane\",",
+              "        \"Kombinasjoner av hovedformål\",",
+              "        \"Landbruks-, natur- og friluftsområder, spredt utbygging\",",
+              "        \"Landbruks-, natur- og friluftsområder der landbruk er utelukket\"",
+              "    })",
+              ")"
+            ],
+            "displayFolder": "Klima og miljøvennlig utvikling;Omdisponering, etter dyrka eller dyrkbar jord, formål, region, lovanvendelse, statistikkvariabel"
+          },
+          {
+            "name": "Boligformål",
+            "expression": [
+              "",
+              "",
+              "/* ",
+              "    Omdisponering, etter dyrka eller dyrkbar jord, formål, region, lovanvendelse, statistikkvariabel ",
+              "    og år",
+              "*/",
+              "",
+              "CALCULATE(SUM('Alle Data'[Verdi]),",
+              "    FILTER(ALL(Tabeller[Tabellnummer]), [Tabellnummer] = \"11776\"),",
+              "    FILTER(ALL(Variabel[Variabelnavn]), [Variabelnavn] = \"Areal  (dekar)\"),",
+              "    FILTER(ALL('Formål'[Dimensjonsnavn]), [Dimensjonsnavn] = ",
+              "        \"Boligbebyggelse, inkludert uteoppholdsareal\"",
+              "    )",
+              ")"
+            ],
+            "displayFolder": "Klima og miljøvennlig utvikling;Omdisponering, etter dyrka eller dyrkbar jord, formål, region, lovanvendelse, statistikkvariabel"
+          },
+          {
+            "name": "Forretninger, kontorer, industri m.m.",
+            "expression": [
+              "",
+              "",
+              "/* ",
+              "    Omdisponering, etter dyrka eller dyrkbar jord, formål, region, lovanvendelse, statistikkvariabel ",
+              "    og år",
+              "*/",
+              "",
+              "CALCULATE(SUM('Alle Data'[Verdi]),",
+              "    FILTER(ALL(Tabeller[Tabellnummer]), [Tabellnummer] = \"11776\"),",
+              "    FILTER(ALL(Variabel[Variabelnavn]), [Variabelnavn] = \"Areal  (dekar)\"),",
+              "    FILTER(ALL('Formål'[Dimensjonsnavn]), [Dimensjonsnavn] IN {",
+              "        \"Næringsbebyggelse / virksomhet\",",
+              "        \"Offentlig eller privat tjenesteyting\"",
+              "    })",
+              ")"
+            ],
+            "displayFolder": "Klima og miljøvennlig utvikling;Omdisponering, etter dyrka eller dyrkbar jord, formål, region, lovanvendelse, statistikkvariabel"
+          },
+          {
+            "name": "Fritidsbebyggelse",
+            "expression": [
+              "",
+              "",
+              "/* ",
+              "    Omdisponering, etter dyrka eller dyrkbar jord, formål, region, lovanvendelse, statistikkvariabel ",
+              "    og år",
+              "*/",
+              "",
+              "CALCULATE(SUM('Alle Data'[Verdi]),",
+              "    FILTER(ALL(Tabeller[Tabellnummer]), [Tabellnummer] = \"11776\"),",
+              "    FILTER(ALL(Variabel[Variabelnavn]), [Variabelnavn] = \"Areal  (dekar)\"),",
+              "    FILTER(ALL('Formål'[Dimensjonsnavn]), [Dimensjonsnavn] = \"Fritidsbebyggelse\")",
+              ")"
+            ],
+            "displayFolder": "Klima og miljøvennlig utvikling;Omdisponering, etter dyrka eller dyrkbar jord, formål, region, lovanvendelse, statistikkvariabel"
+          },
+          {
+            "name": "Grønnstruktur",
+            "expression": [
+              "",
+              "",
+              "/* ",
+              "    Omdisponering, etter dyrka eller dyrkbar jord, formål, region, lovanvendelse, statistikkvariabel ",
+              "    og år",
+              "*/",
+              "",
+              "CALCULATE(SUM('Alle Data'[Verdi]),",
+              "    FILTER(ALL(Tabeller[Tabellnummer]), [Tabellnummer] = \"11776\"),",
+              "    FILTER(ALL(Variabel[Variabelnavn]), [Variabelnavn] = \"Areal  (dekar)\"),",
+              "    FILTER(ALL('Formål'[Dimensjonsnavn]), [Dimensjonsnavn] = \"Grønnstruktur\")",
+              ")"
+            ],
+            "displayFolder": "Klima og miljøvennlig utvikling;Omdisponering, etter dyrka eller dyrkbar jord, formål, region, lovanvendelse, statistikkvariabel"
+          },
+          {
+            "name": "Trafikkområde",
+            "expression": [
+              "",
+              "",
+              "/* ",
+              "    Omdisponering, etter dyrka eller dyrkbar jord, formål, region, lovanvendelse, statistikkvariabel ",
+              "    og år",
+              "*/",
+              "",
+              "CALCULATE(SUM('Alle Data'[Verdi]),",
+              "    FILTER(ALL(Tabeller[Tabellnummer]), [Tabellnummer] = \"11776\"),",
+              "    FILTER(ALL(Variabel[Variabelnavn]), [Variabelnavn] = \"Areal  (dekar)\"),",
+              "    FILTER(ALL('Formål'[Dimensjonsnavn]), [Dimensjonsnavn] = ",
+              "        \"Samferdselsanlegg og teknisk infrastruktur\"",
+              "    )",
+              ")"
+            ],
+            "displayFolder": "Klima og miljøvennlig utvikling;Omdisponering, etter dyrka eller dyrkbar jord, formål, region, lovanvendelse, statistikkvariabel"
+          },
+          {
+            "name": "Jordbruksareal",
+            "expression": [
+              "",
+              "",
+              "/* Jord og skogbruksareal (km2) */",
+              "",
+              "CALCULATE(SUM('Alle Data'[Verdi]),",
+              "    FILTER(ALL(Tabeller[Tabellnummer]), [Tabellnummer] = \"09594\"),",
+              "    FILTER(ALL(Variabel[Variabelnavn]), [Variabelnavn] = \"Areal\"),",
+              "    FILTER(ALL('Arealklasse'[Dimensjonsnavn]), [Dimensjonsnavn] = ",
+              "        \"Jordbruksareal\"",
+              "    )",
+              ")"
+            ],
+            "displayFolder": "Klima og miljøvennlig utvikling;Jord og skogbruksareal (km2)"
+          },
+          {
+            "name": "Skog",
+            "expression": [
+              "",
+              "",
+              "/* Jord og skogbruksareal (km2) */",
+              "",
+              "CALCULATE(SUM('Alle Data'[Verdi]),",
+              "    FILTER(ALL(Tabeller[Tabellnummer]), [Tabellnummer] = \"09594\"),",
+              "    FILTER(ALL(Variabel[Variabelnavn]), [Variabelnavn] = \"Areal\"),",
+              "    FILTER(ALL('Arealklasse'[Dimensjonsnavn]), [Dimensjonsnavn] = ",
+              "        \"Skog\"",
+              "    )",
+              ")"
+            ],
+            "displayFolder": "Klima og miljøvennlig utvikling;Jord og skogbruksareal (km2)"
+          },
+          {
+            "name": "EE- avfall",
+            "expression": [
+              "",
+              "",
+              "/* Mengder husholdningsavfall, etter materiale og år */",
+              "",
+              "CALCULATE([Mengder husholdningsavfall],",
+              "    FILTER(ALL(Behandling[Dimensjonsnavn]), [Dimensjonsnavn] = \"i alt\"),",
+              "    FILTER(ALL(Materiale[Dimensjonsnavn]), [Dimensjonsnavn] = \"EE- avfall\")",
+              ")"
+            ],
+            "displayFolder": "Klima og miljøvennlig utvikling;Mengder husholdningsavfall, etter materiale og år"
+          },
+          {
+            "name": "Glass",
+            "expression": [
+              "",
+              "",
+              "/* Mengder husholdningsavfall, etter materiale og år */",
+              "",
+              "CALCULATE([Mengder husholdningsavfall],",
+              "    FILTER(ALL(Behandling[Dimensjonsnavn]), [Dimensjonsnavn] = \"i alt\"),",
+              "    FILTER(ALL(Materiale[Dimensjonsnavn]), [Dimensjonsnavn] = \"Glass\")",
+              ")"
+            ],
+            "displayFolder": "Klima og miljøvennlig utvikling;Mengder husholdningsavfall, etter materiale og år"
+          },
+          {
+            "name": "Matavfall",
+            "expression": [
+              "",
+              "",
+              "/* Mengder husholdningsavfall, etter materiale og år */",
+              "",
+              "/*",
+              "CALCULATE(SUM('Alle Data'[Verdi]);",
+              "    FILTER(ALL(Tabeller[Tabellnummer]); [Tabellnummer] = \"12313\");",
+              "    FILTER(ALL(Variabel[Variabelnavn]); [Variabelnavn] = \"Mengde  (tonn)\");",
+              "    FILTER(ALL(Behandling[Dimensjonsnavn]); [Dimensjonsnavn] = \"i alt\");",
+              "    FILTER(ALL(Materiale[Dimensjonsnavn]); [Dimensjonsnavn] = \"Matavfall\")",
+              ")",
+              "*/",
+              "",
+              "CALCULATE([Mengder husholdningsavfall],",
+              "    FILTER(ALL(Behandling[Dimensjonsnavn]), [Dimensjonsnavn] = \"i alt\"),",
+              "    FILTER(ALL(Materiale[Dimensjonsnavn]), [Dimensjonsnavn] = \"Matavfall\")",
+              ")"
+            ],
+            "displayFolder": "Klima og miljøvennlig utvikling;Mengder husholdningsavfall, etter materiale og år"
+          },
+          {
+            "name": "Metaller",
+            "expression": [
+              "",
+              "",
+              "/* Mengder husholdningsavfall, etter materiale og år */",
+              "",
+              "CALCULATE([Mengder husholdningsavfall],",
+              "    FILTER(ALL(Behandling[Dimensjonsnavn]), [Dimensjonsnavn] = \"i alt\"),",
+              "    FILTER(ALL(Materiale[Dimensjonsnavn]), [Dimensjonsnavn] = \"Metaller\")",
+              ")"
+            ],
+            "displayFolder": "Klima og miljøvennlig utvikling;Mengder husholdningsavfall, etter materiale og år"
+          },
+          {
+            "name": "Papp",
+            "expression": [
+              "",
+              "",
+              "/* Mengder husholdningsavfall, etter materiale og år */",
+              "",
+              "CALCULATE([Mengder husholdningsavfall],",
+              "    FILTER(ALL(Behandling[Dimensjonsnavn]), [Dimensjonsnavn] = \"i alt\"),",
+              "    FILTER(ALL(Materiale[Dimensjonsnavn]), [Dimensjonsnavn] = \"Papp\")",
+              ")"
+            ],
+            "displayFolder": "Klima og miljøvennlig utvikling;Mengder husholdningsavfall, etter materiale og år"
+          },
+          {
+            "name": "Plast",
+            "expression": [
+              "",
+              "",
+              "/* Mengder husholdningsavfall, etter materiale og år */",
+              "",
+              "CALCULATE([Mengder husholdningsavfall],",
+              "    FILTER(ALL(Behandling[Dimensjonsnavn]), [Dimensjonsnavn] = \"i alt\"),",
+              "    FILTER(ALL(Materiale[Dimensjonsnavn]), [Dimensjonsnavn] = \"Plast\")",
+              ")"
+            ],
+            "displayFolder": "Klima og miljøvennlig utvikling;Mengder husholdningsavfall, etter materiale og år"
+          },
+          {
+            "name": "Materialgjenvinning",
+            "expression": [
+              "",
+              "",
+              "/* Mengder husholdningsavfall, etter materiale og år */",
+              "",
+              "var matgjen =",
+              "CALCULATE(SUM('Alle Data'[Verdi]),",
+              "    FILTER(ALL(Tabeller[Tabellnummer]), [Tabellnummer] = \"12313\"),",
+              "    FILTER(ALL(Variabel[Variabelnavn]), [Variabelnavn] = \"Mengde  (tonn)\"),",
+              "    FILTER(ALL(Behandling[Dimensjonsnavn]), [Dimensjonsnavn] = \"Materialgjenvinning\"),",
+              "    FILTER(ALL(Materiale[Dimensjonsnavn]), [Dimensjonsnavn] = \"I alt\")",
+              ")",
+              "",
+              "var total =",
+              "CALCULATE(SUM('Alle Data'[Verdi]),",
+              "    FILTER(ALL(Tabeller[Tabellnummer]), [Tabellnummer] = \"12313\"),",
+              "    FILTER(ALL(Variabel[Variabelnavn]), [Variabelnavn] = \"Mengde  (tonn)\"),",
+              "    FILTER(ALL(Behandling[Dimensjonsnavn]), [Dimensjonsnavn] = \"i alt\"),",
+              "    FILTER(ALL(Materiale[Dimensjonsnavn]), [Dimensjonsnavn] = \"I alt\")",
+              ")",
+              "",
+              "var mat_div_tot =",
+              "DIVIDE(matgjen * 100, total)",
+              "",
+              "return (",
+              "    ROUND(mat_div_tot, 1)",
+              ")"
+            ],
+            "displayFolder": "Klima og miljøvennlig utvikling;Mengder husholdningsavfall, etter materiale og år"
+          },
+          {
+            "name": "Annet",
+            "expression": [
+              "",
+              "",
+              "/* Mengder husholdningsavfall, etter materiale og år */",
+              "",
+              "var annet =",
+              "CALCULATE([Mengder husholdningsavfall],",
+              "    FILTER(ALL(Behandling[Dimensjonsnavn]), [Dimensjonsnavn] = \"Annet\"),",
+              "    FILTER(ALL(Materiale[Dimensjonsnavn]), [Dimensjonsnavn] = \"I alt\")",
+              ")",
+              "",
+              "var total =",
+              "CALCULATE([Mengder husholdningsavfall],",
+              "    FILTER(ALL(Behandling[Dimensjonsnavn]), [Dimensjonsnavn] = \"i alt\"),",
+              "    FILTER(ALL(Materiale[Dimensjonsnavn]), [Dimensjonsnavn] = \"I alt\")",
+              ")",
+              "",
+              "var annet_div_tot =",
+              "DIVIDE(annet * 100, total)",
+              "",
+              "return (",
+              "    ROUND(annet_div_tot, 1)",
+              ")"
+            ],
+            "displayFolder": "Klima og miljøvennlig utvikling;Mengder husholdningsavfall, etter materiale og år"
+          },
+          {
+            "name": "Biogassproduksjon",
+            "expression": [
+              "",
+              "",
+              "/* Mengder husholdningsavfall, etter materiale og år */",
+              "",
+              "var bio =",
+              "CALCULATE([Mengder husholdningsavfall],",
+              "    FILTER(ALL(Behandling[Dimensjonsnavn]), [Dimensjonsnavn] = \"Biogassproduksjon\"),",
+              "    FILTER(ALL(Materiale[Dimensjonsnavn]), [Dimensjonsnavn] = \"I alt\")",
+              ")",
+              "",
+              "var total =",
+              "CALCULATE([Mengder husholdningsavfall],",
+              "    FILTER(ALL(Behandling[Dimensjonsnavn]), [Dimensjonsnavn] = \"i alt\"),",
+              "    FILTER(ALL(Materiale[Dimensjonsnavn]), [Dimensjonsnavn] = \"I alt\")",
+              ")",
+              "",
+              "var bio_div_tot =",
+              "DIVIDE(bio * 100, total)",
+              "",
+              "return (",
+              "    ROUND(bio_div_tot, 1)",
+              ")"
+            ],
+            "displayFolder": "Klima og miljøvennlig utvikling;Mengder husholdningsavfall, etter materiale og år"
+          },
+          {
+            "name": "Deponi",
+            "expression": [
+              "",
+              "",
+              "/* Mengder husholdningsavfall, etter materiale og år */",
+              "",
+              "var dep =",
+              "CALCULATE([Mengder husholdningsavfall],",
+              "    FILTER(ALL(Behandling[Dimensjonsnavn]), [Dimensjonsnavn] = \"Deponi\"),",
+              "    FILTER(ALL(Materiale[Dimensjonsnavn]), [Dimensjonsnavn] = \"I alt\")",
+              ")",
+              "",
+              "var total =",
+              "CALCULATE([Mengder husholdningsavfall],",
+              "    FILTER(ALL(Behandling[Dimensjonsnavn]), [Dimensjonsnavn] = \"i alt\"),",
+              "    FILTER(ALL(Materiale[Dimensjonsnavn]), [Dimensjonsnavn] = \"I alt\")",
+              ")",
+              "",
+              "var dep_div_tot =",
+              "DIVIDE(dep * 100, total)",
+              "",
+              "return (",
+              "    ROUND(dep_div_tot, 1)",
+              ")"
+            ],
+            "displayFolder": "Klima og miljøvennlig utvikling;Mengder husholdningsavfall, etter materiale og år"
+          },
+          {
+            "name": "Forbrenning",
+            "expression": [
+              "",
+              "",
+              "/* Mengder husholdningsavfall, etter materiale og år */",
+              "",
+              "var forb =",
+              "CALCULATE([Mengder husholdningsavfall],",
+              "    FILTER(ALL(Behandling[Dimensjonsnavn]), [Dimensjonsnavn] = \"Forbrenning\"),",
+              "    FILTER(ALL(Materiale[Dimensjonsnavn]), [Dimensjonsnavn] = \"I alt\")",
+              ")",
+              "",
+              "var total =",
+              "CALCULATE([Mengder husholdningsavfall],",
+              "    FILTER(ALL(Behandling[Dimensjonsnavn]), [Dimensjonsnavn] = \"i alt\"),",
+              "    FILTER(ALL(Materiale[Dimensjonsnavn]), [Dimensjonsnavn] = \"I alt\")",
+              ")",
+              "",
+              "var forb_div_tot =",
+              "DIVIDE(forb * 100, total)",
+              "",
+              "return (",
+              "    ROUND(forb_div_tot, 1)",
+              ")"
+            ],
+            "displayFolder": "Klima og miljøvennlig utvikling;Mengder husholdningsavfall, etter materiale og år"
+          },
+          {
+            "name": "Kompostering",
+            "expression": [
+              "",
+              "",
+              "/* Mengder husholdningsavfall, etter materiale og år */",
+              "",
+              "var komp =",
+              "CALCULATE([Mengder husholdningsavfall],",
+              "    FILTER(ALL(Behandling[Dimensjonsnavn]), [Dimensjonsnavn] = \"Kompostering\"),",
+              "    FILTER(ALL(Materiale[Dimensjonsnavn]), [Dimensjonsnavn] = \"I alt\")",
+              ")",
+              "",
+              "var total =",
+              "CALCULATE([Mengder husholdningsavfall],",
+              "    FILTER(ALL(Behandling[Dimensjonsnavn]), [Dimensjonsnavn] = \"i alt\"),",
+              "    FILTER(ALL(Materiale[Dimensjonsnavn]), [Dimensjonsnavn] = \"I alt\")",
+              ")",
+              "",
+              "var komp_div_tot =",
+              "DIVIDE(komp * 100, total)",
+              "",
+              "return (",
+              "    ROUND(komp_div_tot, 1)",
+              ")"
+            ],
+            "displayFolder": "Klima og miljøvennlig utvikling;Mengder husholdningsavfall, etter materiale og år"
+          },
+          {
+            "name": "Mengder husholdningsavfall",
+            "expression": [
+              "",
+              "",
+              "/* Mengder husholdningsavfall, etter materiale og år */",
+              "",
+              "CALCULATE(SUM('Alle Data'[Verdi]),",
+              "    FILTER(ALL(Tabeller[Tabellnummer]), [Tabellnummer] = \"12313\"),",
+              "    FILTER(ALL(Variabel[Variabelnavn]), [Variabelnavn] = \"Mengde  (tonn)\")",
+              ")"
+            ],
+            "displayFolder": "Klima og miljøvennlig utvikling;Mengder husholdningsavfall, etter materiale og år"
+          },
+          {
+            "name": "Boliger - Innenfor fjorårets tettsted",
+            "expression": [
+              "",
+              "",
+              " /* Nye bygg etter plassering */",
+              "",
+              "var inntett =",
+              "CALCULATE([Antall nye bygninger totalt],",
+              "    FILTER(ALL(Avstand[Dimensjonsnavn]), [Dimensjonsnavn] = \"Innenfor fjorårets tettstedsgrenser\"),",
+              "    FILTER(ALL(Bygningstype[Dimensjonsnavn]), [Dimensjonsnavn] = \"Bolig\")",
+              ")",
+              "",
+              "var inntett_div_totbol =",
+              "DIVIDE(inntett, [Boliger - Totalt])",
+              "",
+              "return (",
+              "    ROUND(inntett_div_totbol, 1)",
+              ")",
+              ""
+            ],
+            "displayFolder": "Attraktive byer og steder;Nye bygg etter plassering"
+          },
+          {
+            "name": "Antall nye bygninger totalt",
+            "expression": [
+              "",
+              "",
+              "/* Nye bygg etter plassering */",
+              "",
+              "CALCULATE(SUM('Alle Data'[Verdi]),",
+              "    FILTER(ALL(Tabeller[Tabellnummer]), [Tabellnummer] = \"11441\"),",
+              "    FILTER(ALL(Variabel[Variabelnavn]), [Variabelnavn] = \"Antall nye bygninger\")",
+              ")"
+            ],
+            "displayFolder": "Attraktive byer og steder;Nye bygg etter plassering"
+          },
+          {
+            "name": "Boliger - Totalt",
+            "expression": [
+              "",
+              "",
+              "/* Nye bygg etter plassering */",
+              "",
+              "CALCULATE([Antall nye bygninger totalt],",
+              "    FILTER(ALL(Avstand[Dimensjonsnavn]), [Dimensjonsnavn] IN {",
+              "        \"Innen 1 km fra eksisterende tettsted\",",
+              "        \"Innenfor fjorårets tettstedsgrenser\",",
+              "        \"I utvidelsen mellom fjorårets og eksisterende tettstedsgrenser\",",
+              "        \"Mellom 1-3 km fra eksisterende tettsted\"",
+              "    }),",
+              "    FILTER(ALL(Bygningstype[Dimensjonsnavn]), [Dimensjonsnavn] = \"Bolig\")",
+              ")",
+              ""
+            ],
+            "displayFolder": "Attraktive byer og steder;Nye bygg etter plassering"
+          },
+          {
+            "name": "Boliger - I utvidelsen mellom fjorårets og eksisterende tettstedgrenser",
+            "expression": [
+              "",
+              "",
+              " /* Nye bygg etter plassering */",
+              "",
+              "var iutvtett =",
+              "CALCULATE([Antall nye bygninger totalt],",
+              "    FILTER(ALL(Avstand[Dimensjonsnavn]), [Dimensjonsnavn] = ",
+              "        \"I utvidelsen mellom fjorårets og eksisterende tettstedsgrenser\"",
+              "    ),",
+              "    FILTER(ALL(Bygningstype[Dimensjonsnavn]), [Dimensjonsnavn] = \"Bolig\")",
+              ")",
+              "",
+              "var iutvtett_div_totbol =",
+              "DIVIDE(iutvtett, [Boliger - Totalt])",
+              "",
+              "return (",
+              "    ROUND(iutvtett_div_totbol, 1)",
+              ")"
+            ],
+            "displayFolder": "Attraktive byer og steder;Nye bygg etter plassering"
+          },
+          {
+            "name": "Boliger - Mellom 1-3 km fra eksisterende tettsted",
+            "expression": [
+              "",
+              "",
+              "/* Nye bygg etter plassering */",
+              "",
+              "var mel13km =",
+              "CALCULATE([Antall nye bygninger totalt],",
+              "    FILTER(ALL(Avstand[Dimensjonsnavn]), [Dimensjonsnavn] = ",
+              "        \"Mellom 1-3 km fra eksisterende tettsted\"",
+              "    ),",
+              "    FILTER(ALL(Bygningstype[Dimensjonsnavn]), [Dimensjonsnavn] = \"Bolig\")",
+              ")",
+              "",
+              "var mel13km_div_totbol =",
+              "DIVIDE(mel13km, [Boliger - Totalt])",
+              "",
+              "return (",
+              "    ROUND(mel13km_div_totbol, 1)",
+              ")"
+            ],
+            "displayFolder": "Attraktive byer og steder;Nye bygg etter plassering"
+          },
+          {
+            "name": "Boliger - Innen 1 km fra eksisterende tettsted",
+            "expression": [
+              "",
+              "",
+              " /* Nye bygg etter plassering */",
+              "",
+              "var innen1km =",
+              "CALCULATE([Antall nye bygninger totalt],",
+              "    FILTER(ALL(Avstand[Dimensjonsnavn]), [Dimensjonsnavn] = ",
+              "        \"Innen 1 km fra eksisterende tettsted\"",
+              "    ),",
+              "    FILTER(ALL(Bygningstype[Dimensjonsnavn]), [Dimensjonsnavn] = \"Bolig\")",
+              ")",
+              "",
+              "var innen1km_div_totbol =",
+              "DIVIDE(innen1km, [Boliger - Totalt])",
+              "",
+              "return (",
+              "    ROUND(innen1km_div_totbol, 1)",
+              ")"
+            ],
+            "displayFolder": "Attraktive byer og steder;Nye bygg etter plassering"
+          },
+          {
+            "name": "Næring - Mellom 1-3 km fra eksisterende tettsted",
+            "expression": [
+              "",
+              "",
+              "/* Nye bygg etter plassering */",
+              "",
+              "var mel13km =",
+              "CALCULATE([Antall nye bygninger totalt],",
+              "    FILTER(ALL(Avstand[Dimensjonsnavn]), [Dimensjonsnavn] = ",
+              "        \"Mellom 1-3 km fra eksisterende tettsted\"",
+              "    ),",
+              "    FILTER(ALL(Bygningstype[Dimensjonsnavn]), [Dimensjonsnavn] <> \"Bolig\")",
+              ")",
+              "",
+              "var mel13km_div_totnaer =",
+              "DIVIDE(mel13km, [Næring - Totalt])",
+              "",
+              "return (",
+              "    ROUND(mel13km_div_totnaer, 1)",
+              ")"
+            ]
+          },
+          {
+            "name": "Næring - Totalt",
+            "expression": [
+              "",
+              "",
+              "/* Nye bygg etter plassering */",
+              "",
+              "CALCULATE([Antall nye bygninger totalt],",
+              "    FILTER(ALL(Avstand[Dimensjonsnavn]), [Dimensjonsnavn] IN {",
+              "        \"Innen 1 km fra eksisterende tettsted\",",
+              "        \"Innenfor fjorårets tettstedsgrenser\",",
+              "        \"I utvidelsen mellom fjorårets og eksisterende tettstedsgrenser\",",
+              "        \"Mellom 1-3 km fra eksisterende tettsted\"",
+              "    }),",
+              "    FILTER(ALL(Bygningstype[Dimensjonsnavn]), [Dimensjonsnavn] <> \"Bolig\")",
+              ")",
+              ""
+            ]
+          },
+          {
+            "name": "Næring - Innenfor fjorårets tettsted",
+            "expression": [
+              "",
+              "",
+              " /* Nye bygg etter plassering */",
+              "",
+              "var inntett =",
+              "CALCULATE([Antall nye bygninger totalt],",
+              "    FILTER(ALL(Avstand[Dimensjonsnavn]), [Dimensjonsnavn] = \"Innenfor fjorårets tettstedsgrenser\"),",
+              "    FILTER(ALL(Bygningstype[Dimensjonsnavn]), [Dimensjonsnavn] <> \"Bolig\")",
+              ")",
+              "",
+              "var inntett_div_totnaer =",
+              "DIVIDE(inntett, [Næring - Totalt])",
+              "",
+              "return (",
+              "    ROUND(inntett_div_totnaer, 1)",
+              ")",
+              ""
+            ]
+          },
+          {
+            "name": "Næring - I utvidelsen mellom fjorårets og eksisterende tettstedsgrenser",
+            "expression": [
+              "",
+              "",
+              " /* Nye bygg etter plassering */",
+              "",
+              "var iutv =",
+              "CALCULATE([Antall nye bygninger totalt],",
+              "    FILTER(ALL(Avstand[Dimensjonsnavn]), [Dimensjonsnavn] = ",
+              "        \"I utvidelsen mellom fjorårets og eksisterende tettstedsgrenser\"",
+              "    ),",
+              "    FILTER(ALL(Bygningstype[Dimensjonsnavn]), [Dimensjonsnavn] <> \"Bolig\")",
+              ")",
+              "",
+              "var iutv_div_totnaer =",
+              "DIVIDE(iutv, [Næring - Totalt])",
+              "",
+              "return (",
+              "    ROUND(iutv_div_totnaer, 1)",
+              ")",
+              ""
+            ]
+          },
+          {
+            "name": "Næring - Innen 1 km fra eksisterende tettsted",
+            "expression": [
+              "",
+              "",
+              " /* Nye bygg etter plassering */",
+              "",
+              "var innen1km =",
+              "CALCULATE([Antall nye bygninger totalt],",
+              "    FILTER(ALL(Avstand[Dimensjonsnavn]), [Dimensjonsnavn] = \"Innen 1 km fra eksisterende tettsted\"),",
+              "    FILTER(ALL(Bygningstype[Dimensjonsnavn]), [Dimensjonsnavn] <> \"Bolig\")",
+              ")",
+              "",
+              "var innen1km_div_totnaer =",
+              "DIVIDE(innen1km, [Næring - Totalt])",
+              "",
+              "return (",
+              "    ROUND(innen1km_div_totnaer, 1)",
+              ")",
+              ""
+            ]
+          }
+        ]
+      },
+      {
+        "name": "Alle Data",
+        "columns": [
+          {
+            "name": "Tabell",
+            "dataType": "string",
+            "isHidden": true,
+            "sourceColumn": "Tabell"
+          },
+          {
+            "name": "Kode",
+            "dataType": "string",
+            "isHidden": true,
+            "sourceColumn": "Kode"
+          },
+          {
+            "name": "Variabel",
+            "dataType": "string",
+            "isHidden": true,
+            "sourceColumn": "Variabel"
+          },
+          {
+            "name": "År",
+            "dataType": "int64",
+            "isHidden": true,
+            "sourceColumn": "År"
+          },
+          {
+            "name": "Verdi",
+            "dataType": "double",
+            "sourceColumn": "Verdi"
+          },
+          {
+            "name": "Formålkode",
+            "dataType": "string",
+            "isHidden": true,
+            "sourceColumn": "Formålkode"
+          },
+          {
+            "name": "Arealklassekode",
+            "dataType": "string",
+            "isHidden": true,
+            "sourceColumn": "Arealklassekode"
+          },
+          {
+            "name": "Materialekode",
+            "dataType": "string",
+            "isHidden": true,
+            "sourceColumn": "Materialekode"
+          },
+          {
+            "name": "Behandlingkode",
+            "dataType": "string",
+            "isHidden": true,
+            "sourceColumn": "Behandlingkode"
+          },
+          {
+            "name": "Bygningstypekode",
+            "dataType": "string",
+            "isHidden": true,
+            "sourceColumn": "Bygningstypekode"
+          },
+          {
+            "name": "Avstandkode",
+            "dataType": "string",
+            "isHidden": true,
+            "sourceColumn": "Avstandkode"
+          }
+        ],
+        "partitions": [
+          {
+            "name": "Partition",
+            "dataView": "full",
+            "source": {
+              "type": "m",
+              "expression": [
+                "let",
+                "    Source = #\"SQL/KS-SQL2018;Reporting_Status\",",
+                "    #\"dbo_Alle Data\" = Source{[Schema=\"dbo\",Item=\"Alle Data\"]}[Data]",
+                "in",
+                "    #\"dbo_Alle Data\""
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "name": "Tabeller",
+        "columns": [
+          {
+            "name": "Tabellnummer",
+            "dataType": "string",
+            "sourceColumn": "Tabellnummer"
+          },
+          {
+            "name": "Tabellnavn",
+            "dataType": "string",
+            "sourceColumn": "Tabellnavn"
+          },
+          {
+            "name": "TabellNummerNavn",
+            "dataType": "string",
+            "sourceColumn": "TabellNummerNavn"
+          }
+        ],
+        "partitions": [
+          {
+            "name": "Partition",
+            "dataView": "full",
+            "source": {
+              "type": "m",
+              "expression": [
+                "let",
+                "    Source = #\"SQL/KS-SQL2018;Reporting_Status\",",
+                "    dbo_Tabeller = Source{[Schema=\"dbo\",Item=\"Tabeller\"]}[Data]",
+                "in",
+                "    dbo_Tabeller"
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "name": "Variabel",
+        "columns": [
+          {
+            "name": "Variabelgruppe",
+            "dataType": "string",
+            "sourceColumn": "Variabelgruppe"
+          },
+          {
+            "name": "Variabel",
+            "dataType": "string",
+            "sourceColumn": "Variabel"
+          },
+          {
+            "name": "Variabelnavn",
+            "dataType": "string",
+            "sourceColumn": "Variabelnavn"
+          }
+        ],
+        "partitions": [
+          {
+            "name": "Partition",
+            "dataView": "full",
+            "source": {
+              "type": "m",
+              "expression": [
+                "let",
+                "    Source = #\"SQL/KS-SQL2018;Reporting_Status\",",
+                "    dbo_Variabel = Source{[Schema=\"dbo\",Item=\"Variabel\"]}[Data]",
+                "in",
+                "    dbo_Variabel"
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "name": "År",
+        "columns": [
+          {
+            "name": "År",
+            "dataType": "int64",
+            "sourceColumn": "År"
+          }
+        ],
+        "partitions": [
+          {
+            "name": "Partition",
+            "dataView": "full",
+            "source": {
+              "type": "m",
+              "expression": [
+                "let",
+                "    Source = #\"SQL/KS-SQL2018;Reporting_Status\",",
+                "    dbo_År = Source{[Schema=\"dbo\",Item=\"År\"]}[Data]",
+                "in",
+                "    dbo_År"
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "name": "Formål",
+        "columns": [
+          {
+            "name": "Dimensjonskode",
+            "dataType": "string",
+            "sourceColumn": "Dimensjonskode"
+          },
+          {
+            "name": "Dimensjonsnavn",
+            "dataType": "string",
+            "sourceColumn": "Dimensjonsnavn"
+          },
+          {
+            "name": "DimensjonskodeNavn",
+            "dataType": "string",
+            "sourceColumn": "DimensjonskodeNavn"
+          }
+        ],
+        "partitions": [
+          {
+            "name": "Partition",
+            "dataView": "full",
+            "source": {
+              "type": "m",
+              "expression": [
+                "let",
+                "    Source = #\"SQL/KS-SQL2018;Reporting_Status\",",
+                "    dbo_Formål = Source{[Schema=\"dbo\",Item=\"Formål\"]}[Data]",
+                "in",
+                "    dbo_Formål"
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "name": "Arealklasse",
+        "columns": [
+          {
+            "name": "Dimensjonskode",
+            "dataType": "string",
+            "sourceColumn": "Dimensjonskode"
+          },
+          {
+            "name": "Dimensjonsnavn",
+            "dataType": "string",
+            "sourceColumn": "Dimensjonsnavn"
+          },
+          {
+            "name": "DimensjonskodeNavn",
+            "dataType": "string",
+            "sourceColumn": "DimensjonskodeNavn"
+          }
+        ],
+        "partitions": [
+          {
+            "name": "Partition",
+            "dataView": "full",
+            "source": {
+              "type": "m",
+              "expression": [
+                "let",
+                "    Source = #\"SQL/KS-SQL2018;Reporting_Status\",",
+                "    dbo_Arealklasse = Source{[Schema=\"dbo\",Item=\"Arealklasse\"]}[Data]",
+                "in",
+                "    dbo_Arealklasse"
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "name": "Materiale",
+        "columns": [
+          {
+            "name": "Dimensjonskode",
+            "dataType": "string",
+            "sourceColumn": "Dimensjonskode"
+          },
+          {
+            "name": "Dimensjonsnavn",
+            "dataType": "string",
+            "sourceColumn": "Dimensjonsnavn"
+          },
+          {
+            "name": "DimensjonskodeNavn",
+            "dataType": "string",
+            "sourceColumn": "DimensjonskodeNavn"
+          }
+        ],
+        "partitions": [
+          {
+            "name": "Partition",
+            "dataView": "full",
+            "source": {
+              "type": "m",
+              "expression": [
+                "let",
+                "    Source = #\"SQL/KS-SQL2018;Reporting_Status\",",
+                "    dbo_Materiale = Source{[Schema=\"dbo\",Item=\"Materiale\"]}[Data]",
+                "in",
+                "    dbo_Materiale"
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "name": "Behandling",
+        "columns": [
+          {
+            "name": "Dimensjonskode",
+            "dataType": "string",
+            "sourceColumn": "Dimensjonskode"
+          },
+          {
+            "name": "Dimensjonsnavn",
+            "dataType": "string",
+            "sourceColumn": "Dimensjonsnavn"
+          },
+          {
+            "name": "DimensjonskodeNavn",
+            "dataType": "string",
+            "sourceColumn": "DimensjonskodeNavn"
+          }
+        ],
+        "partitions": [
+          {
+            "name": "Partition",
+            "dataView": "full",
+            "source": {
+              "type": "m",
+              "expression": [
+                "let",
+                "    Source = #\"SQL/KS-SQL2018;Reporting_Status\",",
+                "    dbo_Behandling = Source{[Schema=\"dbo\",Item=\"Behandling\"]}[Data]",
+                "in",
+                "    dbo_Behandling"
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "name": "Bygningstype",
+        "columns": [
+          {
+            "name": "Dimensjonskode",
+            "dataType": "string",
+            "sourceColumn": "Dimensjonskode"
+          },
+          {
+            "name": "Dimensjonsnavn",
+            "dataType": "string",
+            "sourceColumn": "Dimensjonsnavn"
+          },
+          {
+            "name": "DimensjonskodeNavn",
+            "dataType": "string",
+            "sourceColumn": "DimensjonskodeNavn"
+          }
+        ],
+        "partitions": [
+          {
+            "name": "Partition",
+            "dataView": "full",
+            "source": {
+              "type": "m",
+              "expression": [
+                "let",
+                "    Source = #\"SQL/KS-SQL2018;Reporting_Status\",",
+                "    dbo_Bygningstype = Source{[Schema=\"dbo\",Item=\"Bygningstype\"]}[Data]",
+                "in",
+                "    dbo_Bygningstype"
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "name": "Avstand",
+        "columns": [
+          {
+            "name": "Dimensjonskode",
+            "dataType": "string",
+            "sourceColumn": "Dimensjonskode"
+          },
+          {
+            "name": "Dimensjonsnavn",
+            "dataType": "string",
+            "sourceColumn": "Dimensjonsnavn"
+          },
+          {
+            "name": "DimensjonskodeNavn",
+            "dataType": "string",
+            "sourceColumn": "DimensjonskodeNavn"
+          }
+        ],
+        "partitions": [
+          {
+            "name": "Partition",
+            "dataView": "full",
+            "source": {
+              "type": "m",
+              "expression": [
+                "let",
+                "    Source = #\"SQL/KS-SQL2018;Reporting_Status\",",
+                "    dbo_Avstand = Source{[Schema=\"dbo\",Item=\"Avstand\"]}[Data]",
+                "in",
+                "    dbo_Avstand"
+              ]
+            }
+          }
+        ]
+      }
+    ],
+    "relationships": [
+      {
+        "name": "fd45f95f-1458-41de-94d2-adbfedaf54d1",
+        "fromTable": "Alle Data",
+        "fromColumn": "Tabell",
+        "toTable": "Tabeller",
+        "toColumn": "Tabellnummer"
+      },
+      {
+        "name": "eed6dfec-a469-473b-83d0-e397180a58be",
+        "fromTable": "Alle Data",
+        "fromColumn": "Kode",
+        "toTable": "Region",
+        "toColumn": "Kode"
+      },
+      {
+        "name": "9989dbda-0a8f-4ca3-abc2-d8a4cf13a03f",
+        "fromTable": "Alle Data",
+        "fromColumn": "Variabel",
+        "toTable": "Variabel",
+        "toColumn": "Variabel"
+      },
+      {
+        "name": "f775df9d-0345-47e7-a6ec-9152a6c368f3",
+        "fromTable": "Alle Data",
+        "fromColumn": "År",
+        "toTable": "År",
+        "toColumn": "År"
+      },
+      {
+        "name": "c209b3d6-9b68-4a5f-968a-abff763f84ee",
+        "fromTable": "Alle Data",
+        "fromColumn": "Formålkode",
+        "toTable": "Formål",
+        "toColumn": "Dimensjonskode"
+      },
+      {
+        "name": "99f4e430-03f5-4a46-a7b1-195c9b4d9c6c",
+        "fromTable": "Alle Data",
+        "fromColumn": "Arealklassekode",
+        "toTable": "Arealklasse",
+        "toColumn": "Dimensjonskode"
+      },
+      {
+        "name": "eb156d52-29db-4293-84d2-e246e7c3cf29",
+        "fromTable": "Alle Data",
+        "fromColumn": "Materialekode",
+        "toTable": "Materiale",
+        "toColumn": "Dimensjonskode"
+      },
+      {
+        "name": "9702bd0d-d6f5-44c7-95e1-dcd135686722",
+        "fromTable": "Alle Data",
+        "fromColumn": "Behandlingkode",
+        "toTable": "Behandling",
+        "toColumn": "Dimensjonskode"
+      },
+      {
+        "name": "80d40c68-64f4-47cd-b044-f43881845f72",
+        "fromTable": "Alle Data",
+        "fromColumn": "Bygningstypekode",
+        "toTable": "Bygningstype",
+        "toColumn": "Dimensjonskode"
+      },
+      {
+        "name": "bfebc1c0-4210-4171-88a2-ca95c923fa9c",
+        "fromTable": "Alle Data",
+        "fromColumn": "Avstandkode",
+        "toTable": "Avstand",
+        "toColumn": "Dimensjonskode"
+      }
+    ],
+    "annotations": [
+      {
+        "name": "ClientCompatibilityLevel",
+        "value": "500"
+      }
+    ]
+  },
+  "id": "SemanticModel"
+}
