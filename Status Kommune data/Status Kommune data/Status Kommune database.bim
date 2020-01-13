@@ -883,7 +883,8 @@
               "return (",
               "    ROUND(mel13km_div_totnaer, 1)",
               ")"
-            ]
+            ],
+            "displayFolder": "Attraktive byer og steder;Nye bygg etter plassering"
           },
           {
             "name": "Næring - Totalt",
@@ -902,7 +903,8 @@
               "    FILTER(ALL(Bygningstype[Dimensjonsnavn]), [Dimensjonsnavn] <> \"Bolig\")",
               ")",
               ""
-            ]
+            ],
+            "displayFolder": "Attraktive byer og steder;Nye bygg etter plassering"
           },
           {
             "name": "Næring - Innenfor fjorårets tettsted",
@@ -924,7 +926,8 @@
               "    ROUND(inntett_div_totnaer, 1)",
               ")",
               ""
-            ]
+            ],
+            "displayFolder": "Attraktive byer og steder;Nye bygg etter plassering"
           },
           {
             "name": "Næring - I utvidelsen mellom fjorårets og eksisterende tettstedsgrenser",
@@ -948,7 +951,8 @@
               "    ROUND(iutv_div_totnaer, 1)",
               ")",
               ""
-            ]
+            ],
+            "displayFolder": "Attraktive byer og steder;Nye bygg etter plassering"
           },
           {
             "name": "Næring - Innen 1 km fra eksisterende tettsted",
@@ -970,7 +974,22 @@
               "    ROUND(innen1km_div_totnaer, 1)",
               ")",
               ""
-            ]
+            ],
+            "displayFolder": "Attraktive byer og steder;Nye bygg etter plassering"
+          },
+          {
+            "name": "Andel med trygg tilgang til nærturterreng",
+            "expression": [
+              "",
+              "",
+              "/* Andel bosatte i kommunens tettsteder med trygg tilgang til rekreasjonsareal og nærturterreng (prosent) */",
+              "",
+              "CALCULATE(SUM('Alle Data'[Verdi]),",
+              "    FILTER(ALL(Tabeller[Tabellnummer]), [Tabellnummer] = \"09579\"),",
+              "    FILTER(ALL(Variabel[Variabelnavn]), [Variabelnavn] = \"Andel med trygg tilgang til nærturterreng\")",
+              ")"
+            ],
+            "displayFolder": "Attraktive byer og steder;Andel bosatte i kommunens tettsteder med trygg tilgang til rekreasjonsareal og nærturterreng (prosent)"
           }
         ]
       },

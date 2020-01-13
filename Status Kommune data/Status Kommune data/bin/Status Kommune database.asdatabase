@@ -732,6 +732,264 @@
               ")"
             ],
             "displayFolder": "Klima og miljøvennlig utvikling;Mengder husholdningsavfall, etter materiale og år"
+          },
+          {
+            "name": "Boliger - Innenfor fjorårets tettsted",
+            "expression": [
+              "",
+              "",
+              " /* Nye bygg etter plassering */",
+              "",
+              "var inntett =",
+              "CALCULATE([Antall nye bygninger totalt],",
+              "    FILTER(ALL(Avstand[Dimensjonsnavn]), [Dimensjonsnavn] = \"Innenfor fjorårets tettstedsgrenser\"),",
+              "    FILTER(ALL(Bygningstype[Dimensjonsnavn]), [Dimensjonsnavn] = \"Bolig\")",
+              ")",
+              "",
+              "var inntett_div_totbol =",
+              "DIVIDE(inntett, [Boliger - Totalt])",
+              "",
+              "return (",
+              "    ROUND(inntett_div_totbol, 1)",
+              ")",
+              ""
+            ],
+            "displayFolder": "Attraktive byer og steder;Nye bygg etter plassering"
+          },
+          {
+            "name": "Antall nye bygninger totalt",
+            "expression": [
+              "",
+              "",
+              "/* Nye bygg etter plassering */",
+              "",
+              "CALCULATE(SUM('Alle Data'[Verdi]),",
+              "    FILTER(ALL(Tabeller[Tabellnummer]), [Tabellnummer] = \"11441\"),",
+              "    FILTER(ALL(Variabel[Variabelnavn]), [Variabelnavn] = \"Antall nye bygninger\")",
+              ")"
+            ],
+            "displayFolder": "Attraktive byer og steder;Nye bygg etter plassering"
+          },
+          {
+            "name": "Boliger - Totalt",
+            "expression": [
+              "",
+              "",
+              "/* Nye bygg etter plassering */",
+              "",
+              "CALCULATE([Antall nye bygninger totalt],",
+              "    FILTER(ALL(Avstand[Dimensjonsnavn]), [Dimensjonsnavn] IN {",
+              "        \"Innen 1 km fra eksisterende tettsted\",",
+              "        \"Innenfor fjorårets tettstedsgrenser\",",
+              "        \"I utvidelsen mellom fjorårets og eksisterende tettstedsgrenser\",",
+              "        \"Mellom 1-3 km fra eksisterende tettsted\"",
+              "    }),",
+              "    FILTER(ALL(Bygningstype[Dimensjonsnavn]), [Dimensjonsnavn] = \"Bolig\")",
+              ")",
+              ""
+            ],
+            "displayFolder": "Attraktive byer og steder;Nye bygg etter plassering"
+          },
+          {
+            "name": "Boliger - I utvidelsen mellom fjorårets og eksisterende tettstedgrenser",
+            "expression": [
+              "",
+              "",
+              " /* Nye bygg etter plassering */",
+              "",
+              "var iutvtett =",
+              "CALCULATE([Antall nye bygninger totalt],",
+              "    FILTER(ALL(Avstand[Dimensjonsnavn]), [Dimensjonsnavn] = ",
+              "        \"I utvidelsen mellom fjorårets og eksisterende tettstedsgrenser\"",
+              "    ),",
+              "    FILTER(ALL(Bygningstype[Dimensjonsnavn]), [Dimensjonsnavn] = \"Bolig\")",
+              ")",
+              "",
+              "var iutvtett_div_totbol =",
+              "DIVIDE(iutvtett, [Boliger - Totalt])",
+              "",
+              "return (",
+              "    ROUND(iutvtett_div_totbol, 1)",
+              ")"
+            ],
+            "displayFolder": "Attraktive byer og steder;Nye bygg etter plassering"
+          },
+          {
+            "name": "Boliger - Mellom 1-3 km fra eksisterende tettsted",
+            "expression": [
+              "",
+              "",
+              "/* Nye bygg etter plassering */",
+              "",
+              "var mel13km =",
+              "CALCULATE([Antall nye bygninger totalt],",
+              "    FILTER(ALL(Avstand[Dimensjonsnavn]), [Dimensjonsnavn] = ",
+              "        \"Mellom 1-3 km fra eksisterende tettsted\"",
+              "    ),",
+              "    FILTER(ALL(Bygningstype[Dimensjonsnavn]), [Dimensjonsnavn] = \"Bolig\")",
+              ")",
+              "",
+              "var mel13km_div_totbol =",
+              "DIVIDE(mel13km, [Boliger - Totalt])",
+              "",
+              "return (",
+              "    ROUND(mel13km_div_totbol, 1)",
+              ")"
+            ],
+            "displayFolder": "Attraktive byer og steder;Nye bygg etter plassering"
+          },
+          {
+            "name": "Boliger - Innen 1 km fra eksisterende tettsted",
+            "expression": [
+              "",
+              "",
+              " /* Nye bygg etter plassering */",
+              "",
+              "var innen1km =",
+              "CALCULATE([Antall nye bygninger totalt],",
+              "    FILTER(ALL(Avstand[Dimensjonsnavn]), [Dimensjonsnavn] = ",
+              "        \"Innen 1 km fra eksisterende tettsted\"",
+              "    ),",
+              "    FILTER(ALL(Bygningstype[Dimensjonsnavn]), [Dimensjonsnavn] = \"Bolig\")",
+              ")",
+              "",
+              "var innen1km_div_totbol =",
+              "DIVIDE(innen1km, [Boliger - Totalt])",
+              "",
+              "return (",
+              "    ROUND(innen1km_div_totbol, 1)",
+              ")"
+            ],
+            "displayFolder": "Attraktive byer og steder;Nye bygg etter plassering"
+          },
+          {
+            "name": "Næring - Mellom 1-3 km fra eksisterende tettsted",
+            "expression": [
+              "",
+              "",
+              "/* Nye bygg etter plassering */",
+              "",
+              "var mel13km =",
+              "CALCULATE([Antall nye bygninger totalt],",
+              "    FILTER(ALL(Avstand[Dimensjonsnavn]), [Dimensjonsnavn] = ",
+              "        \"Mellom 1-3 km fra eksisterende tettsted\"",
+              "    ),",
+              "    FILTER(ALL(Bygningstype[Dimensjonsnavn]), [Dimensjonsnavn] <> \"Bolig\")",
+              ")",
+              "",
+              "var mel13km_div_totnaer =",
+              "DIVIDE(mel13km, [Næring - Totalt])",
+              "",
+              "return (",
+              "    ROUND(mel13km_div_totnaer, 1)",
+              ")"
+            ],
+            "displayFolder": "Attraktive byer og steder;Nye bygg etter plassering"
+          },
+          {
+            "name": "Næring - Totalt",
+            "expression": [
+              "",
+              "",
+              "/* Nye bygg etter plassering */",
+              "",
+              "CALCULATE([Antall nye bygninger totalt],",
+              "    FILTER(ALL(Avstand[Dimensjonsnavn]), [Dimensjonsnavn] IN {",
+              "        \"Innen 1 km fra eksisterende tettsted\",",
+              "        \"Innenfor fjorårets tettstedsgrenser\",",
+              "        \"I utvidelsen mellom fjorårets og eksisterende tettstedsgrenser\",",
+              "        \"Mellom 1-3 km fra eksisterende tettsted\"",
+              "    }),",
+              "    FILTER(ALL(Bygningstype[Dimensjonsnavn]), [Dimensjonsnavn] <> \"Bolig\")",
+              ")",
+              ""
+            ],
+            "displayFolder": "Attraktive byer og steder;Nye bygg etter plassering"
+          },
+          {
+            "name": "Næring - Innenfor fjorårets tettsted",
+            "expression": [
+              "",
+              "",
+              " /* Nye bygg etter plassering */",
+              "",
+              "var inntett =",
+              "CALCULATE([Antall nye bygninger totalt],",
+              "    FILTER(ALL(Avstand[Dimensjonsnavn]), [Dimensjonsnavn] = \"Innenfor fjorårets tettstedsgrenser\"),",
+              "    FILTER(ALL(Bygningstype[Dimensjonsnavn]), [Dimensjonsnavn] <> \"Bolig\")",
+              ")",
+              "",
+              "var inntett_div_totnaer =",
+              "DIVIDE(inntett, [Næring - Totalt])",
+              "",
+              "return (",
+              "    ROUND(inntett_div_totnaer, 1)",
+              ")",
+              ""
+            ],
+            "displayFolder": "Attraktive byer og steder;Nye bygg etter plassering"
+          },
+          {
+            "name": "Næring - I utvidelsen mellom fjorårets og eksisterende tettstedsgrenser",
+            "expression": [
+              "",
+              "",
+              " /* Nye bygg etter plassering */",
+              "",
+              "var iutv =",
+              "CALCULATE([Antall nye bygninger totalt],",
+              "    FILTER(ALL(Avstand[Dimensjonsnavn]), [Dimensjonsnavn] = ",
+              "        \"I utvidelsen mellom fjorårets og eksisterende tettstedsgrenser\"",
+              "    ),",
+              "    FILTER(ALL(Bygningstype[Dimensjonsnavn]), [Dimensjonsnavn] <> \"Bolig\")",
+              ")",
+              "",
+              "var iutv_div_totnaer =",
+              "DIVIDE(iutv, [Næring - Totalt])",
+              "",
+              "return (",
+              "    ROUND(iutv_div_totnaer, 1)",
+              ")",
+              ""
+            ],
+            "displayFolder": "Attraktive byer og steder;Nye bygg etter plassering"
+          },
+          {
+            "name": "Næring - Innen 1 km fra eksisterende tettsted",
+            "expression": [
+              "",
+              "",
+              " /* Nye bygg etter plassering */",
+              "",
+              "var innen1km =",
+              "CALCULATE([Antall nye bygninger totalt],",
+              "    FILTER(ALL(Avstand[Dimensjonsnavn]), [Dimensjonsnavn] = \"Innen 1 km fra eksisterende tettsted\"),",
+              "    FILTER(ALL(Bygningstype[Dimensjonsnavn]), [Dimensjonsnavn] <> \"Bolig\")",
+              ")",
+              "",
+              "var innen1km_div_totnaer =",
+              "DIVIDE(innen1km, [Næring - Totalt])",
+              "",
+              "return (",
+              "    ROUND(innen1km_div_totnaer, 1)",
+              ")",
+              ""
+            ],
+            "displayFolder": "Attraktive byer og steder;Nye bygg etter plassering"
+          },
+          {
+            "name": "Andel med trygg tilgang til nærturterreng",
+            "expression": [
+              "",
+              "",
+              "/* Andel bosatte i kommunens tettsteder med trygg tilgang til rekreasjonsareal og nærturterreng (prosent) */",
+              "",
+              "CALCULATE(SUM('Alle Data'[Verdi]),",
+              "    FILTER(ALL(Tabeller[Tabellnummer]), [Tabellnummer] = \"09579\"),",
+              "    FILTER(ALL(Variabel[Variabelnavn]), [Variabelnavn] = \"Andel med trygg tilgang til nærturterreng\")",
+              ")"
+            ],
+            "displayFolder": "Attraktive byer og steder;Andel bosatte i kommunens tettsteder med trygg tilgang til rekreasjonsareal og nærturterreng (prosent)"
           }
         ]
       },
@@ -788,7 +1046,20 @@
           {
             "name": "Behandlingkode",
             "dataType": "string",
+            "isHidden": true,
             "sourceColumn": "Behandlingkode"
+          },
+          {
+            "name": "Bygningstypekode",
+            "dataType": "string",
+            "isHidden": true,
+            "sourceColumn": "Bygningstypekode"
+          },
+          {
+            "name": "Avstandkode",
+            "dataType": "string",
+            "isHidden": true,
+            "sourceColumn": "Avstandkode"
           }
         ],
         "partitions": [
@@ -1049,6 +1320,78 @@
             }
           }
         ]
+      },
+      {
+        "name": "Bygningstype",
+        "columns": [
+          {
+            "name": "Dimensjonskode",
+            "dataType": "string",
+            "sourceColumn": "Dimensjonskode"
+          },
+          {
+            "name": "Dimensjonsnavn",
+            "dataType": "string",
+            "sourceColumn": "Dimensjonsnavn"
+          },
+          {
+            "name": "DimensjonskodeNavn",
+            "dataType": "string",
+            "sourceColumn": "DimensjonskodeNavn"
+          }
+        ],
+        "partitions": [
+          {
+            "name": "Partition",
+            "dataView": "full",
+            "source": {
+              "type": "m",
+              "expression": [
+                "let",
+                "    Source = #\"SQL/KS-SQL2018;Reporting_Status\",",
+                "    dbo_Bygningstype = Source{[Schema=\"dbo\",Item=\"Bygningstype\"]}[Data]",
+                "in",
+                "    dbo_Bygningstype"
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "name": "Avstand",
+        "columns": [
+          {
+            "name": "Dimensjonskode",
+            "dataType": "string",
+            "sourceColumn": "Dimensjonskode"
+          },
+          {
+            "name": "Dimensjonsnavn",
+            "dataType": "string",
+            "sourceColumn": "Dimensjonsnavn"
+          },
+          {
+            "name": "DimensjonskodeNavn",
+            "dataType": "string",
+            "sourceColumn": "DimensjonskodeNavn"
+          }
+        ],
+        "partitions": [
+          {
+            "name": "Partition",
+            "dataView": "full",
+            "source": {
+              "type": "m",
+              "expression": [
+                "let",
+                "    Source = #\"SQL/KS-SQL2018;Reporting_Status\",",
+                "    dbo_Avstand = Source{[Schema=\"dbo\",Item=\"Avstand\"]}[Data]",
+                "in",
+                "    dbo_Avstand"
+              ]
+            }
+          }
+        ]
       }
     ],
     "relationships": [
@@ -1106,6 +1449,20 @@
         "fromTable": "Alle Data",
         "fromColumn": "Behandlingkode",
         "toTable": "Behandling",
+        "toColumn": "Dimensjonskode"
+      },
+      {
+        "name": "80d40c68-64f4-47cd-b044-f43881845f72",
+        "fromTable": "Alle Data",
+        "fromColumn": "Bygningstypekode",
+        "toTable": "Bygningstype",
+        "toColumn": "Dimensjonskode"
+      },
+      {
+        "name": "bfebc1c0-4210-4171-88a2-ca95c923fa9c",
+        "fromTable": "Alle Data",
+        "fromColumn": "Avstandkode",
+        "toTable": "Avstand",
         "toColumn": "Dimensjonskode"
       }
     ],
