@@ -978,11 +978,9 @@
             "displayFolder": "Attraktive byer og steder\\Nye bygg etter plassering"
           },
           {
-            "name": "Andel med trygg tilgang til nærturterreng",
+            "name": "Andel bosatte i kommunens tettsteder med trygg tilgang til rekreasjonsareal og nærturterreng",
             "expression": [
               "",
-              "",
-              "/* Andel bosatte i kommunens tettsteder med trygg tilgang til rekreasjonsareal og nærturterreng (prosent) */",
               "",
               "CALCULATE(SUM('Alle Data'[Verdi]),",
               "    FILTER(ALL(Tabeller[Tabellnummer]), [Tabellnummer] = \"09579\"),",
