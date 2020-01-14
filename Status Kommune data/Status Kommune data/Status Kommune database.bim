@@ -996,14 +996,42 @@
             "expression": [
               "",
               "",
-              "/* Samlet areal av leke- og rekreasjonsområder innenfor tettsteder */",
-              "",
               "CALCULATE(SUM('Alle Data'[Verdi]),",
               "    FILTER(ALL(Tabeller[Tabellnummer]), [Tabellnummer] = \"12243\"),",
               "    FILTER(ALL(Variabel[Variabelnavn]), [Variabelnavn] = \"Mengde (antall)\")",
               ")"
             ],
             "displayFolder": "Attraktive byer og steder\\Samlet areal av leke- og rekreasjonsområder innenfor tettsteder"
+          },
+          {
+            "name": "Andel og antall husholdninger som bor trangt - I alt",
+            "expression": [
+              "",
+              "",
+              "/* Andel og antall husholdninger som bor trangt */",
+              "",
+              "CALCULATE(SUM('Alle Data'[Verdi]),",
+              "    FILTER(ALL(Tabeller[Tabellnummer]), [Tabellnummer] = \"11344\"),",
+              "    FILTER(ALL(Variabel[Variabelnavn]), [Variabelnavn] = \"Antall Husholdninger\"),",
+              "    FILTER(ALL(Trangboddhet[Dimensjonsnavn]), [Dimensjonsnavn] = \"I alt\")",
+              ")"
+            ],
+            "displayFolder": "Attraktive byer og steder\\Andel og antall husholdninger som bor trangt"
+          },
+          {
+            "name": "Andel og antall husholdninger som bor trangt - Bor trangt, få rom og kvm",
+            "expression": [
+              "",
+              "",
+              "/* Andel og antall husholdninger som bor trangt */",
+              "",
+              "CALCULATE(SUM('Alle Data'[Verdi]),",
+              "    FILTER(ALL(Tabeller[Tabellnummer]), [Tabellnummer] = \"11344\"),",
+              "    FILTER(ALL(Variabel[Variabelnavn]), [Variabelnavn] = \"Antall Husholdninger\"),",
+              "    FILTER(ALL(Trangboddhet[Dimensjonsnavn]), [Dimensjonsnavn] = \"Bor trang, få rom og kvm\")",
+              ")"
+            ],
+            "displayFolder": "Attraktive byer og steder\\Andel og antall husholdninger som bor trangt"
           }
         ]
       },
@@ -1086,6 +1114,12 @@
             "dataType": "string",
             "isHidden": true,
             "sourceColumn": "Tilgjengelig områdekode"
+          },
+          {
+            "name": "Trangboddhetkode",
+            "dataType": "string",
+            "isHidden": true,
+            "sourceColumn": "Trangboddhetkode"
           }
         ],
         "partitions": [
@@ -1490,6 +1524,42 @@
             }
           }
         ]
+      },
+      {
+        "name": "Trangboddhet",
+        "columns": [
+          {
+            "name": "Dimensjonskode",
+            "dataType": "string",
+            "sourceColumn": "Dimensjonskode"
+          },
+          {
+            "name": "Dimensjonsnavn",
+            "dataType": "string",
+            "sourceColumn": "Dimensjonsnavn"
+          },
+          {
+            "name": "DimensjonskodeNavn",
+            "dataType": "string",
+            "sourceColumn": "DimensjonskodeNavn"
+          }
+        ],
+        "partitions": [
+          {
+            "name": "Partition",
+            "dataView": "full",
+            "source": {
+              "type": "m",
+              "expression": [
+                "let",
+                "    Source = #\"SQL/KS-SQL2018;Reporting_Status\",",
+                "    dbo_Trangboddhet = Source{[Schema=\"dbo\",Item=\"Trangboddhet\"]}[Data]",
+                "in",
+                "    dbo_Trangboddhet"
+              ]
+            }
+          }
+        ]
       }
     ],
     "relationships": [
@@ -1575,6 +1645,13 @@
         "fromTable": "Alle Data",
         "fromColumn": "Rekreasjonarealkode",
         "toTable": "Rekreasjonareal",
+        "toColumn": "Dimensjonskode"
+      },
+      {
+        "name": "d2c9ea2f-13ad-433a-b784-7d62cd628186",
+        "fromTable": "Alle Data",
+        "fromColumn": "Trangboddhetkode",
+        "toTable": "Trangboddhet",
         "toColumn": "Dimensjonskode"
       }
     ],
