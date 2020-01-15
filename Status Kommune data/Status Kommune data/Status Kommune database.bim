@@ -90,6 +90,7 @@
       },
       {
         "name": "Status Kommune Indikatorer",
+        "isHidden": true,
         "columns": [
           {
             "name": "Andre",
@@ -1030,6 +1031,186 @@
               ")"
             ],
             "displayFolder": "Attraktive byer og steder\\Andel og antall husholdninger som bor trangt"
+          },
+          {
+            "name": "Befolkingsutvikling",
+            "expression": [
+              "",
+              "",
+              "var valgteAar = SELECTEDVALUE('År'[År])",
+              "",
+              "var innb_valgteAar = ",
+              "CALCULATE(SUM('Alle Data'[Verdi]),",
+              "    FILTER(ALL(Tabeller[Tabellnummer]), [Tabellnummer] = \"07459\"),",
+              "    FILTER(ALL(Variabel[Variabelnavn]), [Variabelnavn] = \"Personer\"),",
+              "    FILTER(ALL('År'[År]), [År] = valgteAar)",
+              ")",
+              "",
+              "var innb_nesteAar = ",
+              "CALCULATE(SUM('Alle Data'[Verdi]),",
+              "    FILTER(ALL(Tabeller[Tabellnummer]), [Tabellnummer] = \"07459\"),",
+              "    FILTER(ALL(Variabel[Variabelnavn]), [Variabelnavn] = \"Personer\"),",
+              "    FILTER(ALL('År'[År]), [År] = valgteAar + 1)",
+              ")",
+              "",
+              "var formel = ",
+              "IF(innb_nesteAar = 0, ",
+              "    BLANK(),",
+              "    DIVIDE(innb_nesteAar - innb_valgteAar, innb_valgteAar) * 100",
+              ")",
+              "",
+              "return (",
+              "    ROUND(",
+              "        formel,",
+              "        1",
+              "    )",
+              ")"
+            ],
+            "displayFolder": "God oppvekst og godt liv\\Befolkningsutvikling"
+          },
+          {
+            "name": "Forsørgerbyrde",
+            "expression": [
+              "",
+              "",
+              "var innb_17yng =",
+              "CALCULATE(SUM('Alle Data'[Verdi]),",
+              "    FILTER(ALL(Tabeller[Tabellnummer]), [Tabellnummer] = \"07459\"),",
+              "    FILTER(ALL(Variabel[Variabelnavn]), [Variabelnavn] = \"Personer\"),",
+              "    FILTER(ALL('Alder'[Dimensjonskode]), ",
+              "        IF(ISERROR(VALUE([Dimensjonskode])), ",
+              "            BLANK(), ",
+              "            VALUE([Dimensjonskode]) <= 17)",
+              "    )",
+              "",
+              ")",
+              "",
+              "var innb_67eld =",
+              "CALCULATE(SUM('Alle Data'[Verdi]),",
+              "    FILTER(ALL(Tabeller[Tabellnummer]), [Tabellnummer] = \"07459\"),",
+              "    FILTER(ALL(Variabel[Variabelnavn]), [Variabelnavn] = \"Personer\"),",
+              "    FILTER(ALL('Alder'[Dimensjonskode]), ",
+              "        IF(ISERROR(VALUE([Dimensjonskode])), ",
+              "            BLANK(), ",
+              "            VALUE([Dimensjonskode]) > 67)",
+              "    )",
+              "",
+              ")",
+              "",
+              "var innb_1866 =",
+              "CALCULATE(SUM('Alle Data'[Verdi]),",
+              "    FILTER(ALL(Tabeller[Tabellnummer]), [Tabellnummer] = \"07459\"),",
+              "    FILTER(ALL(Variabel[Variabelnavn]), [Variabelnavn] = \"Personer\"),",
+              "    FILTER(ALL('Alder'[Dimensjonskode]), ",
+              "        IF(ISERROR(VALUE([Dimensjonskode])), ",
+              "            BLANK(), ",
+              "            VALUE([Dimensjonskode]) >= 18 && VALUE([Dimensjonskode]) <= 66)",
+              "    )",
+              "",
+              ")",
+              "",
+              "var formel =",
+              "DIVIDE(innb_17yng + innb_67eld, innb_1866)",
+              "",
+              "return (",
+              "    ROUND(",
+              "        formel,",
+              "        1",
+              "    )",
+              ")"
+            ],
+            "displayFolder": "God oppvekst og godt liv\\Forsørgerbyrde"
+          },
+          {
+            "name": "Forsørgerbyrde - beregnet for 2035",
+            "expression": [
+              "",
+              "",
+              "var innb_17yng =",
+              "CALCULATE(SUM('Alle Data'[Verdi]),",
+              "    FILTER(ALL(Tabeller[Tabellnummer]), [Tabellnummer] = \"11667\"),",
+              "    FILTER(ALL(Variabel[Variabelnavn]), [Variabelnavn] = \"Folkemengde\"),",
+              "    FILTER(ALL('Alder'[Dimensjonskode]), ",
+              "        IF(ISERROR(VALUE([Dimensjonskode])), ",
+              "            BLANK(), ",
+              "            VALUE([Dimensjonskode]) <= 17)",
+              "    )",
+              "",
+              ")",
+              "",
+              "var innb_67eld =",
+              "CALCULATE(SUM('Alle Data'[Verdi]),",
+              "    FILTER(ALL(Tabeller[Tabellnummer]), [Tabellnummer] = \"11667\"),",
+              "    FILTER(ALL(Variabel[Variabelnavn]), [Variabelnavn] = \"Folkemengde\"),",
+              "    FILTER(ALL('Alder'[Dimensjonskode]), ",
+              "        IF(ISERROR(VALUE([Dimensjonskode])), ",
+              "            BLANK(), ",
+              "            VALUE([Dimensjonskode]) > 67)",
+              "    )",
+              "",
+              ")",
+              "",
+              "var innb_1866 =",
+              "CALCULATE(SUM('Alle Data'[Verdi]),",
+              "    FILTER(ALL(Tabeller[Tabellnummer]), [Tabellnummer] = \"11667\"),",
+              "    FILTER(ALL(Variabel[Variabelnavn]), [Variabelnavn] = \"Folkemengde\"),",
+              "    FILTER(ALL('Alder'[Dimensjonskode]), ",
+              "        IF(ISERROR(VALUE([Dimensjonskode])), ",
+              "            BLANK(), ",
+              "            VALUE([Dimensjonskode]) >= 18 && VALUE([Dimensjonskode]) <= 66)",
+              "    )",
+              "",
+              ")",
+              "",
+              "var formel =",
+              "DIVIDE(innb_17yng + innb_67eld, innb_1866)",
+              "",
+              "return (",
+              "    ROUND(",
+              "        formel,",
+              "        1",
+              "    )",
+              ")"
+            ],
+            "displayFolder": "God oppvekst og godt liv\\Forsørgerbyrde"
+          },
+          {
+            "name": "Andel innbyggere 0 - 22 år med barnevernstiltak (prosent)",
+            "expression": [
+              "",
+              "",
+              "var valgteAar = SELECTEDVALUE('År'[År])",
+              "",
+              "var barnmbvtilt =",
+              "CALCULATE(SUM('Alle Data'[Verdi]),",
+              "    FILTER(ALL(Tabeller[Tabellnummer]), [Tabellnummer] = \"12276\"),",
+              "    FILTER(ALL(Variabel[Variabelnavn]), [Variabelnavn] = ",
+              "        \"Barn med barnevernstiltak i løpet av året (antall)\"",
+              "    ),",
+              "    FILTER(ALL('Alder'[Dimensjonsnavn]), [Dimensjonsnavn] = \"0-22 år\")",
+              "",
+              ")",
+              "",
+              "var innb =",
+              "CALCULATE(SUM('Alle Data'[Verdi]),",
+              "    FILTER(ALL(Tabeller[Tabellnummer]), [Tabellnummer] = \"07459\"),",
+              "    FILTER(ALL(Variabel[Variabelnavn]), [Variabelnavn] = \"Personer\"),",
+              "    FILTER(ALL('Alder'[Dimensjonskode]), ",
+              "        IF(ISERROR(VALUE([Dimensjonskode])), ",
+              "            BLANK(), ",
+              "            VALUE([Dimensjonskode])  >= 0 && VALUE([Dimensjonskode]) <= 22)",
+              "    )",
+              "",
+              ")",
+              "",
+              "var formel =",
+              "    DIVIDE(barnmbvtilt, innb) * 100",
+              "",
+              "return (",
+              "    ROUND(formel, 1)",
+              ")"
+            ],
+            "displayFolder": "God oppvekst og godt liv\\Andel innbyggere med barnevernstiltak"
           }
         ]
       },
@@ -1118,6 +1299,12 @@
             "dataType": "string",
             "isHidden": true,
             "sourceColumn": "Trangboddhetkode"
+          },
+          {
+            "name": "Alderkode",
+            "dataType": "string",
+            "isHidden": true,
+            "sourceColumn": "Alderkode"
           }
         ],
         "partitions": [
@@ -1558,6 +1745,42 @@
             }
           }
         ]
+      },
+      {
+        "name": "Alder",
+        "columns": [
+          {
+            "name": "Dimensjonskode",
+            "dataType": "string",
+            "sourceColumn": "Dimensjonskode"
+          },
+          {
+            "name": "Dimensjonsnavn",
+            "dataType": "string",
+            "sourceColumn": "Dimensjonsnavn"
+          },
+          {
+            "name": "DimensjonskodeNavn",
+            "dataType": "string",
+            "sourceColumn": "DimensjonskodeNavn"
+          }
+        ],
+        "partitions": [
+          {
+            "name": "Partition",
+            "dataView": "full",
+            "source": {
+              "type": "m",
+              "expression": [
+                "let",
+                "    Source = #\"SQL/KS-SQL2018;Reporting_Status\",",
+                "    dbo_Alder = Source{[Schema=\"dbo\",Item=\"Alder\"]}[Data]",
+                "in",
+                "    dbo_Alder"
+              ]
+            }
+          }
+        ]
       }
     ],
     "relationships": [
@@ -1650,6 +1873,13 @@
         "fromTable": "Alle Data",
         "fromColumn": "Trangboddhetkode",
         "toTable": "Trangboddhet",
+        "toColumn": "Dimensjonskode"
+      },
+      {
+        "name": "3eda09f8-31c9-4c6b-8576-a6cde17642c4",
+        "fromTable": "Alle Data",
+        "fromColumn": "Alderkode",
+        "toTable": "Alder",
         "toColumn": "Dimensjonskode"
       }
     ],
