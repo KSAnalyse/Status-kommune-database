@@ -1173,6 +1173,44 @@
               ")"
             ],
             "displayFolder": "God oppvekst og godt liv\\Forsørgerbyrde"
+          },
+          {
+            "name": "Andel innbyggere 0 - 22 år med barnevernstiltak (prosent)",
+            "expression": [
+              "",
+              "",
+              "var valgteAar = SELECTEDVALUE('År'[År])",
+              "",
+              "var barnmbvtilt =",
+              "CALCULATE(SUM('Alle Data'[Verdi]),",
+              "    FILTER(ALL(Tabeller[Tabellnummer]), [Tabellnummer] = \"12276\"),",
+              "    FILTER(ALL(Variabel[Variabelnavn]), [Variabelnavn] = ",
+              "        \"Barn med barnevernstiltak i løpet av året (antall)\"",
+              "    ),",
+              "    FILTER(ALL('Alder'[Dimensjonsnavn]), [Dimensjonsnavn] = \"0-22 år\")",
+              "",
+              ")",
+              "",
+              "var innb =",
+              "CALCULATE(SUM('Alle Data'[Verdi]),",
+              "    FILTER(ALL(Tabeller[Tabellnummer]), [Tabellnummer] = \"07459\"),",
+              "    FILTER(ALL(Variabel[Variabelnavn]), [Variabelnavn] = \"Personer\"),",
+              "    FILTER(ALL('Alder'[Dimensjonskode]), ",
+              "        IF(ISERROR(VALUE([Dimensjonskode])), ",
+              "            BLANK(), ",
+              "            VALUE([Dimensjonskode])  >= 0 && VALUE([Dimensjonskode]) <= 22)",
+              "    )",
+              "",
+              ")",
+              "",
+              "var formel =",
+              "    DIVIDE(barnmbvtilt, innb) * 100",
+              "",
+              "return (",
+              "    ROUND(formel, 1)",
+              ")"
+            ],
+            "displayFolder": "God oppvekst og godt liv\\Andel innbyggere med barnevernstiltak"
           }
         ]
       },
