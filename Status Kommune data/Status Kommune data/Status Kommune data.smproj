@@ -18,7 +18,7 @@
     <DeploymentServerVersion>Unknown</DeploymentServerVersion>
     <DeploymentServerDatabase>Status Kommune data</DeploymentServerDatabase>
     <DeploymentServerCubeName>Status Kommune database</DeploymentServerCubeName>
-    <DeploymentOptionProcessing>Default</DeploymentOptionProcessing>
+    <DeploymentOptionProcessing>Full</DeploymentOptionProcessing>
     <DeploymentOptionTransactionalDeployment>False</DeploymentOptionTransactionalDeployment>
     <DeploymentOptionADALCache>Default</DeploymentOptionADALCache>
     <DeploymentOptionDirectQueryMode>InMemory</DeploymentOptionDirectQueryMode>

@@ -1033,7 +1033,7 @@
             "displayFolder": "Attraktive byer og steder\\Andel og antall husholdninger som bor trangt"
           },
           {
-            "name": "Befolkingsutvikling",
+            "name": "Befolkningsutvikling",
             "expression": [
               "",
               "",
@@ -1115,7 +1115,7 @@
               "return (",
               "    ROUND(",
               "        formel,",
-              "        1",
+              "        2",
               "    )",
               ")"
             ],
@@ -1168,7 +1168,7 @@
               "return (",
               "    ROUND(",
               "        formel,",
-              "        1",
+              "        2",
               "    )",
               ")"
             ],
@@ -1261,6 +1261,87 @@
               ")"
             ],
             "displayFolder": "Mangfold og utvikling\\Andel minoritetsspråklige barn i barnehage i forhold til innvandrerbarn 1-5 år"
+          },
+          {
+            "name": "Netto driftsresultat etter netto bundne fondsavsetninger som andel av driftsinntekter",
+            "expression": [
+              "",
+              "",
+              "var valgteAar = SELECTEDVALUE('År'[År])",
+              "",
+              "var brudripre2015 = ",
+              "CALCULATE(SUM('Alle Data'[Verdi]),",
+              "    FILTER(ALL(Tabeller[Tabellnummer]), [Tabellnummer] = \"04938\"),",
+              "    FILTER(ALL(Variabel[Variabelnavn]), [Variabelnavn] = ",
+              "        \"Barn 1-5 år med barnehageplass, fra språklige og kulturelle minoriteter\"",
+              "    )",
+              ")",
+              "",
+              "var netdrirespre2015 = ",
+              "CALCULATE(SUM('Alle Data'[Verdi]),",
+              "    FILTER(ALL(Tabeller[Tabellnummer]), [Tabellnummer] = \"04938\"),",
+              "    FILTER(ALL(Variabel[Variabelnavn]), [Variabelnavn] = ",
+              "        \"Innvandrerbefolkning 1-5 år ekskl. utvalgte land\"",
+              "    )",
+              ")",
+              "",
+              "var brubundripre2015 = ",
+              "CALCULATE(SUM('Alle Data'[Verdi]),",
+              "    FILTER(ALL(Tabeller[Tabellnummer]), [Tabellnummer] = \"04949\"),",
+              "    FILTER(ALL(Variabel[Variabelnavn]), [Variabelnavn] = ",
+              "        \"Innvandrerbefolkning 1-5 år ekskl. utvalgte land\"",
+              "    )",
+              ")",
+              "",
+              "var avsbundripre2015 = ",
+              "CALCULATE(SUM('Alle Data'[Verdi]),",
+              "    FILTER(ALL(Tabeller[Tabellnummer]), [Tabellnummer] = \"04949\"),",
+              "    FILTER(ALL(Variabel[Variabelnavn]), [Variabelnavn] = ",
+              "        \"Innvandrerbefolkning 1-5 år ekskl. utvalgte land\"",
+              "    )",
+              ")",
+              "",
+              "var brudripost2015 = ",
+              "CALCULATE(SUM('Alle Data'[Verdi]),",
+              "    FILTER(ALL(Tabeller[Tabellnummer]), [Tabellnummer] = \"12364\"),",
+              "    FILTER(ALL(Variabel[Variabelnavn]), [Variabelnavn] = \"Minoritetsspråklige barn (antall)\")",
+              ")",
+              "",
+              "var netdrirespost2015 = ",
+              "CALCULATE(SUM('Alle Data'[Verdi]),",
+              "    FILTER(ALL(Tabeller[Tabellnummer]), [Tabellnummer] = \"12364\"),",
+              "    FILTER(ALL(Variabel[Variabelnavn]), [Variabelnavn] = \"Innvandrerbarn (antall)\")",
+              ")",
+              "",
+              "var brubundripre2015 = ",
+              "CALCULATE(SUM('Alle Data'[Verdi]),",
+              "    FILTER(ALL(Tabeller[Tabellnummer]), [Tabellnummer] = \"04949\"),",
+              "    FILTER(ALL(Variabel[Variabelnavn]), [Variabelnavn] = ",
+              "        \"Innvandrerbefolkning 1-5 år ekskl. utvalgte land\"",
+              "    )",
+              ")",
+              "",
+              "var avsbundripre2015 = ",
+              "CALCULATE(SUM('Alle Data'[Verdi]),",
+              "    FILTER(ALL(Tabeller[Tabellnummer]), [Tabellnummer] = \"04949\"),",
+              "    FILTER(ALL(Variabel[Variabelnavn]), [Variabelnavn] = ",
+              "        \"Innvandrerbefolkning 1-5 år ekskl. utvalgte land\"",
+              "    )",
+              ")",
+              "",
+              "var formel =",
+              "IF(valgteAar < 2015,",
+              "    DIVIDE(antminpre2015, antinvpre2015) * 100,",
+              "    DIVIDE(antminpost2015, antinvpost2015) * 100",
+              ")",
+              "",
+              "return (",
+              "    ROUND(",
+              "        formel,",
+              "        1",
+              "    )",
+              ")"
+            ]
           }
         ]
       },
@@ -1270,25 +1351,21 @@
           {
             "name": "Tabell",
             "dataType": "string",
-            "isHidden": true,
             "sourceColumn": "Tabell"
           },
           {
             "name": "Kode",
             "dataType": "string",
-            "isHidden": true,
             "sourceColumn": "Kode"
           },
           {
             "name": "Variabel",
             "dataType": "string",
-            "isHidden": true,
             "sourceColumn": "Variabel"
           },
           {
             "name": "År",
             "dataType": "int64",
-            "isHidden": true,
             "sourceColumn": "År"
           },
           {
@@ -1299,61 +1376,51 @@
           {
             "name": "Formålkode",
             "dataType": "string",
-            "isHidden": true,
             "sourceColumn": "Formålkode"
           },
           {
             "name": "Arealklassekode",
             "dataType": "string",
-            "isHidden": true,
             "sourceColumn": "Arealklassekode"
           },
           {
             "name": "Materialekode",
             "dataType": "string",
-            "isHidden": true,
             "sourceColumn": "Materialekode"
           },
           {
             "name": "Behandlingkode",
             "dataType": "string",
-            "isHidden": true,
             "sourceColumn": "Behandlingkode"
           },
           {
             "name": "Bygningstypekode",
             "dataType": "string",
-            "isHidden": true,
             "sourceColumn": "Bygningstypekode"
           },
           {
             "name": "Avstandkode",
             "dataType": "string",
-            "isHidden": true,
             "sourceColumn": "Avstandkode"
           },
           {
             "name": "Rekreasjonarealkode",
             "dataType": "string",
-            "isHidden": true,
             "sourceColumn": "Rekreasjonarealkode"
           },
           {
             "name": "Tilgjengelig områdekode",
             "dataType": "string",
-            "isHidden": true,
             "sourceColumn": "Tilgjengelig områdekode"
           },
           {
             "name": "Trangboddhetkode",
             "dataType": "string",
-            "isHidden": true,
             "sourceColumn": "Trangboddhetkode"
           },
           {
             "name": "Alderkode",
             "dataType": "string",
-            "isHidden": true,
             "sourceColumn": "Alderkode"
           }
         ],
@@ -1371,6 +1438,12 @@
                 "    #\"dbo_Alle Data\""
               ]
             }
+          }
+        ],
+        "measures": [
+          {
+            "name": "Sum dataverdi",
+            "expression": "SUM('Alle Data'[Verdi])"
           }
         ]
       },
