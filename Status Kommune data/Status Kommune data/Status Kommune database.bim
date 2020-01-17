@@ -1350,7 +1350,85 @@
               "        1",
               "    )",
               ")"
-            ]
+            ],
+            "displayFolder": "Selvstendige\\Netto driftsresultat etter netto bundne fondsavsetninger som andel av driftsinntekter"
+          },
+          {
+            "name": "Netto lånegjeld fratrukket ubundne investeringsfond i prosent av driftsinntekter",
+            "expression": [
+              "",
+              "",
+              "var valgteAar = SELECTEDVALUE('År'[År])",
+              "",
+              "/* variabler for før 2015 */",
+              "",
+              "var netlaanpre2015 = ",
+              "CALCULATE(SUM('Alle Data'[Verdi]),",
+              "    FILTER(ALL(Tabeller[Tabellnummer]), [Tabellnummer] = \"04938\"),",
+              "    FILTER(ALL(Variabel[Variabelnavn]), [Variabelnavn] = ",
+              "        \"Netto lånegjeld, konsern\"",
+              "    )",
+              ")",
+              "",
+              "var ubuinvpre2015 = ",
+              "CALCULATE(SUM('Alle Data'[Verdi]),",
+              "    FILTER(ALL(Tabeller[Tabellnummer]), [Tabellnummer] = \"04947\"),",
+              "    FILTER(ALL(Variabel[Variabelnavn]), [Variabelnavn] = ",
+              "        \"Ubundne investeringsfond\"",
+              "    )",
+              ")",
+              "",
+              "var brudripre2015 = ",
+              "CALCULATE(SUM('Alle Data'[Verdi]),",
+              "    FILTER(ALL(Tabeller[Tabellnummer]), [Tabellnummer] = \"04938\"),",
+              "    FILTER(ALL(Variabel[Variabelnavn]), [Variabelnavn] = ",
+              "        \"Brutto driftsinntekter i alt, konsern\"",
+              "    )",
+              ")",
+              "",
+              "/* variabler for etter 2015 */",
+              "var netlaanpost2015 = ",
+              "CALCULATE(SUM('Alle Data'[Verdi]),",
+              "    FILTER(ALL(Tabeller[Tabellnummer]), [Tabellnummer] = \"12364\"),",
+              "    FILTER(ALL(Variabel[Variabelnavn]), [Variabelnavn] = \"Beløp (1000 kr)\"),",
+              "    FILTER(ALL(Regnskapsbegrep[Dimensjonsnavn]), [Dimensjonsnavn] = ",
+              "        \"Netto lånegjeld\"",
+              "    )",
+              ")",
+              "",
+              "var ubuinvpost2015 = ",
+              "CALCULATE(SUM('Alle Data'[Verdi]),",
+              "    FILTER(ALL(Tabeller[Tabellnummer]), [Tabellnummer] = \"12177\"),",
+              "    FILTER(ALL(Variabel[Variabelnavn]), [Variabelnavn] = \"Beløp (1000 kr)\"),",
+              "    FILTER(ALL(Art[Dimensjonsnavn]), [Dimensjonsnavn] = ",
+              "        \"Ubundne investeringsfond (K)\"",
+              "    )",
+              ")",
+              "",
+              "var brudripost2015 = ",
+              "CALCULATE(SUM('Alle Data'[Verdi]),",
+              "    FILTER(ALL(Tabeller[Tabellnummer]), [Tabellnummer] = \"12364\"),",
+              "    FILTER(ALL(Variabel[Variabelnavn]), [Variabelnavn] = \"Beløp (1000 kr)\"),",
+              "    FILTER(ALL(Regnskapsbegrep[Dimensjonsnavn]), [Dimensjonsnavn] = ",
+              "        \"Brutto driftsinntekter i alt\"",
+              "    )",
+              ")",
+              "",
+              "var formel =",
+              "IF(valgteAar < 2015,",
+              "    DIVIDE(netlaanpre2015 + ubuinvpre2015, brudripre2015) * 100,",
+              "    DIVIDE(netlaanpost2015 + ubuinvpost2015, brudripost2015) * 100",
+              ")",
+              "",
+              "return (",
+              "    ",
+              "    ROUND(",
+              "        formel,",
+              "        1",
+              "    )",
+              ")"
+            ],
+            "displayFolder": "Selvstendige\\Netto driftsresultat etter netto bundne fondsavsetninger som andel av driftsinntekter"
           }
         ]
       },
@@ -1450,6 +1528,11 @@
             "name": "Regnskapsbegrepkode",
             "dataType": "string",
             "sourceColumn": "Regnskapsbegrepkode"
+          },
+          {
+            "name": "Balansedatakode",
+            "dataType": "string",
+            "sourceColumn": "Balansedatakode"
           }
         ],
         "partitions": [
@@ -2004,6 +2087,42 @@
             }
           }
         ]
+      },
+      {
+        "name": "Balansedata",
+        "columns": [
+          {
+            "name": "Dimensjonskode",
+            "dataType": "string",
+            "sourceColumn": "Dimensjonskode"
+          },
+          {
+            "name": "Dimensjonsnavn",
+            "dataType": "string",
+            "sourceColumn": "Dimensjonsnavn"
+          },
+          {
+            "name": "DimensjonskodeNavn",
+            "dataType": "string",
+            "sourceColumn": "DimensjonskodeNavn"
+          }
+        ],
+        "partitions": [
+          {
+            "name": "Partition",
+            "dataView": "full",
+            "source": {
+              "type": "m",
+              "expression": [
+                "let",
+                "    Source = #\"SQL/KS-SQL2018;Reporting_Status\",",
+                "    dbo_Balansedata = Source{[Schema=\"dbo\",Item=\"Balansedata\"]}[Data]",
+                "in",
+                "    dbo_Balansedata"
+              ]
+            }
+          }
+        ]
       }
     ],
     "relationships": [
@@ -2117,6 +2236,13 @@
         "fromTable": "Alle Data",
         "fromColumn": "Regnskapsbegrepkode",
         "toTable": "Regnskapsbegrep",
+        "toColumn": "Dimensjonskode"
+      },
+      {
+        "name": "aa6f2019-ff59-4f28-86ac-d48098f7856f",
+        "fromTable": "Alle Data",
+        "fromColumn": "Balansedatakode",
+        "toTable": "Balansedata",
         "toColumn": "Dimensjonskode"
       }
     ],

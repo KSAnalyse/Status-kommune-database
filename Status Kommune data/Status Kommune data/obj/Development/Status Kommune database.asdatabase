@@ -1273,7 +1273,7 @@
               "CALCULATE(SUM('Alle Data'[Verdi]),",
               "    FILTER(ALL(Tabeller[Tabellnummer]), [Tabellnummer] = \"04938\"),",
               "    FILTER(ALL(Variabel[Variabelnavn]), [Variabelnavn] = ",
-              "        \"Barn 1-5 år med barnehageplass, fra språklige og kulturelle minoriteter\"",
+              "        \"Brutto driftsutgifter i alt, konsern\"",
               "    )",
               ")",
               "",
@@ -1281,7 +1281,7 @@
               "CALCULATE(SUM('Alle Data'[Verdi]),",
               "    FILTER(ALL(Tabeller[Tabellnummer]), [Tabellnummer] = \"04938\"),",
               "    FILTER(ALL(Variabel[Variabelnavn]), [Variabelnavn] = ",
-              "        \"Innvandrerbefolkning 1-5 år ekskl. utvalgte land\"",
+              "        \"Netto driftsresultat, konsern\"",
               "    )",
               ")",
               "",
@@ -1289,7 +1289,7 @@
               "CALCULATE(SUM('Alle Data'[Verdi]),",
               "    FILTER(ALL(Tabeller[Tabellnummer]), [Tabellnummer] = \"04949\"),",
               "    FILTER(ALL(Variabel[Variabelnavn]), [Variabelnavn] = ",
-              "        \"Innvandrerbefolkning 1-5 år ekskl. utvalgte land\"",
+              "        \"Bruk av bundne driftsfond\"",
               "    )",
               ")",
               "",
@@ -1297,45 +1297,130 @@
               "CALCULATE(SUM('Alle Data'[Verdi]),",
               "    FILTER(ALL(Tabeller[Tabellnummer]), [Tabellnummer] = \"04949\"),",
               "    FILTER(ALL(Variabel[Variabelnavn]), [Variabelnavn] = ",
-              "        \"Innvandrerbefolkning 1-5 år ekskl. utvalgte land\"",
+              "        \"Avsetninger til bundne driftsfond\"",
               "    )",
               ")",
               "",
               "var brudripost2015 = ",
               "CALCULATE(SUM('Alle Data'[Verdi]),",
               "    FILTER(ALL(Tabeller[Tabellnummer]), [Tabellnummer] = \"12364\"),",
-              "    FILTER(ALL(Variabel[Variabelnavn]), [Variabelnavn] = \"Minoritetsspråklige barn (antall)\")",
+              "    FILTER(ALL(Variabel[Variabelnavn]), [Variabelnavn] = \"Beløp (1000 kr)\"),",
+              "    FILTER(ALL(Regnskapsbegrep[Dimensjonsnavn]), [Dimensjonsnavn] = ",
+              "        \"Brutto driftsinntekter i alt\"",
+              "    )",
               ")",
               "",
               "var netdrirespost2015 = ",
               "CALCULATE(SUM('Alle Data'[Verdi]),",
               "    FILTER(ALL(Tabeller[Tabellnummer]), [Tabellnummer] = \"12364\"),",
-              "    FILTER(ALL(Variabel[Variabelnavn]), [Variabelnavn] = \"Innvandrerbarn (antall)\")",
-              ")",
-              "",
-              "var brubundripre2015 = ",
-              "CALCULATE(SUM('Alle Data'[Verdi]),",
-              "    FILTER(ALL(Tabeller[Tabellnummer]), [Tabellnummer] = \"04949\"),",
-              "    FILTER(ALL(Variabel[Variabelnavn]), [Variabelnavn] = ",
-              "        \"Innvandrerbefolkning 1-5 år ekskl. utvalgte land\"",
+              "    FILTER(ALL(Variabel[Variabelnavn]), [Variabelnavn] = \"Beløp (1000 kr)\"),",
+              "    FILTER(ALL(Regnskapsbegrep[Dimensjonsnavn]), [Dimensjonsnavn] = ",
+              "        \"Netto driftsresultat\"",
               "    )",
               ")",
               "",
-              "var avsbundripre2015 = ",
+              "var brubundripost2015 = ",
               "CALCULATE(SUM('Alle Data'[Verdi]),",
-              "    FILTER(ALL(Tabeller[Tabellnummer]), [Tabellnummer] = \"04949\"),",
-              "    FILTER(ALL(Variabel[Variabelnavn]), [Variabelnavn] = ",
-              "        \"Innvandrerbefolkning 1-5 år ekskl. utvalgte land\"",
+              "    FILTER(ALL(Tabeller[Tabellnummer]), [Tabellnummer] = \"12365\"),",
+              "    FILTER(ALL(Variabel[Variabelnavn]), [Variabelnavn] = \"Beløp (1000 kr)\"),",
+              "    FILTER(ALL(Art[Dimensjonsnavn]), [Dimensjonsnavn] = ",
+              "        \"Bruk av bundne driftsfond\"",
+              "    )",
+              ")",
+              "",
+              "var avsbundripost2015 = ",
+              "CALCULATE(SUM('Alle Data'[Verdi]),",
+              "    FILTER(ALL(Tabeller[Tabellnummer]), [Tabellnummer] = \"12365\"),",
+              "    FILTER(ALL(Variabel[Variabelnavn]), [Variabelnavn] = \"Beløp (1000 kr)\"),",
+              "    FILTER(ALL(Art[Dimensjonsnavn]), [Dimensjonsnavn] = ",
+              "        \"Avsetninger til bundne fond\"",
               "    )",
               ")",
               "",
               "var formel =",
               "IF(valgteAar < 2015,",
-              "    DIVIDE(antminpre2015, antinvpre2015) * 100,",
-              "    DIVIDE(antminpost2015, antinvpost2015) * 100",
+              "    DIVIDE(netdrirespre2015 + brubundripre2015 + avsbundripre2015, brubundripre2015) * 100,",
+              "    DIVIDE(netdrirespost2015 + brubundripost2015 + avsbundripost2015, brubundripost2015) * 100",
               ")",
               "",
               "return (",
+              "    ",
+              "    ROUND(",
+              "        formel,",
+              "        1",
+              "    )",
+              ")"
+            ]
+          },
+          {
+            "name": "Netto lånegjeld fratrukket ubundne investeringsfond i prosent av driftsinntekter",
+            "expression": [
+              "",
+              "",
+              "var valgteAar = SELECTEDVALUE('År'[År])",
+              "",
+              "/* variabler for før 2015 */",
+              "",
+              "var netlaanpre2015 = ",
+              "CALCULATE(SUM('Alle Data'[Verdi]),",
+              "    FILTER(ALL(Tabeller[Tabellnummer]), [Tabellnummer] = \"04938\"),",
+              "    FILTER(ALL(Variabel[Variabelnavn]), [Variabelnavn] = ",
+              "        \"Netto lånegjeld, konsern\"",
+              "    )",
+              ")",
+              "",
+              "var ubuinvpre2015 = ",
+              "CALCULATE(SUM('Alle Data'[Verdi]),",
+              "    FILTER(ALL(Tabeller[Tabellnummer]), [Tabellnummer] = \"04947\"),",
+              "    FILTER(ALL(Variabel[Variabelnavn]), [Variabelnavn] = ",
+              "        \"Ubundne investeringsfond\"",
+              "    )",
+              ")",
+              "",
+              "var brudripre2015 = ",
+              "CALCULATE(SUM('Alle Data'[Verdi]),",
+              "    FILTER(ALL(Tabeller[Tabellnummer]), [Tabellnummer] = \"04938\"),",
+              "    FILTER(ALL(Variabel[Variabelnavn]), [Variabelnavn] = ",
+              "        \"Brutto driftsinntekter i alt, konsern\"",
+              "    )",
+              ")",
+              "",
+              "/* variabler for etter 2015 */",
+              "var netlaanpost2015 = ",
+              "CALCULATE(SUM('Alle Data'[Verdi]),",
+              "    FILTER(ALL(Tabeller[Tabellnummer]), [Tabellnummer] = \"12364\"),",
+              "    FILTER(ALL(Variabel[Variabelnavn]), [Variabelnavn] = \"Beløp (1000 kr)\"),",
+              "    FILTER(ALL(Regnskapsbegrep[Dimensjonsnavn]), [Dimensjonsnavn] = ",
+              "        \"Netto lånegjeld\"",
+              "    )",
+              ")",
+              "",
+              "var ubuinvpost2015 = ",
+              "CALCULATE(SUM('Alle Data'[Verdi]),",
+              "    FILTER(ALL(Tabeller[Tabellnummer]), [Tabellnummer] = \"12177\"),",
+              "    FILTER(ALL(Variabel[Variabelnavn]), [Variabelnavn] = \"Beløp (1000 kr)\"),",
+              "    FILTER(ALL(Art[Dimensjonsnavn]), [Dimensjonsnavn] = ",
+              "        \"Ubundne investeringsfond (K)\"",
+              "    )",
+              ")",
+              "",
+              "var brudripost2015 = ",
+              "CALCULATE(SUM('Alle Data'[Verdi]),",
+              "    FILTER(ALL(Tabeller[Tabellnummer]), [Tabellnummer] = \"12364\"),",
+              "    FILTER(ALL(Variabel[Variabelnavn]), [Variabelnavn] = \"Beløp (1000 kr)\"),",
+              "    FILTER(ALL(Regnskapsbegrep[Dimensjonsnavn]), [Dimensjonsnavn] = ",
+              "        \"Brutto driftsinntekter i alt\"",
+              "    )",
+              ")",
+              "",
+              "var formel =",
+              "IF(valgteAar < 2015,",
+              "    DIVIDE(netlaanpre2015 + ubuinvpre2015, brudripre2015) * 100,",
+              "    DIVIDE(netlaanpost2015 + ubuinvpost2015, brudripost2015) * 100",
+              ")",
+              "",
+              "return (",
+              "    ",
               "    ROUND(",
               "        formel,",
               "        1",
@@ -1381,47 +1466,71 @@
           {
             "name": "Arealklassekode",
             "dataType": "string",
+            "isHidden": true,
             "sourceColumn": "Arealklassekode"
           },
           {
             "name": "Materialekode",
             "dataType": "string",
+            "isHidden": true,
             "sourceColumn": "Materialekode"
           },
           {
             "name": "Behandlingkode",
             "dataType": "string",
+            "isHidden": true,
             "sourceColumn": "Behandlingkode"
           },
           {
             "name": "Bygningstypekode",
             "dataType": "string",
+            "isHidden": true,
             "sourceColumn": "Bygningstypekode"
           },
           {
             "name": "Avstandkode",
             "dataType": "string",
+            "isHidden": true,
             "sourceColumn": "Avstandkode"
           },
           {
             "name": "Rekreasjonarealkode",
             "dataType": "string",
+            "isHidden": true,
             "sourceColumn": "Rekreasjonarealkode"
           },
           {
             "name": "Tilgjengelig områdekode",
             "dataType": "string",
+            "isHidden": true,
             "sourceColumn": "Tilgjengelig områdekode"
           },
           {
             "name": "Trangboddhetkode",
             "dataType": "string",
+            "isHidden": true,
             "sourceColumn": "Trangboddhetkode"
           },
           {
             "name": "Alderkode",
             "dataType": "string",
+            "isHidden": true,
             "sourceColumn": "Alderkode"
+          },
+          {
+            "name": "Artkode",
+            "dataType": "string",
+            "sourceColumn": "Artkode"
+          },
+          {
+            "name": "Regnskapsbegrepkode",
+            "dataType": "string",
+            "sourceColumn": "Regnskapsbegrepkode"
+          },
+          {
+            "name": "Balansedatakode",
+            "dataType": "string",
+            "sourceColumn": "Balansedatakode"
           }
         ],
         "partitions": [
@@ -1904,6 +2013,114 @@
             }
           }
         ]
+      },
+      {
+        "name": "Art",
+        "columns": [
+          {
+            "name": "Dimensjonskode",
+            "dataType": "string",
+            "sourceColumn": "Dimensjonskode"
+          },
+          {
+            "name": "Dimensjonsnavn",
+            "dataType": "string",
+            "sourceColumn": "Dimensjonsnavn"
+          },
+          {
+            "name": "DimensjonskodeNavn",
+            "dataType": "string",
+            "sourceColumn": "DimensjonskodeNavn"
+          }
+        ],
+        "partitions": [
+          {
+            "name": "Partition",
+            "dataView": "full",
+            "source": {
+              "type": "m",
+              "expression": [
+                "let",
+                "    Source = #\"SQL/KS-SQL2018;Reporting_Status\",",
+                "    dbo_Art = Source{[Schema=\"dbo\",Item=\"Art\"]}[Data]",
+                "in",
+                "    dbo_Art"
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "name": "Regnskapsbegrep",
+        "columns": [
+          {
+            "name": "Dimensjonskode",
+            "dataType": "string",
+            "sourceColumn": "Dimensjonskode"
+          },
+          {
+            "name": "Dimensjonsnavn",
+            "dataType": "string",
+            "sourceColumn": "Dimensjonsnavn"
+          },
+          {
+            "name": "DimensjonskodeNavn",
+            "dataType": "string",
+            "sourceColumn": "DimensjonskodeNavn"
+          }
+        ],
+        "partitions": [
+          {
+            "name": "Partition",
+            "dataView": "full",
+            "source": {
+              "type": "m",
+              "expression": [
+                "let",
+                "    Source = #\"SQL/KS-SQL2018;Reporting_Status\",",
+                "    dbo_Regnskapsbegrep = Source{[Schema=\"dbo\",Item=\"Regnskapsbegrep\"]}[Data]",
+                "in",
+                "    dbo_Regnskapsbegrep"
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "name": "Balansedata",
+        "columns": [
+          {
+            "name": "Dimensjonskode",
+            "dataType": "string",
+            "sourceColumn": "Dimensjonskode"
+          },
+          {
+            "name": "Dimensjonsnavn",
+            "dataType": "string",
+            "sourceColumn": "Dimensjonsnavn"
+          },
+          {
+            "name": "DimensjonskodeNavn",
+            "dataType": "string",
+            "sourceColumn": "DimensjonskodeNavn"
+          }
+        ],
+        "partitions": [
+          {
+            "name": "Partition",
+            "dataView": "full",
+            "source": {
+              "type": "m",
+              "expression": [
+                "let",
+                "    Source = #\"SQL/KS-SQL2018;Reporting_Status\",",
+                "    dbo_Balansedata = Source{[Schema=\"dbo\",Item=\"Balansedata\"]}[Data]",
+                "in",
+                "    dbo_Balansedata"
+              ]
+            }
+          }
+        ]
       }
     ],
     "relationships": [
@@ -2003,6 +2220,27 @@
         "fromTable": "Alle Data",
         "fromColumn": "Alderkode",
         "toTable": "Alder",
+        "toColumn": "Dimensjonskode"
+      },
+      {
+        "name": "f4956df9-ad74-4fb1-acb8-9871001febcd",
+        "fromTable": "Alle Data",
+        "fromColumn": "Artkode",
+        "toTable": "Art",
+        "toColumn": "Dimensjonskode"
+      },
+      {
+        "name": "b319270a-fb95-4273-870a-51946d08ddd6",
+        "fromTable": "Alle Data",
+        "fromColumn": "Regnskapsbegrepkode",
+        "toTable": "Regnskapsbegrep",
+        "toColumn": "Dimensjonskode"
+      },
+      {
+        "name": "aa6f2019-ff59-4f28-86ac-d48098f7856f",
+        "fromTable": "Alle Data",
+        "fromColumn": "Balansedatakode",
+        "toTable": "Balansedata",
         "toColumn": "Dimensjonskode"
       }
     ],
