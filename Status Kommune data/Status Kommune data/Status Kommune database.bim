@@ -823,10 +823,10 @@
               ")",
               "",
               "var inntett_div_totbol =",
-              "DIVIDE(inntett, [Boliger - Totalt])",
+              "DIVIDE(inntett, [Boliger - Totalt]) * 100",
               "",
               "return (",
-              "    ROUND(inntett_div_totbol, 1)",
+              "    ROUND(inntett_div_totbol, 2)",
               ")",
               ""
             ],
@@ -882,10 +882,10 @@
               ")",
               "",
               "var iutvtett_div_totbol =",
-              "DIVIDE(iutvtett, [Boliger - Totalt])",
+              "DIVIDE(iutvtett, [Boliger - Totalt]) * 100",
               "",
               "return (",
-              "    ROUND(iutvtett_div_totbol, 1)",
+              "    ROUND(iutvtett_div_totbol, 2)",
               ")"
             ],
             "displayFolder": "Attraktive byer og steder\\Nye bygg etter plassering"
@@ -906,10 +906,10 @@
               ")",
               "",
               "var mel13km_div_totbol =",
-              "DIVIDE(mel13km, [Boliger - Totalt])",
+              "DIVIDE(mel13km, [Boliger - Totalt]) * 100",
               "",
               "return (",
-              "    ROUND(mel13km_div_totbol, 1)",
+              "    ROUND(mel13km_div_totbol, 2)",
               ")"
             ],
             "displayFolder": "Attraktive byer og steder\\Nye bygg etter plassering"
@@ -930,10 +930,10 @@
               ")",
               "",
               "var innen1km_div_totbol =",
-              "DIVIDE(innen1km, [Boliger - Totalt])",
+              "DIVIDE(innen1km, [Boliger - Totalt]) * 100",
               "",
               "return (",
-              "    ROUND(innen1km_div_totbol, 1)",
+              "    ROUND(innen1km_div_totbol, 2)",
               ")"
             ],
             "displayFolder": "Attraktive byer og steder\\Nye bygg etter plassering"
@@ -954,10 +954,10 @@
               ")",
               "",
               "var mel13km_div_totnaer =",
-              "DIVIDE(mel13km, [Næring - Totalt])",
+              "DIVIDE(mel13km, [Næring - Totalt]) * 100",
               "",
               "return (",
-              "    ROUND(mel13km_div_totnaer, 1)",
+              "    ROUND(mel13km_div_totnaer, 2)",
               ")"
             ],
             "displayFolder": "Attraktive byer og steder\\Nye bygg etter plassering"
@@ -996,10 +996,10 @@
               ")",
               "",
               "var inntett_div_totnaer =",
-              "DIVIDE(inntett, [Næring - Totalt])",
+              "DIVIDE(inntett, [Næring - Totalt]) * 100",
               "",
               "return (",
-              "    ROUND(inntett_div_totnaer, 1)",
+              "    ROUND(inntett_div_totnaer, 2)",
               ")",
               ""
             ],
@@ -1021,10 +1021,10 @@
               ")",
               "",
               "var iutv_div_totnaer =",
-              "DIVIDE(iutv, [Næring - Totalt])",
+              "DIVIDE(iutv, [Næring - Totalt]) * 100",
               "",
               "return (",
-              "    ROUND(iutv_div_totnaer, 1)",
+              "    ROUND(iutv_div_totnaer, 2)",
               ")",
               ""
             ],
@@ -1044,10 +1044,10 @@
               ")",
               "",
               "var innen1km_div_totnaer =",
-              "DIVIDE(innen1km, [Næring - Totalt])",
+              "DIVIDE(innen1km, [Næring - Totalt]) * 100",
               "",
               "return (",
-              "    ROUND(innen1km_div_totnaer, 1)",
+              "    ROUND(innen1km_div_totnaer, 2)",
               ")",
               ""
             ],
@@ -1066,13 +1066,14 @@
             "displayFolder": "Attraktive byer og steder\\Andel bosatte i kommunens tettsteder med trygg tilgang til rekreasjonsareal og nærturterreng (prosent)"
           },
           {
-            "name": "Samlet areal av leke- og rekreasjonsområder innenfor tettsteder",
+            "name": "Samlet areal av leke- og rekreasjonsområder innenfor tettsteder, forhåndsberegnet SSB",
             "expression": [
               "",
               "",
               "CALCULATE(SUM('Alle Data'[Verdi]),",
               "    FILTER(ALL(Tabeller[Tabellnummer]), [Tabellnummer] = \"12243\"),",
-              "    FILTER(ALL(Variabel[Variabelnavn]), [Variabelnavn] = \"Mengde (antall)\")",
+              "    FILTER(ALL(Variabel[Variabelnavn]), [Variabelnavn] = \"Mengde (antall)\"),",
+              "    FILTER(ALL(Rekreasjonareal[Dimensjonsnavn]), [Dimensjonsnavn] = \"I alt, forhåndsberegnet i SSB.\")",
               ")"
             ],
             "displayFolder": "Attraktive byer og steder\\Samlet areal av leke- og rekreasjonsområder innenfor tettsteder"
@@ -1093,7 +1094,7 @@
             "displayFolder": "Attraktive byer og steder\\Andel og antall husholdninger som bor trangt"
           },
           {
-            "name": "Andel og antall husholdninger som bor trangt - Bor trangt, få rom og kvm",
+            "name": "Antall husholdninger som bor trangt",
             "expression": [
               "",
               "",
@@ -1108,7 +1109,7 @@
             "displayFolder": "Attraktive byer og steder\\Andel og antall husholdninger som bor trangt"
           },
           {
-            "name": "Befolkningsutvikling",
+            "name": "Folketall, endring i prosent",
             "expression": [
               "",
               "",
@@ -1144,7 +1145,7 @@
             "displayFolder": "God oppvekst og godt liv\\Befolkningsutvikling"
           },
           {
-            "name": "Forsørgerbyrde",
+            "name": "Forsørgerbyrde (personer utenfor yrkesaktiv alder / personer i yrkesaktiv alder)",
             "expression": [
               "",
               "",
@@ -1504,6 +1505,18 @@
               ")"
             ],
             "displayFolder": "Selvstendige\\Netto driftsresultat etter netto bundne fondsavsetninger som andel av driftsinntekter"
+          },
+          {
+            "name": "Samlet areal av leke- og rekreasjonsområder innenfor tettsteder, rapportert",
+            "expression": [
+              "",
+              "",
+              "CALCULATE(SUM('Alle Data'[Verdi]),",
+              "    FILTER(ALL(Tabeller[Tabellnummer]), [Tabellnummer] = \"12243\"),",
+              "    FILTER(ALL(Variabel[Variabelnavn]), [Variabelnavn] = \"Mengde (antall)\"),",
+              "    FILTER(ALL(Rekreasjonareal[Dimensjonsnavn]), [Dimensjonsnavn] = \"I alt, rapportert.\")",
+              ")"
+            ]
           }
         ]
       },
