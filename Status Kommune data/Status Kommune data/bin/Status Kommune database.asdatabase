@@ -11,7 +11,7 @@
         "connectionDetails": {
           "protocol": "tds",
           "address": {
-            "server": "KS-SQL2018",
+            "server": "vk-sxd0e-002",
             "database": "Reporting_Status"
           },
           "authentication": null,
@@ -20,8 +20,8 @@
         "credential": {
           "AuthenticationKind": "Windows",
           "kind": "SQL",
-          "path": "ks-sql2018;Reporting_Status",
-          "Username": "Axel.Hjelmervik.Hansen@ks.no",
+          "path": "vk-sxd0e-002;Reporting_Status",
+          "Username": "axel.hjelmervik.hansen@ks.no",
           "EncryptConnection": false
         }
       }
@@ -631,17 +631,13 @@
               "/* Mengder husholdningsavfall, etter materiale og år */",
               "",
               "var matgjen =",
-              "CALCULATE(SUM('Alle Data'[Verdi]),",
-              "    FILTER(ALL(Tabeller[Tabellnummer]), [Tabellnummer] = \"12313\"),",
-              "    FILTER(ALL(Variabel[Variabelnavn]), [Variabelnavn] = \"Mengde  (tonn)\"),",
+              "CALCULATE([Mengder husholdningsavfall],",
               "    FILTER(ALL(Behandling[Dimensjonsnavn]), [Dimensjonsnavn] = \"Materialgjenvinning\"),",
               "    FILTER(ALL(Materiale[Dimensjonsnavn]), [Dimensjonsnavn] = \"I alt\")",
               ")",
               "",
               "var total =",
-              "CALCULATE(SUM('Alle Data'[Verdi]),",
-              "    FILTER(ALL(Tabeller[Tabellnummer]), [Tabellnummer] = \"12313\"),",
-              "    FILTER(ALL(Variabel[Variabelnavn]), [Variabelnavn] = \"Mengde  (tonn)\"),",
+              "CALCULATE([Mengder husholdningsavfall],",
               "    FILTER(ALL(Behandling[Dimensjonsnavn]), [Dimensjonsnavn] = \"i alt\"),",
               "    FILTER(ALL(Materiale[Dimensjonsnavn]), [Dimensjonsnavn] = \"I alt\")",
               ")",
@@ -803,8 +799,9 @@
               "/* Mengder husholdningsavfall, etter materiale og år */",
               "",
               "CALCULATE(SUM('Alle Data'[Verdi]),",
-              "    FILTER(ALL(Tabeller[Tabellnummer]), [Tabellnummer] = \"12313\"),",
-              "    FILTER(ALL(Variabel[Variabelnavn]), [Variabelnavn] = \"Mengde  (tonn)\")",
+              "    FILTER(ALL(Tabeller[Tabellnummer]), [Tabellnummer] = \"13136\"),",
+              "    FILTER(ALL(Variabel[Variabelnavn]), [Variabelnavn] = \"Mengd (tonn)\"),",
+              "    FILTER(ALL('Nedstrømsløsning'[Dimensjonsnavn]), [Dimensjonsnavn] = \"I alt\")",
               ")"
             ],
             "displayFolder": "Klima og miljøvennlig utvikling\\Mengder husholdningsavfall, etter materiale og år"
@@ -1621,6 +1618,11 @@
             "name": "Balansedatakode",
             "dataType": "string",
             "sourceColumn": "Balansedatakode"
+          },
+          {
+            "name": "Nedstrømsløsningkode",
+            "dataType": "string",
+            "sourceColumn": "Nedstrømsløsningkode"
           }
         ],
         "partitions": [
@@ -2211,6 +2213,42 @@
             }
           }
         ]
+      },
+      {
+        "name": "Nedstrømsløsning",
+        "columns": [
+          {
+            "name": "Dimensjonskode",
+            "dataType": "string",
+            "sourceColumn": "Dimensjonskode"
+          },
+          {
+            "name": "Dimensjonsnavn",
+            "dataType": "string",
+            "sourceColumn": "Dimensjonsnavn"
+          },
+          {
+            "name": "DimensjonskodeNavn",
+            "dataType": "string",
+            "sourceColumn": "DimensjonskodeNavn"
+          }
+        ],
+        "partitions": [
+          {
+            "name": "Partition",
+            "dataView": "full",
+            "source": {
+              "type": "m",
+              "expression": [
+                "let",
+                "    Source = #\"SQL/KS-SQL2018;Reporting_Status\",",
+                "    dbo_Nedstrømsløsning = Source{[Schema=\"dbo\",Item=\"Nedstrømsløsning\"]}[Data]",
+                "in",
+                "    dbo_Nedstrømsløsning"
+              ]
+            }
+          }
+        ]
       }
     ],
     "relationships": [
@@ -2332,6 +2370,35 @@
         "fromColumn": "Balansedatakode",
         "toTable": "Balansedata",
         "toColumn": "Dimensjonskode"
+      },
+      {
+        "name": "fb34ba35-7747-428e-9df7-3888989d3c96",
+        "fromTable": "Alle Data",
+        "fromColumn": "Nedstrømsløsningkode",
+        "toTable": "Nedstrømsløsning",
+        "toColumn": "Dimensjonskode"
+      }
+    ],
+    "roles": [
+      {
+        "name": "API",
+        "modelPermission": "read",
+        "members": [
+          {
+            "memberName": "NT AUTHORITY\\IUSR",
+            "memberId": "S-1-5-17"
+          }
+        ]
+      },
+      {
+        "name": "Brukere",
+        "modelPermission": "readRefresh",
+        "members": [
+          {
+            "memberName": "I04\\VK.DB.VK-SXD0E-002_Status.DBO",
+            "memberId": "S-1-5-21-2036031588-730629661-1306914269-1033618"
+          }
+        ]
       }
     ],
     "annotations": [
