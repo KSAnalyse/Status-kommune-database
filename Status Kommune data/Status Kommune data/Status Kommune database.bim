@@ -10,7 +10,7 @@
         "connectionDetails": {
           "protocol": "tds",
           "address": {
-            "server": "KS-SQL2018",
+            "server": "vk-sxd0e-002",
             "database": "Reporting_Status"
           },
           "authentication": null,
@@ -20,8 +20,8 @@
         "credential": {
           "AuthenticationKind": "Windows",
           "kind": "SQL",
-          "path": "ks-sql2018;Reporting_Status",
-          "Username": "Axel.Hjelmervik.Hansen@ks.no",
+          "path": "vk-sxd0e-002;Reporting_Status",
+          "Username": "axel.hjelmervik.hansen@ks.no",
           "EncryptConnection": false
         }
       }
@@ -290,10 +290,21 @@
               "    og år",
               "*/",
               "",
-              "CALCULATE(SUM('Alle Data'[Verdi]),",
+              "var valgteRegion = SELECTEDVALUE(Region[Kode])",
+              "",
+              "var formel =",
+              "SUMX(",
+              "    ALL('Alle Data'),",
+              "    CALCULATE(SUM('Alle Data'[Verdi]),",
               "    FILTER(ALL(Tabeller[Tabellnummer]), [Tabellnummer] = \"11776\"),",
+              "    FILTER(ALL(Region[Kode]), [Kode] = valgteRegion),",
               "    FILTER(ALL(Variabel[Variabelnavn]), [Variabelnavn] = \"Areal  (dekar)\"),",
               "    FILTER(ALL('Formål'[Dimensjonsnavn]), [Dimensjonsnavn] = \"Annen bebyggelse og anlegg\")",
+              "    )",
+              ")",
+              "",
+              "return (",
+              "    formel",
               ")"
             ],
             "displayFolder": "Klima og miljøvennlig utvikling\\Omdisponering, etter dyrka eller dyrkbar jord, formål, region, lovanvendelse, statistikkvariabel"
@@ -308,18 +319,28 @@
               "    og år",
               "*/",
               "",
-              "CALCULATE(SUM('Alle Data'[Verdi]),",
-              "    FILTER(ALL(Tabeller[Tabellnummer]), [Tabellnummer] = \"11776\"),",
-              "    FILTER(ALL(Variabel[Variabelnavn]), [Variabelnavn] = \"Areal  (dekar)\"),",
-              "    FILTER(ALL('Formål'[Dimensjonsnavn]), [Dimensjonsnavn] IN {",
-              "        \"Annet landbruksformål, feks. tilleggsnæringer\",",
-              "        \"Bruk og vern av sjø og vassdrag, med tilhørende strandsone\",",
-              "        \"Forsvaret\",",
-              "        \"Golfbane\",",
-              "        \"Kombinasjoner av hovedformål\",",
-              "        \"Landbruks-, natur- og friluftsområder, spredt utbygging\",",
-              "        \"Landbruks-, natur- og friluftsområder der landbruk er utelukket\"",
-              "    })",
+              "var valgteRegion = SELECTEDVALUE(Region[Kode])",
+              "",
+              "var formel =",
+              "SUMX(",
+              "    ALL('Alle Data'),",
+              "    CALCULATE(SUM('Alle Data'[Verdi]),",
+              "        FILTER(ALL(Tabeller[Tabellnummer]), [Tabellnummer] = \"11776\"),",
+              "        FILTER(ALL(Variabel[Variabelnavn]), [Variabelnavn] = \"Areal  (dekar)\"),",
+              "        FILTER(ALL('Formål'[Dimensjonsnavn]), [Dimensjonsnavn] IN {",
+              "            \"Annet landbruksformål, feks. tilleggsnæringer\",",
+              "            \"Bruk og vern av sjø og vassdrag, med tilhørende strandsone\",",
+              "            \"Forsvaret\",",
+              "            \"Golfbane\",",
+              "            \"Kombinasjoner av hovedformål\",",
+              "            \"Landbruks-, natur- og friluftsområder, spredt utbygging\",",
+              "            \"Landbruks-, natur- og friluftsområder der landbruk er utelukket\"",
+              "        })",
+              "    )",
+              ")",
+              "",
+              "return (",
+              "    formel",
               ")"
             ],
             "displayFolder": "Klima og miljøvennlig utvikling\\Omdisponering, etter dyrka eller dyrkbar jord, formål, region, lovanvendelse, statistikkvariabel"
@@ -334,12 +355,22 @@
               "    og år",
               "*/",
               "",
-              "CALCULATE(SUM('Alle Data'[Verdi]),",
-              "    FILTER(ALL(Tabeller[Tabellnummer]), [Tabellnummer] = \"11776\"),",
-              "    FILTER(ALL(Variabel[Variabelnavn]), [Variabelnavn] = \"Areal  (dekar)\"),",
-              "    FILTER(ALL('Formål'[Dimensjonsnavn]), [Dimensjonsnavn] = ",
-              "        \"Boligbebyggelse, inkludert uteoppholdsareal\"",
+              "var valgteRegion = SELECTEDVALUE(Region[Kode])",
+              "",
+              "var formel =",
+              "SUMX(",
+              "    ALL('Alle Data'),",
+              "    CALCULATE(SUM('Alle Data'[Verdi]),",
+              "        FILTER(ALL(Tabeller[Tabellnummer]), [Tabellnummer] = \"11776\"),",
+              "        FILTER(ALL(Variabel[Variabelnavn]), [Variabelnavn] = \"Areal  (dekar)\"),",
+              "        FILTER(ALL('Formål'[Dimensjonsnavn]), [Dimensjonsnavn] = ",
+              "            \"Boligbebyggelse, inkludert uteoppholdsareal\"",
+              "        )",
               "    )",
+              ")",
+              "",
+              "return (",
+              "    formel",
               ")"
             ],
             "displayFolder": "Klima og miljøvennlig utvikling\\Omdisponering, etter dyrka eller dyrkbar jord, formål, region, lovanvendelse, statistikkvariabel"
@@ -354,14 +385,26 @@
               "    og år",
               "*/",
               "",
-              "CALCULATE(SUM('Alle Data'[Verdi]),",
+              "var valgteRegion = SELECTEDVALUE(Region[Kode])",
+              "",
+              "var formel =",
+              "SUMX(",
+              "    ALL('Alle Data'),",
+              "    CALCULATE(SUM('Alle Data'[Verdi]),",
               "    FILTER(ALL(Tabeller[Tabellnummer]), [Tabellnummer] = \"11776\"),",
               "    FILTER(ALL(Variabel[Variabelnavn]), [Variabelnavn] = \"Areal  (dekar)\"),",
               "    FILTER(ALL('Formål'[Dimensjonsnavn]), [Dimensjonsnavn] IN {",
               "        \"Næringsbebyggelse / virksomhet\",",
               "        \"Offentlig eller privat tjenesteyting\"",
               "    })",
-              ")"
+              ")",
+              ")",
+              "",
+              "return (",
+              "    formel",
+              ")",
+              "",
+              ""
             ],
             "displayFolder": "Klima og miljøvennlig utvikling\\Omdisponering, etter dyrka eller dyrkbar jord, formål, region, lovanvendelse, statistikkvariabel"
           },
@@ -375,11 +418,23 @@
               "    og år",
               "*/",
               "",
-              "CALCULATE(SUM('Alle Data'[Verdi]),",
+              "var valgteRegion = SELECTEDVALUE(Region[Kode])",
+              "",
+              "var formel =",
+              "SUMX(",
+              "    ALL('Alle Data'),",
+              "    CALCULATE(SUM('Alle Data'[Verdi]),",
               "    FILTER(ALL(Tabeller[Tabellnummer]), [Tabellnummer] = \"11776\"),",
               "    FILTER(ALL(Variabel[Variabelnavn]), [Variabelnavn] = \"Areal  (dekar)\"),",
               "    FILTER(ALL('Formål'[Dimensjonsnavn]), [Dimensjonsnavn] = \"Fritidsbebyggelse\")",
-              ")"
+              ")",
+              ")",
+              "",
+              "return (",
+              "    formel",
+              ")",
+              "",
+              ""
             ],
             "displayFolder": "Klima og miljøvennlig utvikling\\Omdisponering, etter dyrka eller dyrkbar jord, formål, region, lovanvendelse, statistikkvariabel"
           },
@@ -393,10 +448,20 @@
               "    og år",
               "*/",
               "",
-              "CALCULATE(SUM('Alle Data'[Verdi]),",
+              "var valgteRegion = SELECTEDVALUE(Region[Kode])",
+              "",
+              "var formel =",
+              "SUMX(",
+              "    ALL('Alle Data'),",
+              "    CALCULATE(SUM('Alle Data'[Verdi]),",
               "    FILTER(ALL(Tabeller[Tabellnummer]), [Tabellnummer] = \"11776\"),",
               "    FILTER(ALL(Variabel[Variabelnavn]), [Variabelnavn] = \"Areal  (dekar)\"),",
               "    FILTER(ALL('Formål'[Dimensjonsnavn]), [Dimensjonsnavn] = \"Grønnstruktur\")",
+              ")",
+              ")",
+              "",
+              "return (",
+              "    formel",
               ")"
             ],
             "displayFolder": "Klima og miljøvennlig utvikling\\Omdisponering, etter dyrka eller dyrkbar jord, formål, region, lovanvendelse, statistikkvariabel"
@@ -411,12 +476,22 @@
               "    og år",
               "*/",
               "",
-              "CALCULATE(SUM('Alle Data'[Verdi]),",
+              "var valgteRegion = SELECTEDVALUE(Region[Kode])",
+              "",
+              "var formel =",
+              "SUMX(",
+              "    ALL('Alle Data'),",
+              "    CALCULATE(SUM('Alle Data'[Verdi]),",
               "    FILTER(ALL(Tabeller[Tabellnummer]), [Tabellnummer] = \"11776\"),",
               "    FILTER(ALL(Variabel[Variabelnavn]), [Variabelnavn] = \"Areal  (dekar)\"),",
               "    FILTER(ALL('Formål'[Dimensjonsnavn]), [Dimensjonsnavn] = ",
               "        \"Samferdselsanlegg og teknisk infrastruktur\"",
               "    )",
+              ")",
+              ")",
+              "",
+              "return (",
+              "    formel",
               ")"
             ],
             "displayFolder": "Klima og miljøvennlig utvikling\\Omdisponering, etter dyrka eller dyrkbar jord, formål, region, lovanvendelse, statistikkvariabel"
@@ -556,17 +631,13 @@
               "/* Mengder husholdningsavfall, etter materiale og år */",
               "",
               "var matgjen =",
-              "CALCULATE(SUM('Alle Data'[Verdi]),",
-              "    FILTER(ALL(Tabeller[Tabellnummer]), [Tabellnummer] = \"12313\"),",
-              "    FILTER(ALL(Variabel[Variabelnavn]), [Variabelnavn] = \"Mengde  (tonn)\"),",
+              "CALCULATE([Mengder husholdningsavfall],",
               "    FILTER(ALL(Behandling[Dimensjonsnavn]), [Dimensjonsnavn] = \"Materialgjenvinning\"),",
               "    FILTER(ALL(Materiale[Dimensjonsnavn]), [Dimensjonsnavn] = \"I alt\")",
               ")",
               "",
               "var total =",
-              "CALCULATE(SUM('Alle Data'[Verdi]),",
-              "    FILTER(ALL(Tabeller[Tabellnummer]), [Tabellnummer] = \"12313\"),",
-              "    FILTER(ALL(Variabel[Variabelnavn]), [Variabelnavn] = \"Mengde  (tonn)\"),",
+              "CALCULATE([Mengder husholdningsavfall],",
               "    FILTER(ALL(Behandling[Dimensjonsnavn]), [Dimensjonsnavn] = \"i alt\"),",
               "    FILTER(ALL(Materiale[Dimensjonsnavn]), [Dimensjonsnavn] = \"I alt\")",
               ")",
@@ -728,8 +799,9 @@
               "/* Mengder husholdningsavfall, etter materiale og år */",
               "",
               "CALCULATE(SUM('Alle Data'[Verdi]),",
-              "    FILTER(ALL(Tabeller[Tabellnummer]), [Tabellnummer] = \"12313\"),",
-              "    FILTER(ALL(Variabel[Variabelnavn]), [Variabelnavn] = \"Mengde  (tonn)\")",
+              "    FILTER(ALL(Tabeller[Tabellnummer]), [Tabellnummer] = \"13136\"),",
+              "    FILTER(ALL(Variabel[Variabelnavn]), [Variabelnavn] = \"Mengd (tonn)\"),",
+              "    FILTER(ALL('Nedstrømsløsning'[Dimensjonsnavn]), [Dimensjonsnavn] = \"I alt\")",
               ")"
             ],
             "displayFolder": "Klima og miljøvennlig utvikling\\Mengder husholdningsavfall, etter materiale og år"
@@ -748,10 +820,10 @@
               ")",
               "",
               "var inntett_div_totbol =",
-              "DIVIDE(inntett, [Boliger - Totalt])",
+              "DIVIDE(inntett, [Boliger - Totalt]) * 100",
               "",
               "return (",
-              "    ROUND(inntett_div_totbol, 1)",
+              "    ROUND(inntett_div_totbol, 2)",
               ")",
               ""
             ],
@@ -807,10 +879,10 @@
               ")",
               "",
               "var iutvtett_div_totbol =",
-              "DIVIDE(iutvtett, [Boliger - Totalt])",
+              "DIVIDE(iutvtett, [Boliger - Totalt]) * 100",
               "",
               "return (",
-              "    ROUND(iutvtett_div_totbol, 1)",
+              "    ROUND(iutvtett_div_totbol, 2)",
               ")"
             ],
             "displayFolder": "Attraktive byer og steder\\Nye bygg etter plassering"
@@ -831,10 +903,10 @@
               ")",
               "",
               "var mel13km_div_totbol =",
-              "DIVIDE(mel13km, [Boliger - Totalt])",
+              "DIVIDE(mel13km, [Boliger - Totalt]) * 100",
               "",
               "return (",
-              "    ROUND(mel13km_div_totbol, 1)",
+              "    ROUND(mel13km_div_totbol, 2)",
               ")"
             ],
             "displayFolder": "Attraktive byer og steder\\Nye bygg etter plassering"
@@ -855,10 +927,10 @@
               ")",
               "",
               "var innen1km_div_totbol =",
-              "DIVIDE(innen1km, [Boliger - Totalt])",
+              "DIVIDE(innen1km, [Boliger - Totalt]) * 100",
               "",
               "return (",
-              "    ROUND(innen1km_div_totbol, 1)",
+              "    ROUND(innen1km_div_totbol, 2)",
               ")"
             ],
             "displayFolder": "Attraktive byer og steder\\Nye bygg etter plassering"
@@ -879,10 +951,10 @@
               ")",
               "",
               "var mel13km_div_totnaer =",
-              "DIVIDE(mel13km, [Næring - Totalt])",
+              "DIVIDE(mel13km, [Næring - Totalt]) * 100",
               "",
               "return (",
-              "    ROUND(mel13km_div_totnaer, 1)",
+              "    ROUND(mel13km_div_totnaer, 2)",
               ")"
             ],
             "displayFolder": "Attraktive byer og steder\\Nye bygg etter plassering"
@@ -921,10 +993,10 @@
               ")",
               "",
               "var inntett_div_totnaer =",
-              "DIVIDE(inntett, [Næring - Totalt])",
+              "DIVIDE(inntett, [Næring - Totalt]) * 100",
               "",
               "return (",
-              "    ROUND(inntett_div_totnaer, 1)",
+              "    ROUND(inntett_div_totnaer, 2)",
               ")",
               ""
             ],
@@ -946,10 +1018,10 @@
               ")",
               "",
               "var iutv_div_totnaer =",
-              "DIVIDE(iutv, [Næring - Totalt])",
+              "DIVIDE(iutv, [Næring - Totalt]) * 100",
               "",
               "return (",
-              "    ROUND(iutv_div_totnaer, 1)",
+              "    ROUND(iutv_div_totnaer, 2)",
               ")",
               ""
             ],
@@ -969,10 +1041,10 @@
               ")",
               "",
               "var innen1km_div_totnaer =",
-              "DIVIDE(innen1km, [Næring - Totalt])",
+              "DIVIDE(innen1km, [Næring - Totalt]) * 100",
               "",
               "return (",
-              "    ROUND(innen1km_div_totnaer, 1)",
+              "    ROUND(innen1km_div_totnaer, 2)",
               ")",
               ""
             ],
@@ -991,13 +1063,14 @@
             "displayFolder": "Attraktive byer og steder\\Andel bosatte i kommunens tettsteder med trygg tilgang til rekreasjonsareal og nærturterreng (prosent)"
           },
           {
-            "name": "Samlet areal av leke- og rekreasjonsområder innenfor tettsteder",
+            "name": "Samlet areal av leke- og rekreasjonsområder innenfor tettsteder, forhåndsberegnet SSB",
             "expression": [
               "",
               "",
               "CALCULATE(SUM('Alle Data'[Verdi]),",
               "    FILTER(ALL(Tabeller[Tabellnummer]), [Tabellnummer] = \"12243\"),",
-              "    FILTER(ALL(Variabel[Variabelnavn]), [Variabelnavn] = \"Mengde (antall)\")",
+              "    FILTER(ALL(Variabel[Variabelnavn]), [Variabelnavn] = \"Mengde (antall)\"),",
+              "    FILTER(ALL(Rekreasjonareal[Dimensjonsnavn]), [Dimensjonsnavn] = \"I alt, forhåndsberegnet i SSB.\")",
               ")"
             ],
             "displayFolder": "Attraktive byer og steder\\Samlet areal av leke- og rekreasjonsområder innenfor tettsteder"
@@ -1018,7 +1091,7 @@
             "displayFolder": "Attraktive byer og steder\\Andel og antall husholdninger som bor trangt"
           },
           {
-            "name": "Andel og antall husholdninger som bor trangt - Bor trangt, få rom og kvm",
+            "name": "Antall husholdninger som bor trangt",
             "expression": [
               "",
               "",
@@ -1033,7 +1106,7 @@
             "displayFolder": "Attraktive byer og steder\\Andel og antall husholdninger som bor trangt"
           },
           {
-            "name": "Befolkingsutvikling",
+            "name": "Folketall, endring i prosent",
             "expression": [
               "",
               "",
@@ -1069,7 +1142,7 @@
             "displayFolder": "God oppvekst og godt liv\\Befolkningsutvikling"
           },
           {
-            "name": "Forsørgerbyrde",
+            "name": "Forsørgerbyrde (personer utenfor yrkesaktiv alder / personer i yrkesaktiv alder)",
             "expression": [
               "",
               "",
@@ -1115,7 +1188,7 @@
               "return (",
               "    ROUND(",
               "        formel,",
-              "        1",
+              "        2",
               "    )",
               ")"
             ],
@@ -1168,7 +1241,7 @@
               "return (",
               "    ROUND(",
               "        formel,",
-              "        1",
+              "        2",
               "    )",
               ")"
             ],
@@ -1261,6 +1334,186 @@
               ")"
             ],
             "displayFolder": "Mangfold og utvikling\\Andel minoritetsspråklige barn i barnehage i forhold til innvandrerbarn 1-5 år"
+          },
+          {
+            "name": "Netto driftsresultat etter netto bundne fondsavsetninger som andel av driftsinntekter",
+            "expression": [
+              "",
+              "",
+              "var valgteAar = SELECTEDVALUE('År'[År])",
+              "",
+              "var brudripre2015 = ",
+              "CALCULATE(SUM('Alle Data'[Verdi]),",
+              "    FILTER(ALL(Tabeller[Tabellnummer]), [Tabellnummer] = \"04938\"),",
+              "    FILTER(ALL(Variabel[Variabelnavn]), [Variabelnavn] = ",
+              "        \"Brutto driftsutgifter i alt, konsern\"",
+              "    )",
+              ")",
+              "",
+              "var netdrirespre2015 = ",
+              "CALCULATE(SUM('Alle Data'[Verdi]),",
+              "    FILTER(ALL(Tabeller[Tabellnummer]), [Tabellnummer] = \"04938\"),",
+              "    FILTER(ALL(Variabel[Variabelnavn]), [Variabelnavn] = ",
+              "        \"Netto driftsresultat, konsern\"",
+              "    )",
+              ")",
+              "",
+              "var brubundripre2015 = ",
+              "CALCULATE(SUM('Alle Data'[Verdi]),",
+              "    FILTER(ALL(Tabeller[Tabellnummer]), [Tabellnummer] = \"04949\"),",
+              "    FILTER(ALL(Variabel[Variabelnavn]), [Variabelnavn] = ",
+              "        \"Bruk av bundne driftsfond\"",
+              "    )",
+              ")",
+              "",
+              "var avsbundripre2015 = ",
+              "CALCULATE(SUM('Alle Data'[Verdi]),",
+              "    FILTER(ALL(Tabeller[Tabellnummer]), [Tabellnummer] = \"04949\"),",
+              "    FILTER(ALL(Variabel[Variabelnavn]), [Variabelnavn] = ",
+              "        \"Avsetninger til bundne driftsfond\"",
+              "    )",
+              ")",
+              "",
+              "var brudripost2015 = ",
+              "CALCULATE(SUM('Alle Data'[Verdi]),",
+              "    FILTER(ALL(Tabeller[Tabellnummer]), [Tabellnummer] = \"12364\"),",
+              "    FILTER(ALL(Variabel[Variabelnavn]), [Variabelnavn] = \"Beløp (1000 kr)\"),",
+              "    FILTER(ALL(Regnskapsbegrep[Dimensjonsnavn]), [Dimensjonsnavn] = ",
+              "        \"Brutto driftsinntekter i alt\"",
+              "    )",
+              ")",
+              "",
+              "var netdrirespost2015 = ",
+              "CALCULATE(SUM('Alle Data'[Verdi]),",
+              "    FILTER(ALL(Tabeller[Tabellnummer]), [Tabellnummer] = \"12364\"),",
+              "    FILTER(ALL(Variabel[Variabelnavn]), [Variabelnavn] = \"Beløp (1000 kr)\"),",
+              "    FILTER(ALL(Regnskapsbegrep[Dimensjonsnavn]), [Dimensjonsnavn] = ",
+              "        \"Netto driftsresultat\"",
+              "    )",
+              ")",
+              "",
+              "var brubundripost2015 = ",
+              "CALCULATE(SUM('Alle Data'[Verdi]),",
+              "    FILTER(ALL(Tabeller[Tabellnummer]), [Tabellnummer] = \"12365\"),",
+              "    FILTER(ALL(Variabel[Variabelnavn]), [Variabelnavn] = \"Beløp (1000 kr)\"),",
+              "    FILTER(ALL(Art[Dimensjonsnavn]), [Dimensjonsnavn] = ",
+              "        \"Bruk av bundne driftsfond\"",
+              "    )",
+              ")",
+              "",
+              "var avsbundripost2015 = ",
+              "CALCULATE(SUM('Alle Data'[Verdi]),",
+              "    FILTER(ALL(Tabeller[Tabellnummer]), [Tabellnummer] = \"12365\"),",
+              "    FILTER(ALL(Variabel[Variabelnavn]), [Variabelnavn] = \"Beløp (1000 kr)\"),",
+              "    FILTER(ALL(Art[Dimensjonsnavn]), [Dimensjonsnavn] = ",
+              "        \"Avsetninger til bundne fond\"",
+              "    )",
+              ")",
+              "",
+              "var formel =",
+              "IF(valgteAar < 2015,",
+              "    DIVIDE(netdrirespre2015 + brubundripre2015 + avsbundripre2015, brubundripre2015) * 100,",
+              "    DIVIDE(netdrirespost2015 + brubundripost2015 + avsbundripost2015, brubundripost2015) * 100",
+              ")",
+              "",
+              "return (",
+              "    ",
+              "    ROUND(",
+              "        formel,",
+              "        1",
+              "    )",
+              ")"
+            ],
+            "displayFolder": "Selvstendige\\Netto driftsresultat etter netto bundne fondsavsetninger som andel av driftsinntekter"
+          },
+          {
+            "name": "Netto lånegjeld fratrukket ubundne investeringsfond i prosent av driftsinntekter",
+            "expression": [
+              "",
+              "",
+              "var valgteAar = SELECTEDVALUE('År'[År])",
+              "",
+              "/* variabler for før 2015 */",
+              "",
+              "var netlaanpre2015 = ",
+              "CALCULATE(SUM('Alle Data'[Verdi]),",
+              "    FILTER(ALL(Tabeller[Tabellnummer]), [Tabellnummer] = \"04938\"),",
+              "    FILTER(ALL(Variabel[Variabelnavn]), [Variabelnavn] = ",
+              "        \"Netto lånegjeld, konsern\"",
+              "    )",
+              ")",
+              "",
+              "var ubuinvpre2015 = ",
+              "CALCULATE(SUM('Alle Data'[Verdi]),",
+              "    FILTER(ALL(Tabeller[Tabellnummer]), [Tabellnummer] = \"04947\"),",
+              "    FILTER(ALL(Variabel[Variabelnavn]), [Variabelnavn] = ",
+              "        \"Ubundne investeringsfond\"",
+              "    )",
+              ")",
+              "",
+              "var brudripre2015 = ",
+              "CALCULATE(SUM('Alle Data'[Verdi]),",
+              "    FILTER(ALL(Tabeller[Tabellnummer]), [Tabellnummer] = \"04938\"),",
+              "    FILTER(ALL(Variabel[Variabelnavn]), [Variabelnavn] = ",
+              "        \"Brutto driftsinntekter i alt, konsern\"",
+              "    )",
+              ")",
+              "",
+              "/* variabler for etter 2015 */",
+              "var netlaanpost2015 = ",
+              "CALCULATE(SUM('Alle Data'[Verdi]),",
+              "    FILTER(ALL(Tabeller[Tabellnummer]), [Tabellnummer] = \"12364\"),",
+              "    FILTER(ALL(Variabel[Variabelnavn]), [Variabelnavn] = \"Beløp (1000 kr)\"),",
+              "    FILTER(ALL(Regnskapsbegrep[Dimensjonsnavn]), [Dimensjonsnavn] = ",
+              "        \"Netto lånegjeld\"",
+              "    )",
+              ")",
+              "",
+              "var ubuinvpost2015 = ",
+              "CALCULATE(SUM('Alle Data'[Verdi]),",
+              "    FILTER(ALL(Tabeller[Tabellnummer]), [Tabellnummer] = \"12177\"),",
+              "    FILTER(ALL(Variabel[Variabelnavn]), [Variabelnavn] = \"Beløp (1000 kr)\"),",
+              "    FILTER(ALL(Art[Dimensjonsnavn]), [Dimensjonsnavn] = ",
+              "        \"Ubundne investeringsfond (K)\"",
+              "    )",
+              ")",
+              "",
+              "var brudripost2015 = ",
+              "CALCULATE(SUM('Alle Data'[Verdi]),",
+              "    FILTER(ALL(Tabeller[Tabellnummer]), [Tabellnummer] = \"12364\"),",
+              "    FILTER(ALL(Variabel[Variabelnavn]), [Variabelnavn] = \"Beløp (1000 kr)\"),",
+              "    FILTER(ALL(Regnskapsbegrep[Dimensjonsnavn]), [Dimensjonsnavn] = ",
+              "        \"Brutto driftsinntekter i alt\"",
+              "    )",
+              ")",
+              "",
+              "var formel =",
+              "IF(valgteAar < 2015,",
+              "    DIVIDE(netlaanpre2015 + ubuinvpre2015, brudripre2015) * 100,",
+              "    DIVIDE(netlaanpost2015 + ubuinvpost2015, brudripost2015) * 100",
+              ")",
+              "",
+              "return (",
+              "    ",
+              "    ROUND(",
+              "        formel,",
+              "        1",
+              "    )",
+              ")"
+            ],
+            "displayFolder": "Selvstendige\\Netto driftsresultat etter netto bundne fondsavsetninger som andel av driftsinntekter"
+          },
+          {
+            "name": "Samlet areal av leke- og rekreasjonsområder innenfor tettsteder, rapportert",
+            "expression": [
+              "",
+              "",
+              "CALCULATE(SUM('Alle Data'[Verdi]),",
+              "    FILTER(ALL(Tabeller[Tabellnummer]), [Tabellnummer] = \"12243\"),",
+              "    FILTER(ALL(Variabel[Variabelnavn]), [Variabelnavn] = \"Mengde (antall)\"),",
+              "    FILTER(ALL(Rekreasjonareal[Dimensjonsnavn]), [Dimensjonsnavn] = \"I alt, rapportert.\")",
+              ")"
+            ]
           }
         ]
       },
@@ -1270,25 +1523,21 @@
           {
             "name": "Tabell",
             "dataType": "string",
-            "isHidden": true,
             "sourceColumn": "Tabell"
           },
           {
             "name": "Kode",
             "dataType": "string",
-            "isHidden": true,
             "sourceColumn": "Kode"
           },
           {
             "name": "Variabel",
             "dataType": "string",
-            "isHidden": true,
             "sourceColumn": "Variabel"
           },
           {
             "name": "År",
             "dataType": "int64",
-            "isHidden": true,
             "sourceColumn": "År"
           },
           {
@@ -1299,7 +1548,6 @@
           {
             "name": "Formålkode",
             "dataType": "string",
-            "isHidden": true,
             "sourceColumn": "Formålkode"
           },
           {
@@ -1355,6 +1603,26 @@
             "dataType": "string",
             "isHidden": true,
             "sourceColumn": "Alderkode"
+          },
+          {
+            "name": "Artkode",
+            "dataType": "string",
+            "sourceColumn": "Artkode"
+          },
+          {
+            "name": "Regnskapsbegrepkode",
+            "dataType": "string",
+            "sourceColumn": "Regnskapsbegrepkode"
+          },
+          {
+            "name": "Balansedatakode",
+            "dataType": "string",
+            "sourceColumn": "Balansedatakode"
+          },
+          {
+            "name": "Nedstrømsløsningkode",
+            "dataType": "string",
+            "sourceColumn": "Nedstrømsløsningkode"
           }
         ],
         "partitions": [
@@ -1371,6 +1639,12 @@
                 "    #\"dbo_Alle Data\""
               ]
             }
+          }
+        ],
+        "measures": [
+          {
+            "name": "Sum dataverdi",
+            "expression": "SUM('Alle Data'[Verdi])"
           }
         ]
       },
@@ -1831,6 +2105,150 @@
             }
           }
         ]
+      },
+      {
+        "name": "Art",
+        "columns": [
+          {
+            "name": "Dimensjonskode",
+            "dataType": "string",
+            "sourceColumn": "Dimensjonskode"
+          },
+          {
+            "name": "Dimensjonsnavn",
+            "dataType": "string",
+            "sourceColumn": "Dimensjonsnavn"
+          },
+          {
+            "name": "DimensjonskodeNavn",
+            "dataType": "string",
+            "sourceColumn": "DimensjonskodeNavn"
+          }
+        ],
+        "partitions": [
+          {
+            "name": "Partition",
+            "dataView": "full",
+            "source": {
+              "type": "m",
+              "expression": [
+                "let",
+                "    Source = #\"SQL/KS-SQL2018;Reporting_Status\",",
+                "    dbo_Art = Source{[Schema=\"dbo\",Item=\"Art\"]}[Data]",
+                "in",
+                "    dbo_Art"
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "name": "Regnskapsbegrep",
+        "columns": [
+          {
+            "name": "Dimensjonskode",
+            "dataType": "string",
+            "sourceColumn": "Dimensjonskode"
+          },
+          {
+            "name": "Dimensjonsnavn",
+            "dataType": "string",
+            "sourceColumn": "Dimensjonsnavn"
+          },
+          {
+            "name": "DimensjonskodeNavn",
+            "dataType": "string",
+            "sourceColumn": "DimensjonskodeNavn"
+          }
+        ],
+        "partitions": [
+          {
+            "name": "Partition",
+            "dataView": "full",
+            "source": {
+              "type": "m",
+              "expression": [
+                "let",
+                "    Source = #\"SQL/KS-SQL2018;Reporting_Status\",",
+                "    dbo_Regnskapsbegrep = Source{[Schema=\"dbo\",Item=\"Regnskapsbegrep\"]}[Data]",
+                "in",
+                "    dbo_Regnskapsbegrep"
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "name": "Balansedata",
+        "columns": [
+          {
+            "name": "Dimensjonskode",
+            "dataType": "string",
+            "sourceColumn": "Dimensjonskode"
+          },
+          {
+            "name": "Dimensjonsnavn",
+            "dataType": "string",
+            "sourceColumn": "Dimensjonsnavn"
+          },
+          {
+            "name": "DimensjonskodeNavn",
+            "dataType": "string",
+            "sourceColumn": "DimensjonskodeNavn"
+          }
+        ],
+        "partitions": [
+          {
+            "name": "Partition",
+            "dataView": "full",
+            "source": {
+              "type": "m",
+              "expression": [
+                "let",
+                "    Source = #\"SQL/KS-SQL2018;Reporting_Status\",",
+                "    dbo_Balansedata = Source{[Schema=\"dbo\",Item=\"Balansedata\"]}[Data]",
+                "in",
+                "    dbo_Balansedata"
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "name": "Nedstrømsløsning",
+        "columns": [
+          {
+            "name": "Dimensjonskode",
+            "dataType": "string",
+            "sourceColumn": "Dimensjonskode"
+          },
+          {
+            "name": "Dimensjonsnavn",
+            "dataType": "string",
+            "sourceColumn": "Dimensjonsnavn"
+          },
+          {
+            "name": "DimensjonskodeNavn",
+            "dataType": "string",
+            "sourceColumn": "DimensjonskodeNavn"
+          }
+        ],
+        "partitions": [
+          {
+            "name": "Partition",
+            "dataView": "full",
+            "source": {
+              "type": "m",
+              "expression": [
+                "let",
+                "    Source = #\"SQL/KS-SQL2018;Reporting_Status\",",
+                "    dbo_Nedstrømsløsning = Source{[Schema=\"dbo\",Item=\"Nedstrømsløsning\"]}[Data]",
+                "in",
+                "    dbo_Nedstrømsløsning"
+              ]
+            }
+          }
+        ]
       }
     ],
     "relationships": [
@@ -1931,6 +2349,56 @@
         "fromColumn": "Alderkode",
         "toTable": "Alder",
         "toColumn": "Dimensjonskode"
+      },
+      {
+        "name": "f4956df9-ad74-4fb1-acb8-9871001febcd",
+        "fromTable": "Alle Data",
+        "fromColumn": "Artkode",
+        "toTable": "Art",
+        "toColumn": "Dimensjonskode"
+      },
+      {
+        "name": "b319270a-fb95-4273-870a-51946d08ddd6",
+        "fromTable": "Alle Data",
+        "fromColumn": "Regnskapsbegrepkode",
+        "toTable": "Regnskapsbegrep",
+        "toColumn": "Dimensjonskode"
+      },
+      {
+        "name": "aa6f2019-ff59-4f28-86ac-d48098f7856f",
+        "fromTable": "Alle Data",
+        "fromColumn": "Balansedatakode",
+        "toTable": "Balansedata",
+        "toColumn": "Dimensjonskode"
+      },
+      {
+        "name": "fb34ba35-7747-428e-9df7-3888989d3c96",
+        "fromTable": "Alle Data",
+        "fromColumn": "Nedstrømsløsningkode",
+        "toTable": "Nedstrømsløsning",
+        "toColumn": "Dimensjonskode"
+      }
+    ],
+    "roles": [
+      {
+        "name": "API",
+        "modelPermission": "read",
+        "members": [
+          {
+            "memberName": "NT AUTHORITY\\IUSR",
+            "memberId": "S-1-5-17"
+          }
+        ]
+      },
+      {
+        "name": "Brukere",
+        "modelPermission": "readRefresh",
+        "members": [
+          {
+            "memberName": "I04\\VK.DB.VK-SXD0E-002_Status.DBO",
+            "memberId": "S-1-5-21-2036031588-730629661-1306914269-1033618"
+          }
+        ]
       }
     ],
     "annotations": [
