@@ -16,7 +16,6 @@
           "authentication": null,
           "query": null
         },
-        "options": {},
         "credential": {
           "AuthenticationKind": "Windows",
           "kind": "SQL",
@@ -1106,7 +1105,7 @@
               "CALCULATE(SUM('Alle Data'[Verdi]),",
               "    FILTER(ALL(Tabeller[Tabellnummer]), [Tabellnummer] = \"11344\"),",
               "    FILTER(ALL(Variabel[Variabelnavn]), [Variabelnavn] = \"Antall Husholdninger\"),",
-              "    FILTER(ALL(Trangboddhet[Dimensjonsnavn]), [Dimensjonsnavn] = \"Bor trang, få rom og kvm\")",
+              "    FILTER(ALL(Trangboddhet[Dimensjonsnavn]), [Dimensjonsnavn] = \"Bor trangt, få rom og kvm\")",
               ")"
             ],
             "displayFolder": "Attraktive byer og steder\\Andel og antall husholdninger som bor trangt"
