@@ -1532,7 +1532,8 @@
               "return (",
               "    barn",
               ")"
-            ]
+            ],
+            "displayFolder": "God oppvekst og godt liv"
           },
           {
             "name": "Andel innbyggere over 80 år som er brukere av hjemmetjenester (prosent)",
@@ -1550,7 +1551,8 @@
               "return (",
               "    formel",
               ")"
-            ]
+            ],
+            "displayFolder": "God oppvekst og godt liv"
           },
           {
             "name": "Andel innbyggere over 67 år",
@@ -1588,7 +1590,8 @@
               "        1",
               "    )",
               ")"
-            ]
+            ],
+            "displayFolder": "God oppvekst og godt liv"
           }
         ]
       },
