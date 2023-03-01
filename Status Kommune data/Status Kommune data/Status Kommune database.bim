@@ -1551,6 +1551,44 @@
               "    formel",
               ")"
             ]
+          },
+          {
+            "name": "Andel innbyggere over 67 år",
+            "expression": [
+              "",
+              "",
+              "var innb_67 = ",
+              "CALCULATE(SUM('Alle Data'[Verdi]),",
+              "    FILTER(ALL(Tabeller[Tabellnummer]), [Tabellnummer] = \"07459\"),",
+              "    FILTER(ALL(Variabel[Variabelnavn]), [Variabelnavn] = \"Personer\"),",
+              "    FILTER(ALL('Alder'[Dimensjonskode]), ",
+              "        IF(ISERROR(VALUE([Dimensjonskode])), ",
+              "            BLANK(), ",
+              "            VALUE([Dimensjonskode]) >= 67)",
+              "    )",
+              ")",
+              "",
+              "var innb_u_67 = ",
+              "CALCULATE(SUM('Alle Data'[Verdi]),",
+              "    FILTER(ALL(Tabeller[Tabellnummer]), [Tabellnummer] = \"07459\"),",
+              "    FILTER(ALL(Variabel[Variabelnavn]), [Variabelnavn] = \"Personer\"),",
+              "    FILTER(ALL('Alder'[Dimensjonskode]), ",
+              "        IF(ISERROR(VALUE([Dimensjonskode])), ",
+              "            BLANK(), ",
+              "            VALUE([Dimensjonskode]) < 67)",
+              "    )",
+              ")",
+              "",
+              "var formel = ",
+              "DIVIDE(innb_67 * 100, innb_u_67)",
+              "",
+              "return (",
+              "    ROUND(",
+              "        formel,",
+              "        1",
+              "    )",
+              ")"
+            ]
           }
         ]
       },
