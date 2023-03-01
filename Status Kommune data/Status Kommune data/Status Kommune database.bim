@@ -1517,6 +1517,22 @@
               "    FILTER(ALL(Rekreasjonareal[Dimensjonsnavn]), [Dimensjonsnavn] = \"I alt, rapportert.\")",
               ")"
             ]
+          },
+          {
+            "name": "Andel barn 1–2 år i barnehage som andel av innbyggere 1–2 år",
+            "expression": [
+              "",
+              "",
+              "var barn = ",
+              "CALCULATE(SUM('Alle Data'[Verdi]),",
+              "    FILTER(ALL(Tabeller[Tabellnummer]), [Tabellnummer] = \"13502\"),",
+              "    FILTER(ALL(Variabel[Variabelnavn]), [Variabelnavn] = \"Andel barn 1-2 år i barnehage, i forhold til innbyggere 1-2 år (prosent)\")",
+              ")",
+              "",
+              "return (",
+              "    barn",
+              ")"
+            ]
           }
         ]
       },
