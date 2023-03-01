@@ -1516,7 +1516,8 @@
               "    FILTER(ALL(Variabel[Variabelnavn]), [Variabelnavn] = \"Mengde (antall)\"),",
               "    FILTER(ALL(Rekreasjonareal[Dimensjonsnavn]), [Dimensjonsnavn] = \"I alt, rapportert.\")",
               ")"
-            ]
+            ],
+            "displayFolder": "Attraktive byer og steder"
           },
           {
             "name": "Andel barn 1–2 år i barnehage som andel av innbyggere 1–2 år",
