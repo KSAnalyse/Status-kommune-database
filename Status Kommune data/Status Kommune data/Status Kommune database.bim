@@ -1533,6 +1533,24 @@
               "    barn",
               ")"
             ]
+          },
+          {
+            "name": "Andel innbyggere over 80 år som er brukere av hjemmetjenester (prosent)",
+            "expression": [
+              "",
+              "",
+              "var formel = ",
+              "CALCULATE(SUM('Alle Data'[Verdi]),",
+              "    FILTER(ALL(Tabeller[Tabellnummer]), [Tabellnummer] = \"12209\"),",
+              "    FILTER(ALL(Variabel[Variabelnavn]), [Variabelnavn] = ",
+              "        \"Andel innbyggere 80 år og over som bruker hjemmetjenester (prosent)\"",
+              "    )",
+              ")",
+              "",
+              "return (",
+              "    formel",
+              ")"
+            ]
           }
         ]
       },
